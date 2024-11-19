@@ -39,7 +39,7 @@ The plugin provides an extension named `delvelin` to configure analysis paramete
 **Kotlin DSL**:
 ```kotlin
 delvelin {
-    outputFormat = OutputFormat.JSON // Output format: LOG, JSON, or XML
+    outputFormat = OutputFormat.JSON // Output format: LOG, JSON, or HTML
     isShowDate = true               // Show date in the results
     isShowSaveDialog = false        // Display a save dialog after analysis
     isIgnoreCommentBlock = true     // Ignore comment blocks during analysis
@@ -50,7 +50,7 @@ delvelin {
 **Groovy DSL**:
 ```groovy
 delvelin {
-    outputFormat = OutputFormat.JSON // Output format: LOG, JSON, or XML
+    outputFormat = OutputFormat.JSON // Output format: LOG, JSON, or HTML
     isShowDate = true                // Show date in the results
     isShowSaveDialog = false         // Display a save dialog after analysis
     isIgnoreCommentBlock = true      // Ignore comment blocks during analysis
@@ -71,13 +71,13 @@ Run the Gradle task named `delvelinScan` to start the code analysis:
 
 #### **Configuration Parameters**
 
-| **Parameter**         | **Type**              | **Default**       | **Description**                                                              |
-|------------------------|-----------------------|-------------------|------------------------------------------------------------------------------|
-| `outputFormat`         | `OutputFormat`       | `LOG`             | Output format of the results (`LOG`, `JSON`, `XML`).                        |
-| `isShowDate`           | `Boolean`            | `true`            | Display the date in the output results.                                     |
-| `isShowSaveDialog`     | `Boolean`            | `false`           | Show a save dialog after analysis completes.                                |
-| `isIgnoreCommentBlock` | `Boolean`            | `false`           | Ignore comment blocks during the analysis.                                  |
-| `isCustomExtensions`   | `Boolean`            | `false`           | Enable custom extensions.                                                   |
+| **Parameter**         | **Type**              | **Default**       | **Description**                                       |
+|------------------------|-----------------------|-------------------|-------------------------------------------------------|
+| `outputFormat`         | `OutputFormat`       | `LOG`             | Output format of the results (`LOG`, `JSON`, `HTML`). |
+| `isShowDate`           | `Boolean`            | `true`            | Display the date in the output results.               |
+| `isShowSaveDialog`     | `Boolean`            | `false`           | Show a save dialog after analysis completes.          |
+| `isIgnoreCommentBlock` | `Boolean`            | `false`           | Ignore comment blocks during the analysis.            |
+| `isCustomExtensions`   | `Boolean`            | `false`           | Enable custom extensions.                             |
 
 ---
 
@@ -91,7 +91,9 @@ Detected Vulnerabilities:
 2. CWE-605: Non-thread-safe Data Structure found in `List` usage.
 ```
 
-For other formats (`JSON` or `XML`), the results will be saved as configured.
+For other formats (`JSON` or `HTML`), the results will be saved as configured.
+
+<a target="_blank" href="https://hangga.github.io/vulnerability-report.html">Example HTML Output</a>
 
 ---
 
