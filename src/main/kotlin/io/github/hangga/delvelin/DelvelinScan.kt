@@ -1,4 +1,4 @@
-package io.github.hangga
+package io.github.hangga.delvelin
 
 import io.delvelin.Delvelin
 import io.delvelin.properties.OutputFormat

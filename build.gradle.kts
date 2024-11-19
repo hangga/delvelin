@@ -26,6 +26,8 @@ kotlin {
 tasks.register<Jar>("fatJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
+    dependsOn(tasks.classes) // Tambahkan ini untuk memastikan kelas dikompilasi
+
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 
     archiveBaseName.set("delvelin") // Set nama base JAR
