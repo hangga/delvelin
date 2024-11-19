@@ -1,7 +1,16 @@
-### Documentation for **DelvelinScan** Gradle Plugin
+### Delvelin
 
-**Plugin Name**: `Delvelin`  
 **Purpose**: This plugin is designed to analyze code vulnerabilities in Java/Kotlin projects with CWE and CVSS standards.
+
+<p>We use <span class="highlight">
+          <a target="_blank" href="https://cwe.mitre.org/data/slices/699.html">CWE (Common Weakness Enumeration)</a>
+        </span> as the standard for categorizing and reporting vulnerabilities. This ensures that identified issues are described using a globally recognized taxonomy, making it easier to understand, track, and address them effectively. </p>
+      <p>For scoring vulnerabilities, we adhere to the <span class="highlight">
+          <a target="_blank" href="https://www.first.org/cvss/calculator/3.0">CVSS (Common Vulnerability Scoring System)</a>
+        </span>. This system provides a consistent way to assess the severity of vulnerabilities, enabling developers and security teams to prioritize their efforts based on the potential impact on their systems. </p>
+      <p>
+        <strong>Disclaimer:</strong> While this approach may not be entirely accurate in identifying every possible vulnerability, it provides a helpful starting point to secure your code. Ultimately, vigilance and proactive measures play a crucial role in maintaining robust security.
+      </p>
 
 ---
 
