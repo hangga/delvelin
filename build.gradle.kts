@@ -23,22 +23,22 @@ kotlin {
     jvmToolchain(8) // Menetapkan toolchain untuk kompatibilitas Java 8
 }
 
-tasks.register<Jar>("fatJar") {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-    dependsOn(tasks.classes)
-
-    from(sourceSets.main.get().output) // Tambahkan semua output dari sourceSets
-    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
-
-    archiveBaseName.set("delvelin")
-    archiveClassifier.set("all")
-    archiveVersion.set(project.version.toString())
-}
-
-tasks.named("build") {
-    dependsOn("fatJar") // Pastikan fat JAR dibuat dalam task build
-}
+//tasks.register<Jar>("fatJar") {
+//    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+//
+//    dependsOn(tasks.classes)
+//
+//    from(sourceSets.main.get().output) // Tambahkan semua output dari sourceSets
+//    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+//
+//    archiveBaseName.set("delvelin")
+//    archiveClassifier.set("all")
+//    archiveVersion.set(project.version.toString())
+//}
+//
+//tasks.named("build") {
+//    dependsOn("fatJar") // Pastikan fat JAR dibuat dalam task build
+//}
 
 gradlePlugin {
     website.set("https://github.com/hangga/delvelin")
