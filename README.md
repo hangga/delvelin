@@ -1,101 +1,132 @@
-### Delvelin
+# Delvelin 
+![Latest Version](https://img.shields.io/maven-central/v/io.github.hangga/delvelin?color=brightgreen) ![Java Support](https://img.shields.io/badge/Java-8+-blue) ![Kotlin Support](https://img.shields.io/badge/Kotlin-1.5+-blueviolet) ![Build](https://img.shields.io/github/actions/workflow/status/hangga/delvelin/build.yml)
 
-**Purpose**: This plugin is designed to analyze code vulnerabilities in Java/Kotlin projects with CWE and CVSS standards.
-
-<p>We use <span class="highlight">
-          <a target="_blank" href="https://cwe.mitre.org/data/slices/699.html">CWE (Common Weakness Enumeration)</a>
-        </span> as the standard for categorizing and reporting vulnerabilities. This ensures that identified issues are described using a globally recognized taxonomy, making it easier to understand, track, and address them effectively. </p>
-      <p>For scoring vulnerabilities, we adhere to the <span class="highlight">
-          <a target="_blank" href="https://www.first.org/cvss/calculator/3.0">CVSS (Common Vulnerability Scoring System)</a>
-        </span>. This system provides a consistent way to assess the severity of vulnerabilities, enabling developers and security teams to prioritize their efforts based on the potential impact on their systems. </p>
-      <p>
-        <strong>Disclaimer:</strong> While this approach may not be entirely accurate in identifying every possible vulnerability, it provides a helpful starting point to secure your code. Ultimately, vigilance and proactive measures play a crucial role in maintaining robust security.
-      </p>
+**Delvelin** is a **code vulnerability analyzer** for Java/Kotlin projects. It integrates **CWE (Common Weakness Enumeration)** for classifying vulnerabilities and **CVSS (Common Vulnerability Scoring System)** for scoring their severity. This ensures accurate, standardized reporting to help developers prioritize and resolve security issues effectively.
 
 ---
 
-#### **Installation**
-
-1. **Add the plugin to `build.gradle.kts` (Kotlin DSL)**:
-   ```kotlin
-   plugins {
-       id("io.github.hangga.delvelin") version "0.0.8"
-   }
-   ```
-
-2. **Or to `build.gradle` (Groovy DSL)**:
-   ```groovy
-   plugins {
-       id 'io.github.hangga.delvelin' version '0.0.8'
-   }
-   ```
+## **Features**
+- Detects vulnerabilities using the CWE classification.
+- Provides CVSS-based severity scoring for better prioritization.
+- Supports Java and Kotlin codebases.
+- Configurable output formats: `LOG`, `JSON`, and `HTML`.
+- Easy integration as a Gradle plugin.
 
 ---
 
-#### **Configuration**
+## **Tech Stack**
+![Java](https://img.shields.io/badge/Java-8+-blue?logo=java) ![Kotlin](https://img.shields.io/badge/Kotlin-1.5+-blueviolet?logo=kotlin)  
+![Gradle Plugin](https://img.shields.io/badge/Gradle-Plugin-brightgreen?logo=gradle)  
+![CWE](https://img.shields.io/badge/CWE-Standards-orange) ![CVSS](https://img.shields.io/badge/CVSS-Severity-red)
 
-The plugin provides an extension named `delvelin` to configure analysis parameters. You can configure it in the `build.gradle.kts` or `build.gradle` file.
+---
 
-**Kotlin DSL**:
+## **How it Works**
+We leverage:
+- [CWE (Common Weakness Enumeration)](https://cwe.mitre.org/data/slices/699.html): A global standard for identifying and categorizing vulnerabilities.
+- [CVSS (Common Vulnerability Scoring System)](https://www.first.org/cvss/calculator/3.0): A framework for scoring the severity of vulnerabilities.
+
+> **Disclaimer**: Delvelin may not identify all vulnerabilities but serves as a powerful first step in securing your codebase.
+
+---
+
+## **Installation**
+
+Add the plugin to your Gradle project.
+
+### **Kotlin DSL**
+```kotlin
+plugins {
+    id("io.github.hangga.delvelin") version "0.0.8"
+}
+```
+
+### **Groovy DSL**
+```groovy
+plugins {
+    id 'io.github.hangga.delvelin' version '0.0.8'
+}
+```
+
+---
+
+## **Configuration**
+
+Configure Delvelin using the `delvelin` extension.
+
+### **Kotlin DSL**
 ```kotlin
 delvelin {
-    outputFormat = OutputFileFormat.JSON // Output format: LOG, JSON, or HTML
-    isShowDate = true               // Show date in the results
-    isShowSaveDialog = false        // Display a save dialog after analysis
-    isIgnoreCommentBlock = true     // Ignore comment blocks during analysis
-    isCustomExtensions = false      // Enable custom extensions
+    outputFormat = OutputFileFormat.JSON // Options: LOG, JSON, HTML
+    isShowDate = true
+    isShowSaveDialog = false
+    isIgnoreCommentBlock = true
+    isCustomExtensions = false
 }
 ```
 
-**Groovy DSL**:
+### **Groovy DSL**
 ```groovy
 delvelin {
-    outputFormat = OutputFileFormat.JSON // Output format: LOG, JSON, or HTML
-    isShowDate = true                // Show date in the results
-    isShowSaveDialog = false         // Display a save dialog after analysis
-    isIgnoreCommentBlock = true      // Ignore comment blocks during analysis
-    isCustomExtensions = false       // Enable custom extensions
+    outputFormat = OutputFileFormat.JSON // Options: LOG, JSON, HTML
+    isShowDate = true
+    isShowSaveDialog = false
+    isIgnoreCommentBlock = true
+    isCustomExtensions = false
 }
 ```
 
 ---
 
-#### **Running the Analysis**
+## **Running the Analysis**
 
-Run the Gradle task named `delvelinScan` to start the code analysis:
+Run the `delvelinScan` task to analyze your project:
 ```bash
 ./gradlew delvelinScan
 ```
 
 ---
 
-#### **Configuration Parameters**
+## **Configuration Parameters**
 
 | **Parameter**         | **Type**           | **Default**       | **Description**                                       |
 |------------------------|--------------------|-------------------|-------------------------------------------------------|
-| `outputFormat`         | `OutputFileFormat` | `LOG`             | Output format of the results (`LOG`, `JSON`, `HTML`). |
-| `isShowDate`           | `Boolean`          | `true`            | Display the date in the output results.               |
-| `isShowSaveDialog`     | `Boolean`          | `false`           | Show a save dialog after analysis completes.          |
-| `isIgnoreCommentBlock` | `Boolean`          | `false`           | Ignore comment blocks during the analysis.            |
-| `isCustomExtensions`   | `Boolean`          | `false`           | Enable custom extensions.                             |
+| `outputFormat`         | `OutputFileFormat` | `LOG`             | Output format (`LOG`, `JSON`, `HTML`).               |
+| `isShowDate`           | `Boolean`          | `true`            | Show date in the output.                             |
+| `isShowSaveDialog`     | `Boolean`          | `false`           | Prompt a save dialog after the scan.                 |
+| `isIgnoreCommentBlock` | `Boolean`          | `false`           | Skip comment blocks during analysis.                 |
+| `isCustomExtensions`   | `Boolean`          | `false`           | Enable custom extensions for additional checks.      |
 
 ---
 
-#### **Sample Output**
-If `outputFormat` is set to `LOG`, the results will be displayed directly in the console, for example:
+## **Sample Output**
+
+### **LOG Format**
 ```
 [INFO] Delvelin Scan Results:
 Date: 2024-11-19
 Detected Vulnerabilities:
-1. CWE-798: Hard-coded Credentials found in file: `src/main/java/com/example/App.java`.
+1. CWE-798: Hard-coded Credentials found in `src/main/java/com/example/App.java`.
 2. CWE-605: Non-thread-safe Data Structure found in `List` usage.
 ```
 
-For other formats (`JSON` or `HTML`), the results will be saved as configured.
-
-<a target="_blank" href="https://hangga.github.io/vulnerability-report.html">Example HTML Output</a>
+### **HTML Format**
+For a detailed report, output can be saved in HTML format:
+[Example HTML Output](https://hangga.github.io/vulnerability-report.html)
 
 ---
 
-#### **Adjusting Output Format**
-To customize the output further, add logic to the plugin code or use the `isCustomExtensions` feature with your own extension definitions.
+## **License**
+This project is licensed under [MIT License](LICENSE).
+
+---
+
+## **Contributing**
+Contributions are welcome! Feel free to submit issues or pull requests for new features or improvements.
+
+---
+
+### **Connect**
+Feel free to reach out for questions, suggestions, or contributions:
+- 📧 Email: bazeniancode@gmail.com
+- 🌐 [GitHub Repository](https://github.com/hangga/delvelin)
