@@ -1,40 +1,43 @@
 plugins {
+    java
     kotlin("jvm") version "2.0.21"
     id("com.gradle.plugin-publish") version "1.3.0"
 }
 
 group = "io.github.hangga"
-version = "0.0.1"
+version = "0.0.4"
 
 repositories {
     mavenCentral()
-    maven {url = uri("https://repo.repsy.io/mvn/hangga/repo")}
 }
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("io.delvelin:delvelin:0.1.0")
 }
 
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain(8) // Menetapkan toolchain untuk kompatibilitas Java 8
 }
 
 tasks.register<Jar>("fatJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-    dependsOn(tasks.classes) // Tambahkan ini untuk memastikan kelas dikompilasi
+    dependsOn(tasks.classes)
 
+    from(sourceSets.main.get().output) // Tambahkan semua output dari sourceSets
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 
-    archiveBaseName.set("delvelin") // Set nama base JAR
-    archiveClassifier.set("all") // Set classifier untuk fat JAR
-    archiveVersion.set(project.version.toString()) // Set versi dari project
+    archiveBaseName.set("delvelin")
+    archiveClassifier.set("all")
+    archiveVersion.set(project.version.toString())
+}
 
-    with(tasks.jar.get()) // Menggabungkan konfigurasi dengan task `jar` default
+tasks.named("build") {
+    dependsOn("fatJar") // Pastikan fat JAR dibuat dalam task build
 }
 
 gradlePlugin {

@@ -1,7 +1,6 @@
 package io.github.hangga.delvelin
 
-import io.delvelin.Delvelin
-import io.delvelin.properties.OutputFormat
+import io.github.hangga.delvelin.properties.OutputFormat
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
