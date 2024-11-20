@@ -4,6 +4,7 @@
 **Delvelin** is a **code vulnerability analyzer** for Java/Kotlin projects. It integrates **CWE (Common Weakness Enumeration)** for classifying vulnerabilities and **CVSS (Common Vulnerability Scoring System)** for scoring their severity. This ensures accurate, standardized reporting to help developers prioritize and resolve security issues effectively.
 
 ---
+![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/delvelin-scan.gif?raw=true)
 
 ## **Features**
 - Detects vulnerabilities using the CWE classification.
@@ -101,16 +102,11 @@ Run the `delvelinScan` task to analyze your project:
 
 ## **Sample Output**
 
-### **LOG Format**
-```
-[INFO] Delvelin Scan Results:
-Date: 2024-11-19
-Detected Vulnerabilities:
-1. CWE-798: Hard-coded Credentials found in `src/main/java/com/example/App.java`.
-2. CWE-605: Non-thread-safe Data Structure found in `List` usage.
-```
-
 ### **HTML Format**
+
+![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/output-sample.png?raw=true)
+![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/output-sample-summary.png?raw=true)
+
 For a detailed report, output can be saved in HTML format:
 [Example HTML Output](https://hangga.github.io/vulnerability-report.html)
 
