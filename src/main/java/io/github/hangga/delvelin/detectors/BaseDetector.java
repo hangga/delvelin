@@ -3,7 +3,7 @@ package io.github.hangga.delvelin.detectors;
 import java.nio.file.Path;
 
 import io.github.hangga.delvelin.properties.Config;
-import io.github.hangga.delvelin.properties.OutputFormat;
+import io.github.hangga.delvelin.properties.OutputFileFormat;
 import io.github.hangga.delvelin.properties.Vulnerabilities;
 import io.github.hangga.delvelin.utils.Reports;
 import io.github.hangga.delvelin.utils.SourceSet;
@@ -23,7 +23,7 @@ public abstract class BaseDetector {
 
         extName = pathStr.substring(pathStr.lastIndexOf('.'));
 
-        if (Config.outputFormat == OutputFormat.HTML || Config.outputFormat == OutputFormat.JSON) {
+        if (Config.outputFileFormat == OutputFileFormat.HTML || Config.outputFileFormat == OutputFileFormat.JSON) {
             className = pathStr;
         } else {
             if (pathStr.contains("src")) {
@@ -36,7 +36,7 @@ public abstract class BaseDetector {
     }
 
     String specificLocation(int lineNumber) {
-        return (Config.outputFormat == OutputFormat.HTML || Config.outputFormat == OutputFormat.JSON) ? className + ":" + lineNumber : className + extName + ":" + lineNumber;
+        return (Config.outputFileFormat == OutputFileFormat.HTML || Config.outputFileFormat == OutputFileFormat.JSON) ? className + ":" + lineNumber : className + extName + ":" + lineNumber;
     }
 
     void setValidVulnerability(String specificLocation, String finding, String message) {

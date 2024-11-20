@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import io.github.hangga.delvelin.detectors.GeneralScanner;
 import io.github.hangga.delvelin.properties.Config;
-import io.github.hangga.delvelin.properties.OutputFormat;
+import io.github.hangga.delvelin.properties.OutputFileFormat;
 import io.github.hangga.delvelin.utils.DelvelinLog;
 import io.github.hangga.delvelin.utils.FileUtil;
 import io.github.hangga.delvelin.utils.Reports;
@@ -26,8 +26,8 @@ public class Delvelin {
         return this;
     }
 
-    public Delvelin setOutputFormat(OutputFormat format) {
-        Config.outputFormat = format;
+    public Delvelin setOutputFormat(OutputFileFormat format) {
+        Config.outputFileFormat = format;
         return this;
     }
 
@@ -37,7 +37,7 @@ public class Delvelin {
     public static void main(String[] args) {
         List<String> slist = Arrays.asList(args);
         new Delvelin().setOutputFormat(
-                slist.contains("format_html") ? OutputFormat.HTML : (slist.contains("format_json") ? OutputFormat.JSON : OutputFormat.LOG))
+                slist.contains("format_html") ? OutputFileFormat.HTML : (slist.contains("format_json") ? OutputFileFormat.JSON : OutputFileFormat.LOG))
             .setShowSaveDialog(slist.contains("show_save_dialog"))
             .scan();
     }
@@ -78,11 +78,11 @@ public class Delvelin {
                 .forEach(generalScanner::scan);
         } catch (IOException ignored) {
         } finally {
-            if (Config.outputFormat == OutputFormat.HTML) {
+            if (Config.outputFileFormat == OutputFileFormat.HTML) {
                 Reports.generateHtmlReport();
-            } else if (Config.outputFormat == OutputFormat.JSON) {
+            } else if (Config.outputFileFormat == OutputFileFormat.JSON) {
                 Reports.generateJson();
-            } else if (Config.outputFormat == OutputFormat.LOG) {
+            } else if (Config.outputFileFormat == OutputFileFormat.LOG) {
                 new DelvelinLog().log(Reports.log()
                     .toString());
             } else if (logListener != null) {

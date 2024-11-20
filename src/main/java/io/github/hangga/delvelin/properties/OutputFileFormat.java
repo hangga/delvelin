@@ -1,13 +1,13 @@
 package io.github.hangga.delvelin.properties;
 
-public enum OutputFormat {
+public enum OutputFileFormat {
     HTML("html"),
     JSON("json"),
     LOG("log");
 
     private final String extension;
 
-    OutputFormat(String extension) {
+    OutputFileFormat(String extension) {
         this.extension = extension;
     }
 

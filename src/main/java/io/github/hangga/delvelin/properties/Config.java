@@ -6,5 +6,5 @@ public class Config {
     public static boolean ignoreCommentBlock = false;
     public static boolean isCustomExtensions = false;
 
-    public static OutputFormat outputFormat = OutputFormat.LOG;
+    public static OutputFileFormat outputFileFormat = OutputFileFormat.LOG;
 }

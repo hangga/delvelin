@@ -19,14 +19,14 @@
 1. **Add the plugin to `build.gradle.kts` (Kotlin DSL)**:
    ```kotlin
    plugins {
-       id("io.github.hangga.delvelin") version "0.0.1"
+       id("io.github.hangga.delvelin") version "0.0.8"
    }
    ```
 
 2. **Or to `build.gradle` (Groovy DSL)**:
    ```groovy
    plugins {
-       id 'io.github.hangga.delvelin' version '0.0.1'
+       id 'io.github.hangga.delvelin' version '0.0.8'
    }
    ```
 
@@ -39,7 +39,7 @@ The plugin provides an extension named `delvelin` to configure analysis paramete
 **Kotlin DSL**:
 ```kotlin
 delvelin {
-    outputFormat = OutputFormat.JSON // Output format: LOG, JSON, or HTML
+    outputFormat = OutputFileFormat.JSON // Output format: LOG, JSON, or HTML
     isShowDate = true               // Show date in the results
     isShowSaveDialog = false        // Display a save dialog after analysis
     isIgnoreCommentBlock = true     // Ignore comment blocks during analysis
@@ -50,7 +50,7 @@ delvelin {
 **Groovy DSL**:
 ```groovy
 delvelin {
-    outputFormat = OutputFormat.JSON // Output format: LOG, JSON, or HTML
+    outputFormat = OutputFileFormat.JSON // Output format: LOG, JSON, or HTML
     isShowDate = true                // Show date in the results
     isShowSaveDialog = false         // Display a save dialog after analysis
     isIgnoreCommentBlock = true      // Ignore comment blocks during analysis
@@ -71,13 +71,13 @@ Run the Gradle task named `delvelinScan` to start the code analysis:
 
 #### **Configuration Parameters**
 
-| **Parameter**         | **Type**              | **Default**       | **Description**                                       |
-|------------------------|-----------------------|-------------------|-------------------------------------------------------|
-| `outputFormat`         | `OutputFormat`       | `LOG`             | Output format of the results (`LOG`, `JSON`, `HTML`). |
-| `isShowDate`           | `Boolean`            | `true`            | Display the date in the output results.               |
-| `isShowSaveDialog`     | `Boolean`            | `false`           | Show a save dialog after analysis completes.          |
-| `isIgnoreCommentBlock` | `Boolean`            | `false`           | Ignore comment blocks during the analysis.            |
-| `isCustomExtensions`   | `Boolean`            | `false`           | Enable custom extensions.                             |
+| **Parameter**         | **Type**           | **Default**       | **Description**                                       |
+|------------------------|--------------------|-------------------|-------------------------------------------------------|
+| `outputFormat`         | `OutputFileFormat` | `LOG`             | Output format of the results (`LOG`, `JSON`, `HTML`). |
+| `isShowDate`           | `Boolean`          | `true`            | Display the date in the output results.               |
+| `isShowSaveDialog`     | `Boolean`          | `false`           | Show a save dialog after analysis completes.          |
+| `isIgnoreCommentBlock` | `Boolean`          | `false`           | Ignore comment blocks during the analysis.            |
+| `isCustomExtensions`   | `Boolean`          | `false`           | Enable custom extensions.                             |
 
 ---
 
