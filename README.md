@@ -99,7 +99,3 @@ For other formats (`JSON` or `HTML`), the results will be saved as configured.
 
 #### **Adjusting Output Format**
 To customize the output further, add logic to the plugin code or use the `isCustomExtensions` feature with your own extension definitions.
-
----
-
-Let me know if you need any additional details! 😊
