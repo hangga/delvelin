@@ -20,21 +20,21 @@ public class DelvelinScan implements Plugin<Project> {
         project.getTasks()
             .register("delvelinScan", task -> {
                 task.doLast(action -> {
-//                    new Delvelin().setShowSaveDialog(ext.getShowSaveDialog())
-//                        .setOutputFormat(ext.outputFileFormat)
-//                        .setShowDate(ext.isShowDate)
-//                        .scan();
                     OutputFileFormat outputFileFormat;
                     try {
-                        outputFileFormat = OutputFileFormat.valueOf(ext.getOutputFileFormat().get().toUpperCase());
+                        outputFileFormat = OutputFileFormat.valueOf(ext.getOutputFileFormat()
+                            .get()
+                            .toUpperCase());
                     } catch (IllegalArgumentException e) {
-                        throw new RuntimeException("Invalid outputFileFormat: " + ext.getOutputFileFormat().get(), e);
+                        throw new RuntimeException("Invalid outputFileFormat: " + ext.getOutputFileFormat()
+                            .get(), e);
                     }
 
-                    new Delvelin()
-                        .setShowSaveDialog(ext.getShowSaveDialog().get())
+                    new Delvelin().setShowSaveDialog(ext.getShowSaveDialog()
+                            .get())
                         .setOutputFormat(outputFileFormat)
-                        .setShowDate(ext.getShowDate().get())
+                        .setShowDate(ext.getShowDate()
+                            .get())
                         .scan();
                 });
             });
@@ -50,11 +50,16 @@ public class DelvelinScan implements Plugin<Project> {
 
         @Inject
         public DelvelinExtension(ObjectFactory objectFactory) {
-            this.outputFileFormat = objectFactory.property(String.class).convention("LOG");
-            this.showDate = objectFactory.property(Boolean.class).convention(true);
-            this.showSaveDialog = objectFactory.property(Boolean.class).convention(false);
-            this.ignoreCommentBlock = objectFactory.property(Boolean.class).convention(false);
-            this.customExtensions = objectFactory.property(Boolean.class).convention(false);
+            this.outputFileFormat = objectFactory.property(String.class)
+                .convention("LOG");
+            this.showDate = objectFactory.property(Boolean.class)
+                .convention(true);
+            this.showSaveDialog = objectFactory.property(Boolean.class)
+                .convention(false);
+            this.ignoreCommentBlock = objectFactory.property(Boolean.class)
+                .convention(false);
+            this.customExtensions = objectFactory.property(Boolean.class)
+                .convention(false);
         }
 
         public Property<String> getOutputFileFormat() {
@@ -77,54 +82,4 @@ public class DelvelinScan implements Plugin<Project> {
             return customExtensions;
         }
     }
-
-    // Extension class for task configuration
-    //    public static class DelvelinExtension {
-    //
-    //        public OutputFileFormat outputFileFormat = OutputFileFormat.LOG;
-    //        public boolean isShowDate = true;
-    //        public boolean isShowSaveDialog = false;
-    //        public boolean isIgnoreCommentBlock = false;
-    //        public boolean isCustomExtensions = false;
-    //
-    //        public OutputFileFormat getOutputFormat() {
-    //            return outputFileFormat;
-    //        }
-    //
-    //        public void setOutputFormat(OutputFileFormat outputFileFormat) {
-    //            this.outputFileFormat = outputFileFormat;
-    //        }
-    //
-    //        public boolean isShowDate() {
-    //            return isShowDate;
-    //        }
-    //
-    //        public void setShowDate(boolean showDate) {
-    //            isShowDate = showDate;
-    //        }
-    //
-    //        public boolean isShowSaveDialog() {
-    //            return isShowSaveDialog;
-    //        }
-    //
-    //        public void setShowSaveDialog(boolean showSaveDialog) {
-    //            isShowSaveDialog = showSaveDialog;
-    //        }
-    //
-    //        public boolean isIgnoreCommentBlock() {
-    //            return isIgnoreCommentBlock;
-    //        }
-    //
-    //        public void setIgnoreCommentBlock(boolean ignoreCommentBlock) {
-    //            isIgnoreCommentBlock = ignoreCommentBlock;
-    //        }
-    //
-    //        public boolean isCustomExtensions() {
-    //            return isCustomExtensions;
-    //        }
-    //
-    //        public void setCustomExtensions(boolean customExtensions) {
-    //            isCustomExtensions = customExtensions;
-    //        }
-    //    }
 }
