@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.hangga"
-version = "0.0.8"
+version = "0.0.17"
 
 repositories {
     mavenCentral()
