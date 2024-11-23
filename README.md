@@ -38,14 +38,14 @@ Add the plugin to your Gradle project.
 ### **Kotlin DSL**
 ```kotlin
 plugins {
-    id("io.github.hangga.delvelin") version "0.0.8"
+    id("io.github.hangga.delvelin") version "0.0.18-beta0"
 }
 ```
 
 ### **Groovy DSL**
 ```groovy
 plugins {
-    id 'io.github.hangga.delvelin' version '0.0.8'
+    id 'io.github.hangga.delvelin' version '0.0.18-beta0'
 }
 ```
 
@@ -55,25 +55,11 @@ plugins {
 
 Configure Delvelin using the `delvelin` extension.
 
-### **Kotlin DSL**
-```kotlin
-delvelin {
-    outputFormat = OutputFileFormat.JSON // Options: LOG, JSON, HTML
-    isShowDate = true
-    isShowSaveDialog = false
-    isIgnoreCommentBlock = true
-    isCustomExtensions = false
-}
-```
-
-### **Groovy DSL**
 ```groovy
 delvelin {
-    outputFormat = OutputFileFormat.JSON // Options: LOG, JSON, HTML
-    isShowDate = true
-    isShowSaveDialog = false
-    isIgnoreCommentBlock = true
-    isCustomExtensions = false
+    outputFileFormat = 'JSON' // Options: LOG, JSON, HTML
+    showDate = true
+    showSaveDialog = false
 }
 ```
 
@@ -90,13 +76,11 @@ Run the `delvelinScan` task to analyze your project:
 
 ## **Configuration Parameters**
 
-| **Parameter**         | **Type**           | **Default**       | **Description**                                       |
-|------------------------|--------------------|-------------------|-------------------------------------------------------|
-| `outputFormat`         | `OutputFileFormat` | `LOG`             | Output format (`LOG`, `JSON`, `HTML`).               |
-| `isShowDate`           | `Boolean`          | `true`            | Show date in the output.                             |
-| `isShowSaveDialog`     | `Boolean`          | `false`           | Prompt a save dialog after the scan.                 |
-| `isIgnoreCommentBlock` | `Boolean`          | `false`           | Skip comment blocks during analysis.                 |
-| `isCustomExtensions`   | `Boolean`          | `false`           | Enable custom extensions for additional checks.      |
+| **Parameter**    | **Type**  | **Default**       | **Description**                                      |
+|------------------|-----------|-------------------|------------------------------------------------------|
+| `outputFileFormat`   | `String`  | `LOG`             | `LOG`, `JSON`, `HTML`.               |
+| `showDate`       | `Boolean` | `true`            | Show date in the output.                            |
+| `showSaveDialog` | `Boolean` | `false`           | Prompt a save dialog after the scan.                |
 
 ---
 
