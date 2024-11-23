@@ -262,7 +262,6 @@ public class Reports {
             .append("hr { border: 1px solid #36846B; margin-top: 20px; }")
             .append("table { width: 100%; border-collapse: collapse; margin-top: 20px; }")
             .append("th, td { padding-left: 4px; padding-right: 4px; text-align: left; border: 1px solid #ddd; }")
-//            .append("th { background-color: #16697A; color: white; }")
             .append("th { background-color: white; }")
             .append("code{display:inline-block;font-family:monospace;background-color:#FBF4DB;border:1px solid #FDE7BB;border-radius:3px;padding:2px 5px;" +
                 "margin:0 2px;color:#AA5486;white-space:nowrap}")
@@ -307,25 +306,19 @@ public class Reports {
             .append("; ")
             .append(" transition: all 0.3s ease; border: 1px solid #ddd;'>")
             .append("<h3 style='display:inline;'>")
-            //            .append("<a style='text-decoration: none; color: inherit;' target=\"_blank\" href=\"https://cwe.mitre.org/data/definitions/")
-            //            .append(cweCode.replace("CWE-", ""))
-            //            .append(".html\">")
             .append(cweCode)
             .append(" - ")
             .append(vulnerabilityName)
             .append("</a>")
             .append("</h3>")
             .append("</summary>");
-        System.out.println(cweCode+" | "+getPriorityColor(priority));
+        System.out.println(cweCode + " | " + getPriorityColor(priority));
 
         // Add Table CSS (Optional)
         htmlBuffer.append("<style>")
             .append("table { width: 100%; border-collapse: collapse; margin-top: 10px; }")
             .append("th, td { border: 1px solid #D1D2D4; padding-left: 8px; padding-right: 8px; padding-top:2px; padding-bottom:2px; text-align: left; " +
-                "word-wrap: break-word; word-break: " +
-                "break-word;}")
-//            .append("th { background-color: #323844; color: white; }")
-//            .append("th { background-color: #323844; color: white; }")
+                "word-wrap: break-word; word-break: " + "break-word;}")
             .append("td:nth-child(1) { width: 30%; }")
             .append("td:nth-child(3) { width: 10%; text-align: right; }")
             .append("</style>");
@@ -466,9 +459,7 @@ public class Reports {
             .map(Reports::getPriorityColor)
             .collect(Collectors.joining("\",\"", "[\"", "\"]"));
 
-        htmlBuffer
-            //.append("<h3 style=\"text-align: center;\">Findings Distribution (Bar Chart)</h3>")
-            .append("<div style=\"width: 100%; height: 800px;\"><canvas style=\"margin:auto;\" id='findingsBarChart'></canvas></div>")
+        htmlBuffer.append("<div style=\"width: 100%; height: 800px;\"><canvas style=\"margin:auto;\" id='findingsBarChart'></canvas></div>")
             .append("<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>")
             .append("<script>")
             .append("const barCtx = document.getElementById('findingsBarChart').getContext('2d');")
