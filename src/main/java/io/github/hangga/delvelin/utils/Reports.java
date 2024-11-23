@@ -253,13 +253,13 @@ public class Reports {
     private static void buildHtmlHeader(StringBuffer htmlBuffer, String dateReport) {
         htmlBuffer.append("<html><head>")
             .append("<style>")
-            .append("body { background-color: #f4f7fc; margin: 0; padding: 60px; }")
-            .append("h2 { color: #36846B; }")
+            .append("body { background-color: #f4f7fc; margin: 0; padding: 100px; }")
+            .append("h2 { color: #979CAB; }")
             .append("h2 { text-align: center; }")
             .append("h4 { text-align: center; }")
             .append(
                 "pre{display:block;font-family:monospace;white-space:pre-wrap;background-color:#fbf4db;border:1px solid #fde7bb;border-radius:4px;padding:10px;margin:10px 0;color:#aa5486;overflow-x:auto;max-width:100%;word-wrap:break-word}")
-            .append("hr { border: 1px solid #36846B; margin-top: 20px; }")
+            .append("hr { border: 1px solid #979CAB; margin-top: 20px; }")
             .append("table { width: 100%; border-collapse: collapse; margin-top: 20px; }")
             .append("th, td { padding-left: 4px; padding-right: 4px; text-align: left; border: 1px solid #ddd; }")
             .append("th { background-color: white; }")
@@ -298,21 +298,58 @@ public class Reports {
 
     private static void appendCweSection(StringBuffer htmlBuffer, String cweCode, String vulnerabilityName, List<ItemReport> reports, String priority) {
 
+//        htmlBuffer.append("<details>")
+//            .append("<summary style='cursor: pointer; margin: 10px 0; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 6px; text-align:" +
+//                " left; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); background-color:#3F4552;")
+////            .append(getPriorityColor(priority))
+//            .append("transition: all 0.3s ease; border: 1px solid #ddd; position: relative;'>")
+//            .append("<span style='display:inline; color:#FFF;'>")
+//            .append(cweCode)
+//            .append(" - ")
+//            .append(vulnerabilityName)
+//            .append("</span>")
+//            .append("<span style='box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); font-size: 14px;  border-radius: 6px; display: block; " +
+//                "padding: 6px; position: absolute; right: " +
+//                "20px; top: 50%; " +
+//                "transform: translateY(-50%); " +
+//                "background-color:")
+//            .append(getPriorityColor(priority))
+//            .append("; '> ")
+//            .append(reports.size())
+//            .append("</span>")
+//            .append("</summary>");
+
+        htmlBuffer.append("<style>")
+            .append("details summary:hover {")
+            .append("    background-color: #6A669D;") // Warna saat hover
+            .append("    color: #FFFFFF;")          // Warna teks saat hover
+//            .append("    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);") // Efek bayangan tambahan
+//            .append("    transition: background-color 0.3s ease, box-shadow 0.3s ease;") // Efek transisi
+            .append("}")
+            .append("</style>");
+
         htmlBuffer.append("<details>")
-            .append("<summary style='cursor: pointer; margin: 10px 0; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 6px; text-align:")
-            .append("left; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);")
-            .append("background-color:")
-            .append(getPriorityColor(priority))
-            .append("; ")
-            .append(" transition: all 0.3s ease; border: 1px solid #ddd;'>")
-            .append("<h3 style='display:inline;'>")
+            .append("<summary style='cursor: pointer; margin: 4px 0; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: " +
+                "6px; text-align:" +
+                " left; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); background-color:#979CAB;")
+            .append("transition: all 0.3s ease; border: 1px solid #ddd; position: relative;'>")
+            .append("<span style='display:inline;'>")
             .append(cweCode)
             .append(" - ")
             .append(vulnerabilityName)
-            .append("</a>")
-            .append("</h3>")
+            .append("</span>")
+            .append("<span style='box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); font-size: 14px;  border-radius: 6px; display: block; " +
+                "padding: 6px; position: absolute; right: " +
+                "20px; top: 50%; " +
+                "transform: translateY(-50%); " +
+                "background-color:")
+            .append(getPriorityColor(priority))
+            .append("; '> ")
+            .append(reports.size())
+            .append("</span>")
             .append("</summary>");
-        System.out.println(cweCode + " | " + getPriorityColor(priority));
+
+
 
         // Add Table CSS (Optional)
         htmlBuffer.append("<style>")
@@ -321,6 +358,8 @@ public class Reports {
                 "word-wrap: break-word; word-break: " + "break-word;}")
             .append("td:nth-child(1) { width: 30%; }")
             .append("td:nth-child(3) { width: 10%; text-align: right; }")
+            .append("td:nth-child(4) { width: 10%; text-align: right; }")
+            .append("td:nth-child(5) { width: 8%; }")
             .append("</style>");
 
         // Add Table Content
@@ -332,13 +371,21 @@ public class Reports {
             .append("</tr>");
 
         double totalScore = 0.0;
-
+        int idx = 0;
         for (ItemReport item : reports) {
             double score = item.getScore();
             totalScore += score;
+            idx++;
 
             htmlBuffer.append("<tr>")
+//                .append("<td>")
+//                .append(idx)
+//                .append("</td>")
                 .append("<td>")
+                .append("<span style='border: 1px solid #AE445A; min-width: 15px; text-align:center; position:absolute; background-color:#FFF; color: #000; font-size: 12px;  " +
+                    "border-radius: 10px; display: " +
+                    "block; " +
+                    "padding:2px; '>"+idx+"</span>")
                 .append("<pre>")
                 .append(trimTitle(item.getFinding()))
                 .append("</pre>")
@@ -371,7 +418,7 @@ public class Reports {
     private static void buildSummaryTable(StringBuffer htmlBuffer, Map<String, Integer> cweCounts, Map<String, Double> highestCvss,
         Map<String, String> priorities, double totalScore) {
         htmlBuffer.append("<h3 style=\"text-align: center;\">Summary</h3>")
-            .append("<table><tr><th>CWE Code</th><th>Total Findings</th><th>CVSS Score</th><th>Subtotal</th><th>Priority</th></tr>");
+            .append("<table><tr><th>CWE Code</th><th>Total Found</th><th>CVSS Score</th><th>Subtotal</th><th>Priority</th></tr>");
 
         int totalFindings = 0;
         for (String cweCode : cweCounts.keySet()) {
