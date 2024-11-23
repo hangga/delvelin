@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.hangga"
-version = "0.0.17"
+version = "0.0.18-beta0"
 
 repositories {
     mavenCentral()
@@ -52,4 +52,10 @@ gradlePlugin {
             tags.set(listOf("testing", "Analyzer", "Vulnerability", "delvelin", "CWE", "CVSS"))
         }
     }
+}
+
+tasks.register<JavaExec>("scanDelvelin") {
+    classpath = sourceSets["main"].runtimeClasspath
+    mainClass.set("io.github.hangga.delvelin.Delvelin")
+    args("format_html")
 }

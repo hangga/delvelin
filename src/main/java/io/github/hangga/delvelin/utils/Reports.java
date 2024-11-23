@@ -232,14 +232,16 @@ public class Reports {
 
             cweCounts.put(cweCode, reports.size());
             highestCvss.put(cweCode, highestScore);
-            priorities.put(cweCode, getPriorityBasedOnScore(highestScore));
+            String priority = getPriorityBasedOnScore(highestScore);
+            priorities.put(cweCode, priority);
 
-            appendCweSection(htmlBuffer, cweCode, vulnerabilityName, reports);
+            appendCweSection(htmlBuffer, cweCode, vulnerabilityName, reports, priority);
             totalScore += subtotalScore;
         }
 
         buildSummaryTable(htmlBuffer, cweCounts, highestCvss, priorities, totalScore);
         buildPieChart(htmlBuffer, cweCounts, priorities);
+        buildBarChart(htmlBuffer, cweCounts, priorities);
 
         if (Config.isShowSaveDialog) {
             FileUtil.saveOutputCustom(htmlBuffer.toString(), ".html");
@@ -252,15 +254,16 @@ public class Reports {
         htmlBuffer.append("<html><head>")
             .append("<style>")
             .append("body { background-color: #f4f7fc; margin: 0; padding: 60px; }")
-            .append("h2, h3 { color: #36846B; }")
+            .append("h2 { color: #36846B; }")
             .append("h2 { text-align: center; }")
             .append("h4 { text-align: center; }")
             .append(
                 "pre{display:block;font-family:monospace;white-space:pre-wrap;background-color:#fbf4db;border:1px solid #fde7bb;border-radius:4px;padding:10px;margin:10px 0;color:#aa5486;overflow-x:auto;max-width:100%;word-wrap:break-word}")
             .append("hr { border: 1px solid #36846B; margin-top: 20px; }")
             .append("table { width: 100%; border-collapse: collapse; margin-top: 20px; }")
-            .append("th, td { padding: 8px; text-align: left; border: 1px solid #ddd; }")
-            .append("th { background-color: #16697A; color: white; }")
+            .append("th, td { padding-left: 4px; padding-right: 4px; text-align: left; border: 1px solid #ddd; }")
+//            .append("th { background-color: #16697A; color: white; }")
+            .append("th { background-color: white; }")
             .append("code{display:inline-block;font-family:monospace;background-color:#FBF4DB;border:1px solid #FDE7BB;border-radius:3px;padding:2px 5px;" +
                 "margin:0 2px;color:#AA5486;white-space:nowrap}")
             .append("</style>")
@@ -294,27 +297,40 @@ public class Reports {
             .orElse(0.0);
     }
 
-    private static void appendCweSection(StringBuffer htmlBuffer, String cweCode, String vulnerabilityName, List<ItemReport> reports) {
-        htmlBuffer.append("<h3><a target=\"_blank\" href=\"https://cwe.mitre.org/data/definitions/")
-            .append(cweCode.replace("CWE-", ""))
-            .append(".html\">")
+    private static void appendCweSection(StringBuffer htmlBuffer, String cweCode, String vulnerabilityName, List<ItemReport> reports, String priority) {
+
+        htmlBuffer.append("<details>")
+            .append("<summary style='cursor: pointer; margin: 10px 0; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 6px; text-align:")
+            .append("left; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);")
+            .append("background-color:")
+            .append(getPriorityColor(priority))
+            .append("; ")
+            .append(" transition: all 0.3s ease; border: 1px solid #ddd;'>")
+            .append("<h3 style='display:inline;'>")
+            //            .append("<a style='text-decoration: none; color: inherit;' target=\"_blank\" href=\"https://cwe.mitre.org/data/definitions/")
+            //            .append(cweCode.replace("CWE-", ""))
+            //            .append(".html\">")
             .append(cweCode)
             .append(" - ")
             .append(vulnerabilityName)
-            .append("</a></h3>");
+            .append("</a>")
+            .append("</h3>")
+            .append("</summary>");
+        System.out.println(cweCode+" | "+getPriorityColor(priority));
 
-        // Css
+        // Add Table CSS (Optional)
         htmlBuffer.append("<style>")
             .append("table { width: 100%; border-collapse: collapse; margin-top: 10px; }")
-            .append("th, td { border: 1px solid #D1D2D4; padding: 8px; text-align: left; word-wrap: break-word; word-break: break-word;}")
-            .append("th { background-color: #323844; }")
+            .append("th, td { border: 1px solid #D1D2D4; padding-left: 8px; padding-right: 8px; padding-top:2px; padding-bottom:2px; text-align: left; " +
+                "word-wrap: break-word; word-break: " +
+                "break-word;}")
+//            .append("th { background-color: #323844; color: white; }")
+//            .append("th { background-color: #323844; color: white; }")
             .append("td:nth-child(1) { width: 30%; }")
             .append("td:nth-child(3) { width: 10%; text-align: right; }")
-            .append("td:nth-child(4) { width: 10%; text-align: right; }")
-            .append("td:nth-child(5) { width: 8%; text-align: left; }")
             .append("</style>");
 
-        // Header
+        // Add Table Content
         htmlBuffer.append("<table>")
             .append("<tr>")
             .append("<th>Findings</th>")
@@ -324,7 +340,6 @@ public class Reports {
 
         double totalScore = 0.0;
 
-        // fill content
         for (ItemReport item : reports) {
             double score = item.getScore();
             totalScore += score;
@@ -347,15 +362,17 @@ public class Reports {
                 .append("</tr>");
         }
 
-        // Subtotal
+        // Add Subtotal Row
         htmlBuffer.append("<tr style=\"font-weight: bold; background-color: #f9f9f9;\">")
             .append("<td colspan=\"2\" style=\"text-align: right;\">Subtotal:</td>")
             .append("<td style=\"text-align: right;\">")
             .append(String.format("%.2f", totalScore))
             .append("</td>")
-            .append("</tr>");
+            .append("</tr>")
+            .append("</table>");
 
-        htmlBuffer.append("</table>");
+        // Close details tag
+        htmlBuffer.append("</details>");
     }
 
     private static void buildSummaryTable(StringBuffer htmlBuffer, Map<String, Integer> cweCounts, Map<String, Double> highestCvss,
@@ -420,7 +437,7 @@ public class Reports {
             .collect(Collectors.joining("\",\"", "[\"", "\"]"));
 
         htmlBuffer.append("<h3 style=\"text-align: center;\">Findings Distribution</h3>")
-            .append("<div style=\"width: 100%; height: 800px;\"><canvas style=\"margin:auto;\" id='findingsChart'></canvas></div>")
+            .append("<div style=\"width: 100%; height: 400px;\"><canvas style=\"margin:auto;\" id='findingsChart'></canvas></div>")
             .append("<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>")
             .append("<script>")
             .append("const ctx = document.getElementById('findingsChart').getContext('2d');")
@@ -432,6 +449,44 @@ public class Reports {
             .append("], backgroundColor: ")
             .append(chartColors)
             .append(", hoverOffset: 4 }] } });")
+            .append("</script>");
+    }
+
+    private static void buildBarChart(StringBuffer htmlBuffer, Map<String, Integer> cweCounts, Map<String, String> priorities) {
+        String cweLabels = cweCounts.keySet()
+            .stream()
+            .map(cwe -> "\"" + cwe + "\"")
+            .collect(Collectors.joining(","));
+        String cweData = cweCounts.values()
+            .stream()
+            .map(String::valueOf)
+            .collect(Collectors.joining(","));
+        String chartColors = priorities.values()
+            .stream()
+            .map(Reports::getPriorityColor)
+            .collect(Collectors.joining("\",\"", "[\"", "\"]"));
+
+        htmlBuffer
+            //.append("<h3 style=\"text-align: center;\">Findings Distribution (Bar Chart)</h3>")
+            .append("<div style=\"width: 100%; height: 800px;\"><canvas style=\"margin:auto;\" id='findingsBarChart'></canvas></div>")
+            .append("<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>")
+            .append("<script>")
+            .append("const barCtx = document.getElementById('findingsBarChart').getContext('2d');")
+            .append("new Chart(barCtx, {")
+            .append("type: 'bar',")
+            .append("data: { labels: [")
+            .append(cweLabels)
+            .append("], datasets: [{ label: 'Findings', data: [")
+            .append(cweData)
+            .append("], backgroundColor: ")
+            .append(chartColors)
+            .append(", borderWidth: 1 }] },")
+            .append("options: {")
+            .append("indexAxis: 'y',") // Membuat grafik horizontal
+            .append("scales: { x: { beginAtZero: true } },")
+            .append("plugins: { legend: { display: false } }")
+            .append("}")
+            .append("});")
             .append("</script>");
     }
 
