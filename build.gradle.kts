@@ -40,6 +40,28 @@ kotlin {
 //    dependsOn("fatJar") // Pastikan fat JAR dibuat dalam task build
 //}
 
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"]) // Publikasikan JAR default yang dihasilkan
+
+            groupId = project.group.toString()
+            artifactId = "delvelin"
+            version = project.version.toString()
+        }
+    }
+
+    repositories {
+        maven {
+            url = uri("https://repo.repsy.io/mvn/hangga/repo")
+            credentials {
+                username = project.findProperty("repoUsername") as String? ?: ""
+                password = project.findProperty("repoPassword") as String? ?: ""
+            }
+        }
+    }
+}
+
 gradlePlugin {
     website.set("https://github.com/hangga/delvelin")
     vcsUrl.set("https://github.com/hangga/delvelin")

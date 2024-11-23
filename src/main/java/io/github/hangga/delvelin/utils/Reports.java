@@ -133,7 +133,7 @@ public class Reports {
             double subtotalScore = 0.0;
             for (ItemReport itemReport : reports) {
                 logMessage.append(indentation)
-                    .append("Findings: ")
+                    .append("Issues: ")
                     .append(Ansi.YELLOW)
                     .append(itemReport.getFinding()
                         .replace("<code>", "")
@@ -297,34 +297,10 @@ public class Reports {
     }
 
     private static void appendCweSection(StringBuffer htmlBuffer, String cweCode, String vulnerabilityName, List<ItemReport> reports, String priority) {
-
-//        htmlBuffer.append("<details>")
-//            .append("<summary style='cursor: pointer; margin: 10px 0; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 6px; text-align:" +
-//                " left; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); background-color:#3F4552;")
-////            .append(getPriorityColor(priority))
-//            .append("transition: all 0.3s ease; border: 1px solid #ddd; position: relative;'>")
-//            .append("<span style='display:inline; color:#FFF;'>")
-//            .append(cweCode)
-//            .append(" - ")
-//            .append(vulnerabilityName)
-//            .append("</span>")
-//            .append("<span style='box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); font-size: 14px;  border-radius: 6px; display: block; " +
-//                "padding: 6px; position: absolute; right: " +
-//                "20px; top: 50%; " +
-//                "transform: translateY(-50%); " +
-//                "background-color:")
-//            .append(getPriorityColor(priority))
-//            .append("; '> ")
-//            .append(reports.size())
-//            .append("</span>")
-//            .append("</summary>");
-
         htmlBuffer.append("<style>")
             .append("details summary:hover {")
             .append("    background-color: #6A669D;") // Warna saat hover
             .append("    color: #FFFFFF;")          // Warna teks saat hover
-//            .append("    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);") // Efek bayangan tambahan
-//            .append("    transition: background-color 0.3s ease, box-shadow 0.3s ease;") // Efek transisi
             .append("}")
             .append("</style>");
 
@@ -349,8 +325,6 @@ public class Reports {
             .append("</span>")
             .append("</summary>");
 
-
-
         // Add Table CSS (Optional)
         htmlBuffer.append("<style>")
             .append("table { width: 100%; border-collapse: collapse; margin-top: 10px; }")
@@ -365,7 +339,7 @@ public class Reports {
         // Add Table Content
         htmlBuffer.append("<table>")
             .append("<tr>")
-            .append("<th>Findings</th>")
+            .append("<th>Issues</th>")
             .append("<th>Location</th>")
             .append("<th style=\"text-align: center;\">Score</th>")
             .append("</tr>");
@@ -376,16 +350,13 @@ public class Reports {
             double score = item.getScore();
             totalScore += score;
             idx++;
-
             htmlBuffer.append("<tr>")
-//                .append("<td>")
-//                .append(idx)
-//                .append("</td>")
                 .append("<td>")
-                .append("<span style='border: 1px solid #AE445A; min-width: 15px; text-align:center; position:absolute; background-color:#FFF; color: #000; font-size: 12px;  " +
-                    "border-radius: 10px; display: " +
-                    "block; " +
-                    "padding:2px; '>"+idx+"</span>")
+                .append(
+                    "<span style='border: 1px solid #AE445A; min-width: 15px; text-align:center; position:absolute; background-color:#FFF; color: #000; font-size: 12px;  " +
+                        "border-radius: 10px; display: " + "block; " + "padding:2px; '>")
+                .append(idx)
+                .append("</span>")
                 .append("<pre>")
                 .append(trimTitle(item.getFinding()))
                 .append("</pre>")
@@ -476,7 +447,7 @@ public class Reports {
             .map(Reports::getPriorityColor)
             .collect(Collectors.joining("\",\"", "[\"", "\"]"));
 
-        htmlBuffer.append("<h3 style=\"text-align: center;\">Findings Distribution</h3>")
+        htmlBuffer.append("<h3 style=\"text-align: center;\">Issues Distribution</h3>")
             .append("<div style=\"width: 100%; height: 400px;\"><canvas style=\"margin:auto;\" id='findingsChart'></canvas></div>")
             .append("<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>")
             .append("<script>")
@@ -591,7 +562,7 @@ public class Reports {
             jsonBuilder.append("\"subtotalScore\": ")
                 .append(subtotalScore)
                 .append(",");
-            jsonBuilder.append("\"findings\": [");
+            jsonBuilder.append("\"issues\": [");
 
             boolean isFirstFinding = true;
             for (ItemReport item : reports) {
@@ -600,7 +571,7 @@ public class Reports {
                 }
 
                 jsonBuilder.append("{");
-                jsonBuilder.append("\"finding\": \"")
+                jsonBuilder.append("\"issues\": \"")
                     .append(escapeJson(item.getFinding()))
                     .append("\",");
                 jsonBuilder.append("\"message\": \"")
