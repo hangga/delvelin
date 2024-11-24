@@ -74,6 +74,10 @@ Run the `delvelinScan` task to analyze your project:
 ./gradlew delvelinScan
 ```
 
+If we are using Intellij IDEA, we can also use the gradle menu in the sidebar:
+
+<img width="400" src="https://github.com/hangga/delvelin/blob/main/delvelin-scan-gradle-menu.png?raw=true" alt="sidebar"/>
+
 ---
 
 ### On Gitlab CI
