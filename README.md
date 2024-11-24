@@ -67,12 +67,30 @@ delvelin {
 
 ## **Running the Analysis**
 
+### On Local
+
 Run the `delvelinScan` task to analyze your project:
 ```bash
 ./gradlew delvelinScan
 ```
 
 ---
+
+### On Gitlab CI
+Add `delvelinScan` gradle task to our pipeline configuration, for example:
+```yaml
+stages:
+  - test
+
+gradle-scan:
+  stage: test
+  image: gradle:7.6-jdk8
+  script:
+    - gradle delvelinScan
+  only:
+    - main
+    - develop
+```
 
 ## **Configuration Parameters**
 
