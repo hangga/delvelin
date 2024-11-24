@@ -261,7 +261,7 @@ public class Reports {
                 "pre{display:block;font-family:monospace;white-space:pre-wrap;background-color:#fbf4db;border:1px solid #fde7bb;border-radius:4px;padding:10px;margin:10px 0;color:#aa5486;overflow-x:auto;max-width:100%;word-wrap:break-word}")
             .append("hr { border: 1px solid #979CAB; margin-top: 20px; }")
             .append("table { width: 100%; border-collapse: collapse; margin-top: 20px; }")
-            .append("th, td { padding-left: 4px; padding-right: 4px; text-align: left; border: 1px solid #ddd; }")
+            .append("th, td { padding: 4px; text-align: left; border: 1px solid #ddd; }")
             .append("th { background-color: white; }")
             .append("code{display:inline-block;font-family:monospace;background-color:#FBF4DB;border:1px solid #FDE7BB;border-radius:3px;padding:2px 5px;" +
                 "margin:0 2px;color:#AA5486;white-space:nowrap}")
@@ -322,16 +322,16 @@ public class Reports {
             .append(getPriorityColor(priority))
             .append("; '> ")
             .append(reports.size())
-            .append("</span>")
+            .append(" issues </span>")
             .append("</summary>");
 
         // Add Table CSS (Optional)
         htmlBuffer.append("<style>")
-            .append("table { width: 100%; border-collapse: collapse; margin-top: 10px; }")
+            .append("table { padding: 10px; width: 100%; border-collapse: collapse; margin-bottom: 40px; margin-top:5px;}")
             .append("th, td { border: 1px solid #D1D2D4; padding-left: 8px; padding-right: 8px; padding-top:2px; padding-bottom:2px; text-align: left; " +
                 "word-wrap: break-word; word-break: " + "break-word;}")
-            .append("td:nth-child(1) { width: 30%; }")
-            .append("td:nth-child(3) { width: 10%; text-align: right; }")
+            .append("td:nth-child(1) { width: 40%; }")
+            .append("td:nth-child(3) { width: 8%; text-align: right; }")
             .append("td:nth-child(4) { width: 10%; text-align: right; }")
             .append("td:nth-child(5) { width: 8%; }")
             .append("</style>");
