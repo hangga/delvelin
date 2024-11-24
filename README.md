@@ -65,9 +65,9 @@ delvelin {
 
 ---
 
-## **Running the Analysis**
+## **Running Delvelin Analyzer**
 
-### On Local
+### Running on Local Machine
 
 Run the `delvelinScan` task to analyze your project:
 ```bash
@@ -80,7 +80,7 @@ If we are using Intellij IDEA, we can also use the gradle menu in the sidebar:
 
 ---
 
-### On Gitlab CI
+### Running on Gitlab CI
 Add `delvelinScan` gradle task to our pipeline configuration, for example:
 ```yaml
 stages:
@@ -96,7 +96,7 @@ gradle-scan:
     - develop
 ```
 
-## **Configuration Parameters**
+## **Configurations**
 
 | **Parameter**    | **Type**  | **Default**       | **Description**                                      |
 |------------------|-----------|-------------------|------------------------------------------------------|
