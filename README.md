@@ -126,6 +126,12 @@ This project is licensed under [MIT License](LICENSE).
 ## **Contributing**
 Contributions are welcome! Feel free to submit issues or pull requests for new features or improvements.
 
+This project is still a work in progress, and your contributions are highly valuable in helping us improve and refine it.
+
+If you find this project useful and would like to support its development, we would greatly appreciate your donations. Your generosity will go a long way in ensuring the growth and sustainability of this initiative.
+
+Thank you for your support!
+
 ---
 
 ### **Connect**
