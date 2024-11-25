@@ -1,5 +1,5 @@
 # Delvelin 
-![Latest Version](https://img.shields.io/maven-central/v/io.github.hangga/delvelin?color=brightgreen) ![Java Support](https://img.shields.io/badge/Java-8+-blue) ![Kotlin Support](https://img.shields.io/badge/Kotlin-1.5+-blueviolet) ![Build](https://img.shields.io/github/actions/workflow/status/hangga/delvelin/build.yml)
+![Java](https://img.shields.io/badge/Java-8+-blue?logo=java) ![Kotlin](https://img.shields.io/badge/Kotlin-1.5+-blueviolet?logo=kotlin)![Gradle Plugin](https://img.shields.io/badge/Gradle-Plugin-brightgreen?logo=gradle)![CWE](https://img.shields.io/badge/CWE-Standards-orange) ![CVSS](https://img.shields.io/badge/CVSS-Severity-red)
 
 **Delvelin** is a **code vulnerability analyzer** for Java/Kotlin projects. It integrates **CWE (Common Weakness Enumeration)** for classifying vulnerabilities and **CVSS (Common Vulnerability Scoring System)** for scoring their severity. This ensures accurate, standardized reporting to help developers prioritize and resolve security issues effectively.
 
@@ -12,13 +12,6 @@
 - Supports Java and Kotlin codebases.
 - Configurable output formats: `LOG`, `JSON`, and `HTML`.
 - Easy integration as a Gradle plugin.
-
----
-
-## **Tech Stack**
-![Java](https://img.shields.io/badge/Java-8+-blue?logo=java) ![Kotlin](https://img.shields.io/badge/Kotlin-1.5+-blueviolet?logo=kotlin)  
-![Gradle Plugin](https://img.shields.io/badge/Gradle-Plugin-brightgreen?logo=gradle)  
-![CWE](https://img.shields.io/badge/CWE-Standards-orange) ![CVSS](https://img.shields.io/badge/CVSS-Severity-red)
 
 ---
 
