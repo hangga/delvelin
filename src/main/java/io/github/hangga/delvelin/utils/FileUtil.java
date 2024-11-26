@@ -1,5 +1,6 @@
 package io.github.hangga.delvelin.utils;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,7 +33,12 @@ public class FileUtil {
         Path outputPath = Paths.get(path.toString(), "vulnerability-report" + extName);
         try {
             Files.write(outputPath, content.getBytes());
-            System.out.println("Report saved: file://" + outputPath.toAbsolutePath());
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop()
+                    .browse(outputPath.toUri());
+            } else {
+                System.out.println("Report saved: file://" + outputPath.toAbsolutePath());
+            }
         } catch (IOException e) {
             throw new RuntimeException("Failed to save HTML report to file: " + path, e);
         }
