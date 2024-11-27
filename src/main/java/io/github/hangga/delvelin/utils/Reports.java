@@ -19,21 +19,25 @@ public class Reports {
         String cweCode;
         String vulnerabilityName;
         String finding;
-        double score;
         String specificLocation;
         String message;
+        String priority;
+
+        public String getPriority() {
+            return priority;
+        }
 
         public String getFinding() {
             return finding;
         }
 
-        public ItemReport(String cweCode, String finding, String vulnerabilityName, double score, String specificLocation, String message) {
+        public ItemReport(String cweCode, String finding, String vulnerabilityName, String specificLocation, String message, String priority) {
             this.cweCode = cweCode;
             this.finding = finding;
             this.vulnerabilityName = vulnerabilityName;
-            this.score = score;
             this.specificLocation = specificLocation;
             this.message = message;
+            this.priority = priority;
         }
 
         public String getVulnerabilityName() {
@@ -44,9 +48,9 @@ public class Reports {
             return cweCode;
         }
 
-        public double getScore() {
-            return score;
-        }
+        //        public double getScore() {
+        //            return score;
+        //        }
 
         public String getSpecificLocation() {
             return specificLocation;
@@ -83,8 +87,8 @@ public class Reports {
             .format(formatter);
     }
 
-    public static void addToReport(String cweCode, String finding, String vulnerabilityName, double score, String location, String message) {
-        ItemReport newItem = new ItemReport(cweCode, finding, vulnerabilityName, score, location, message);
+    public static void addToReport(String cweCode, String finding, String vulnerabilityName, String location, String message, String priority) {
+        ItemReport newItem = new ItemReport(cweCode, finding, vulnerabilityName, location, message, priority);
 
         // check if exist
         for (ItemReport existingItem : itemReports) {
@@ -130,7 +134,7 @@ public class Reports {
                 .append("\n");
 
             // Menghitung subtotal score untuk kelompok ini
-            double subtotalScore = 0.0;
+            //            double subtotalScore = 0.0;
             for (ItemReport itemReport : reports) {
                 logMessage.append(indentation)
                     .append("Issues: ")
@@ -151,24 +155,24 @@ public class Reports {
                     .append(itemReport.getSpecificLocation())
                     .append(")\n\n");
 
-                subtotalScore += itemReport.getScore();
+                //                subtotalScore += itemReport.getScore();
             }
 
-            totalScore += subtotalScore;
+            //            totalScore += subtotalScore;
 
-            logMessage.append(indentation)
-                .append(Ansi.BLUE)
-                .append("Subtotal: ")
-                .append(String.format("%.2f", subtotalScore))
-                .append(Ansi.RESET)
-                .append("\n\n");
+            //            logMessage.append(indentation)
+            //                .append(Ansi.BLUE)
+            //                .append("Subtotal: ")
+            //                .append(String.format("%.2f", subtotalScore))
+            //                .append(Ansi.RESET)
+            //                .append("\n\n");
         }
 
-        logMessage.append(Ansi.GREEN)
-            .append(indentation)
-            .append(String.format("Total Score: %,.2f", totalScore))
-            .append(Ansi.RESET)
-            .append("\n\n");
+        //        logMessage.append(Ansi.GREEN)
+        //            .append(indentation)
+        //            .append(String.format("Total Score: %,.2f", totalScore))
+        //            .append(Ansi.RESET)
+        //            .append("\n\n");
 
         return logMessage;
     }
@@ -184,17 +188,17 @@ public class Reports {
     }
 
     // Method to determine priority based on CVSS score
-    private static String getPriorityBasedOnScore(double cvssScore) {
-        if (cvssScore >= 9.0) {
-            return "Critical";
-        } else if (cvssScore >= 7.0) {
-            return "High";
-        } else if (cvssScore >= 4.0) {
-            return "Medium";
-        } else {
-            return "Low";
-        }
-    }
+    //    private static String getPriorityBasedOnScore(double cvssScore) {
+    //        if (cvssScore >= 9.0) {
+    //            return "Critical";
+    //        } else if (cvssScore >= 7.0) {
+    //            return "High";
+    //        } else if (cvssScore >= 4.0) {
+    //            return "Medium";
+    //        } else {
+    //            return "Low";
+    //        }
+    //    }
 
     public static String removeTrail(String input) {
         if (input == null || input.isEmpty()) {
@@ -217,29 +221,34 @@ public class Reports {
         buildHtmlHeader(htmlBuffer, dateReport);
 
         Map<String, Integer> cweCounts = new HashMap<>();
-        Map<String, Double> highestCvss = new HashMap<>();
+        //        Map<String, Double> highestCvss = new HashMap<>();
         Map<String, String> priorities = new HashMap<>();
-        double totalScore = 0;
+        //        double totalScore = 0;
 
         for (Map.Entry<String, List<ItemReport>> entry : groupedReports.entrySet()) {
             String cweCode = entry.getKey();
             List<ItemReport> reports = entry.getValue();
 
-            double subtotalScore = calculateSubtotalScore(reports);
-            double highestScore = calculateHighestScore(reports);
+            //            double subtotalScore = calculateSubtotalScore(reports);
+            //            double highestScore = calculateHighestScore(reports);
             String vulnerabilityName = reports.get(0)
                 .getVulnerabilityName();
 
+            String priority = reports.get(0)
+                .getPriority();
+
             cweCounts.put(cweCode, reports.size());
-            highestCvss.put(cweCode, highestScore);
-            String priority = getPriorityBasedOnScore(highestScore);
+            //            highestCvss.put(cweCode, highestScore);
+            //            String priority = getPriorityBasedOnScore(highestScore);
+            //            String priority = getPriorityBasedOnScore(highestScore);
             priorities.put(cweCode, priority);
 
             appendCweSection(htmlBuffer, cweCode, vulnerabilityName, reports, priority);
-            totalScore += subtotalScore;
+            //            totalScore += subtotalScore;
         }
 
-        buildSummaryTable(htmlBuffer, cweCounts, highestCvss, priorities, totalScore);
+//        buildSummaryTable(htmlBuffer, cweCounts, priorities);
+        //        buildSummaryTable(htmlBuffer, cweCounts, highestCvss, priorities, totalScore);
         buildPieChart(htmlBuffer, cweCounts, priorities);
         buildBarChart(htmlBuffer, cweCounts, priorities);
 
@@ -283,18 +292,18 @@ public class Reports {
             .append("<hr/>");
     }
 
-    private static double calculateSubtotalScore(List<ItemReport> reports) {
-        return reports.stream()
-            .mapToDouble(ItemReport::getScore)
-            .sum();
-    }
-
-    private static double calculateHighestScore(List<ItemReport> reports) {
-        return reports.stream()
-            .mapToDouble(ItemReport::getScore)
-            .max()
-            .orElse(0.0);
-    }
+    //    private static double calculateSubtotalScore(List<ItemReport> reports) {
+    //        return reports.stream()
+    //            .mapToDouble(ItemReport::getScore)
+    //            .sum();
+    //    }
+    //
+    //    private static double calculateHighestScore(List<ItemReport> reports) {
+    //        return reports.stream()
+    //            .mapToDouble(ItemReport::getScore)
+    //            .max()
+    //            .orElse(0.0);
+    //    }
 
     private static void appendCweSection(StringBuffer htmlBuffer, String cweCode, String vulnerabilityName, List<ItemReport> reports, String priority) {
         htmlBuffer.append("<style>")
@@ -305,9 +314,9 @@ public class Reports {
             .append("</style>");
 
         htmlBuffer.append("<details>")
-            .append("<summary style='cursor: pointer; margin: 4px 0; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: " +
-                "6px; text-align:" +
-                " left; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); background-color:#979CAB;")
+            .append(
+                "<summary style='cursor: pointer; margin: 4px 0; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: " + "6px; text-align:" +
+                    " left; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); background-color:#979CAB;")
             .append("transition: all 0.3s ease; border: 1px solid #ddd; position: relative;'>")
             .append("<span style='display:inline;'>")
             .append(cweCode)
@@ -315,10 +324,7 @@ public class Reports {
             .append(vulnerabilityName)
             .append("</span>")
             .append("<span style='box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); font-size: 14px;  border-radius: 6px; display: block; " +
-                "padding: 6px; position: absolute; right: " +
-                "20px; top: 50%; " +
-                "transform: translateY(-50%); " +
-                "background-color:")
+                "padding: 6px; position: absolute; right: " + "20px; top: 50%; " + "transform: translateY(-50%); " + "background-color:")
             .append(getPriorityColor(priority))
             .append("; '> ")
             .append(reports.size())
@@ -331,7 +337,7 @@ public class Reports {
             .append("th, td { border: 1px solid #D1D2D4; padding-left: 8px; padding-right: 8px; padding-top:2px; padding-bottom:2px; text-align: left; " +
                 "word-wrap: break-word; word-break: " + "break-word;}")
             .append("td:nth-child(1) { width: 40%; }")
-            .append("td:nth-child(3) { width: 8%; text-align: right; }")
+            .append("td:nth-child(3) { width: 10%; text-align: right; }")
             .append("td:nth-child(4) { width: 10%; text-align: right; }")
             .append("td:nth-child(5) { width: 8%; }")
             .append("</style>");
@@ -341,14 +347,14 @@ public class Reports {
             .append("<tr>")
             .append("<th>Issues</th>")
             .append("<th>Location</th>")
-            .append("<th style=\"text-align: center;\">Score</th>")
+            //            .append("<th style=\"text-align: center;\">Score</th>")
             .append("</tr>");
 
-        double totalScore = 0.0;
+        //        double totalScore = 0.0;
         int idx = 0;
         for (ItemReport item : reports) {
-            double score = item.getScore();
-            totalScore += score;
+            //            double score = item.getScore();
+            //            totalScore += score;
             idx++;
             htmlBuffer.append("<tr>")
                 .append("<td>")
@@ -367,34 +373,35 @@ public class Reports {
                 .append("\">")
                 .append(item.getSpecificLocation())
                 .append("</a></td>")
-                .append("<td>")
-                .append(String.format("%.2f", score))
-                .append("</td>")
+                //                .append("<td>")
+                //                .append(String.format("%.2f", score))
+                //                .append("</td>")
                 .append("</tr>");
         }
 
         // Add Subtotal Row
-        htmlBuffer.append("<tr style=\"font-weight: bold; background-color: #f9f9f9;\">")
-            .append("<td colspan=\"2\" style=\"text-align: right;\">Subtotal:</td>")
-            .append("<td style=\"text-align: right;\">")
-            .append(String.format("%.2f", totalScore))
-            .append("</td>")
-            .append("</tr>")
+        htmlBuffer
+//            .append("<tr style=\"font-weight: bold; background-color: #f9f9f9;\">")
+//            .append("<td colspan=\"2\" style=\"text-align: right;\">Subtotal:</td>")
+//            //            .append("<td style=\"text-align: right;\">")
+//            //            .append(String.format("%.2f", totalScore))
+//            //            .append("</td>")
+//            .append("</tr>")
             .append("</table>");
 
         // Close details tag
         htmlBuffer.append("</details>");
     }
 
-    private static void buildSummaryTable(StringBuffer htmlBuffer, Map<String, Integer> cweCounts, Map<String, Double> highestCvss,
-        Map<String, String> priorities, double totalScore) {
+    private static void buildSummaryTable(StringBuffer htmlBuffer, Map<String, Integer> cweCounts, Map<String, String> priorities) {
         htmlBuffer.append("<h3 style=\"text-align: center;\">Summary</h3>")
-            .append("<table><tr><th>CWE Code</th><th>Total Found</th><th>CVSS Score</th><th>Subtotal</th><th>Priority</th></tr>");
+            //            .append("<table><tr><th>CWE Code</th><th>Total Found</th><th>CVSS Score</th><th>Subtotal</th><th>Priority</th></tr>");
+            .append("<table><tr><th>CWE Code</th><th>Total Found</th><th>Priority</th></tr>");
 
         int totalFindings = 0;
         for (String cweCode : cweCounts.keySet()) {
             int findings = cweCounts.get(cweCode);
-            double cvss = highestCvss.get(cweCode);
+            //            double cvss = highestCvss.get(cweCode);
             String priority = priorities.get(cweCode);
 
             totalFindings += findings;
@@ -407,12 +414,12 @@ public class Reports {
                 .append("<td>")
                 .append(findings)
                 .append("</td>")
-                .append("<td>")
-                .append(String.format("%.2f", cvss))
-                .append("</td>")
-                .append("<td>")
-                .append(String.format("%.2f", cvss * findings))
-                .append("</td>")
+                //                .append("<td>")
+                //                .append(String.format("%.2f", cvss))
+                //                .append("</td>")
+                //                .append("<td>")
+                //                .append(String.format("%.2f", cvss * findings))
+                //                .append("</td>")
                 .append("<td style='background-color:")
                 .append(getPriorityColor(priority))
                 .append(";'>")
@@ -426,10 +433,10 @@ public class Reports {
             .append(totalFindings)
             .append("</td>")
             .append("<td></td>")
-            .append("<td>")
-            .append(String.format("%.2f", totalScore))
-            .append("</td>")
-            .append("<td>-</td></tr>")
+            //            .append("<td>")
+            //            .append(String.format("%.2f", totalScore))
+            //            .append("</td>")
+            //            .append("<td>-</td></tr>")
             .append("</table>");
     }
 
@@ -501,13 +508,13 @@ public class Reports {
 
     private static String getPriorityColor(String priority) {
         switch (priority) {
-            case "Critical":
+            case "CRITICAL":
                 return "#E02401";
-            case "High":
+            case "HIGH":
                 return "#F98404";
-            case "Medium":
+            case "MODERATE":
                 return "#FFCA03";
-            case "Low":
+            case "LOW":
                 return "#95CD41";
             default:
                 return "#0000FF";
@@ -533,7 +540,7 @@ public class Reports {
         jsonBuilder.append("\"vulnerabilities\": [");
 
         boolean isFirstCwe = true;
-        double totalScore = 0.0; // Total score for all CWE groups
+        //        double totalScore = 0.0; // Total score for all CWE groups
 
         for (Map.Entry<String, List<ItemReport>> entry : groupedReports.entrySet()) {
             if (!isFirstCwe) {
@@ -543,11 +550,13 @@ public class Reports {
             String cweCode = entry.getKey();
             List<ItemReport> reports = entry.getValue();
 
-            double highestScore = calculateHighestScore(reports);
-            double subtotalScore = calculateSubtotalScore(reports);
-            totalScore += subtotalScore; // Add to the overall total score
+            //            double subtotalScore = calculateSubtotalScore(reports);
+            //            totalScore += subtotalScore; // Add to the overall total score
             String vulnerabilityName = reports.get(0)
                 .getVulnerabilityName();
+
+            String priority = reports.get(0)
+                .getPriority();
 
             jsonBuilder.append("{");
             jsonBuilder.append("\"cweCode\": \"")
@@ -556,12 +565,9 @@ public class Reports {
             jsonBuilder.append("\"vulnerabilityName\": \"")
                 .append(vulnerabilityName)
                 .append("\",");
-            jsonBuilder.append("\"score\": ")
-                .append(highestScore)
-                .append(",");
-            jsonBuilder.append("\"subtotalScore\": ")
-                .append(subtotalScore)
-                .append(",");
+            jsonBuilder.append("\"priority\": \"")
+                .append(priority)
+                .append("\",");
             jsonBuilder.append("\"issues\": [");
 
             boolean isFirstFinding = true;
@@ -579,9 +585,7 @@ public class Reports {
                     .append("\",");
                 jsonBuilder.append("\"location\": \"")
                     .append(escapeJson(item.getSpecificLocation()))
-                    .append("\",");
-                jsonBuilder.append("\"score\": ")
-                    .append(item.getScore());
+                    .append("\"");
                 jsonBuilder.append("}");
                 isFirstFinding = false;
             }
@@ -591,9 +595,7 @@ public class Reports {
             isFirstCwe = false;
         }
 
-        jsonBuilder.append("],");
-        jsonBuilder.append("\"totalScore\": ")
-            .append(totalScore);
+        jsonBuilder.append("]");
         jsonBuilder.append("}");
 
         if (Config.isShowSaveDialog) {

@@ -1,4 +1,4 @@
-package io.github.hangga.delvelin.detectors;
+package io.github.hangga.delvelin.cwedetectors;
 
 import java.nio.file.Path;
 
@@ -10,9 +10,9 @@ import io.github.hangga.delvelin.utils.SourceSet;
 
 public abstract class BaseDetector {
 
-    String className;
-    String extName;
-    Vulnerabilities vulnerabilities;
+    public String className;
+    public String extName;
+    public Vulnerabilities vulnerabilities;
 
     public abstract void detect(String line, int lineNumber);
 
@@ -35,12 +35,18 @@ public abstract class BaseDetector {
         }
     }
 
-    String specificLocation(int lineNumber) {
+    public String specificLocation(int lineNumber) {
         return (Config.outputFileFormat == OutputFileFormat.HTML || Config.outputFileFormat == OutputFileFormat.JSON) ? className + ":" + lineNumber : className + extName + ":" + lineNumber;
     }
 
-    void setValidVulnerability(String specificLocation, String finding, String message) {
-        Reports.addToReport(vulnerabilities.getCweCode(), finding, vulnerabilities.getDescription(), vulnerabilities.getCvssScore(), specificLocation, message);
+    public void setValidVulnerability(String cweCode, String desc, String specificLocation, String finding, String message, String priority) {
+        Reports.addToReport(cweCode, finding, desc, specificLocation,
+            message, priority);
+    }
+
+    public void setValidVulnerability(String specificLocation, String finding, String message) {
+        Reports.addToReport(vulnerabilities.getCweCode(), finding, vulnerabilities.getDescription(), specificLocation,
+            message, vulnerabilities.getPriority());
     }
 
 }

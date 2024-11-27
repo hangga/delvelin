@@ -5,9 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
-import io.github.hangga.delvelin.detectors.GeneralScanner;
+import io.github.hangga.delvelin.cwedetectors.GeneralScanner;
 import io.github.hangga.delvelin.properties.Config;
 import io.github.hangga.delvelin.properties.OutputFileFormat;
 import io.github.hangga.delvelin.utils.DelvelinLog;
@@ -83,11 +84,11 @@ public class Delvelin {
             } else if (Config.outputFileFormat == OutputFileFormat.JSON) {
                 Reports.generateJson();
             } else if (Config.outputFileFormat == OutputFileFormat.LOG) {
-                new DelvelinLog().log(Reports.log()
+                new DelvelinLog().log(Objects.requireNonNull(Reports.log())
                     .toString());
             } else if (logListener != null) {
                 logListener.onGetLog(Reports.log());
-                logListener.onGetLog(Reports.log()
+                logListener.onGetLog(Objects.requireNonNull(Reports.log())
                     .toString());
             }
         }
