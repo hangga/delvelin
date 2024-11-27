@@ -13,6 +13,10 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
+//    implementation("com.google.guava:guava:31.1-jre")
+//    implementation("org.hibernate.orm:hibernate-core:7.0.0.Beta1")
+//    implementation("org.apache.logging.log4j:log4j-core:2.0-beta9")
 }
 
 tasks.test {
@@ -23,22 +27,22 @@ kotlin {
     jvmToolchain(8) // Menetapkan toolchain untuk kompatibilitas Java 8
 }
 
-//tasks.register<Jar>("fatJar") {
-//    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-//
-//    dependsOn(tasks.classes)
-//
-//    from(sourceSets.main.get().output) // Tambahkan semua output dari sourceSets
-//    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
-//
-//    archiveBaseName.set("delvelin")
-//    archiveClassifier.set("all")
-//    archiveVersion.set(project.version.toString())
-//}
-//
-//tasks.named("build") {
-//    dependsOn("fatJar") // Pastikan fat JAR dibuat dalam task build
-//}
+tasks.register<Jar>("fatJar") {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    dependsOn(tasks.classes)
+
+    from(sourceSets.main.get().output) // Tambahkan semua output dari sourceSets
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+
+    archiveBaseName.set("delvelin")
+    archiveClassifier.set("all")
+    archiveVersion.set(project.version.toString())
+}
+
+tasks.named("build") {
+    dependsOn("fatJar") // Pastikan fat JAR dibuat dalam task build
+}
 
 publishing {
     publications {
@@ -80,4 +84,5 @@ tasks.register<JavaExec>("scanDelvelin") {
     classpath = sourceSets["main"].runtimeClasspath
     mainClass.set("io.github.hangga.delvelin.Delvelin")
     args("format_html")
+//    args("format_json")
 }

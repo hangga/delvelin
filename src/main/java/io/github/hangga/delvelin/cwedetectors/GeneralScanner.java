@@ -1,10 +1,11 @@
-package io.github.hangga.delvelin.detectors;
+package io.github.hangga.delvelin.cwedetectors;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
+import io.github.hangga.delvelin.osvdetector.OsvDetector;
 import io.github.hangga.delvelin.properties.Config;
 import io.github.hangga.delvelin.utils.FileUtil;
 
@@ -18,7 +19,9 @@ public class GeneralScanner {
         new XSSDetector(),
         new SQLInjectionDetector(),
         new CmdInjectionDetector(),
-        new WeakCryptographicDetector()
+        new WeakCryptographicDetector(),
+        new OsvDetector(),
+        new OsvDetector()
         // add new detector here
     );
 

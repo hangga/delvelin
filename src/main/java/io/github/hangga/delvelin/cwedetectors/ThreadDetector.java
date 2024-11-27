@@ -1,4 +1,4 @@
-package io.github.hangga.delvelin.detectors;
+package io.github.hangga.delvelin.cwedetectors;
 
 import io.github.hangga.delvelin.properties.Vulnerabilities;
 

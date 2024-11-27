@@ -1,4 +1,4 @@
-package io.github.hangga.delvelin.detectors;
+package io.github.hangga.delvelin.cwedetectors;
 
 import java.util.Arrays;
 import java.util.List;
