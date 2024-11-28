@@ -13,7 +13,7 @@ public class SourceSet {
         this.extensions = extensions;
     }
 
-    private String[] extensions = { ".java", ".kt", ".kts", ".gradle" };
+    private String[] extensions = { ".java", ".kt", ".kts", ".gradle", ".xml"};
 
     public String[] getExtensions() {
         return extensions;

@@ -33,13 +33,12 @@ public class FileUtil {
         Path outputPath = Paths.get(path.toString(), "vulnerability-report" + extName);
         try {
             Files.write(outputPath, content.getBytes());
-//            if (Desktop.isDesktopSupported()) {
-//                Desktop.getDesktop()
-//                    .browse(outputPath.toUri());
-//            } else {
-//                System.out.println("Report saved: file://" + outputPath.toAbsolutePath());
-//            }
-            System.out.println("Report saved: file://" + outputPath.toAbsolutePath());
+            if (Desktop.isDesktopSupported() && extName.equalsIgnoreCase(".html")) {
+                Desktop.getDesktop()
+                    .browse(outputPath.toUri());
+            } else {
+                System.out.println("Report saved: file://" + outputPath.toAbsolutePath());
+            }
         } catch (IOException e) {
             throw new RuntimeException("Failed to save HTML report to file: " + path, e);
         }
