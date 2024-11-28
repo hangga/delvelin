@@ -10,7 +10,7 @@ alt="Delvelin Scan Demo" width="260">
 
 ## **Features**
 - Detects vulnerabilities using the CWE classification.
-- Provides CVSS-based severity scoring for better prioritization.
+- CVE vulnerability detection.
 - Supports Java and Kotlin codebases.
 - Configurable output formats: `LOG`, `JSON`, and `HTML`.
 - Easy integration as a Gradle plugin.
@@ -21,7 +21,7 @@ alt="Delvelin Scan Demo" width="260">
 We leverage:
 - [CWE (Common Weakness Enumeration)](https://cwe.mitre.org/data/slices/699.html): A global standard for identifying and categorizing vulnerabilities.
 - [CVSS (Common Vulnerability Scoring System)](https://www.first.org/cvss/calculator/3.0): A framework for scoring the severity of vulnerabilities.
-
+- [OSV (Open Source Vulnerabilities)](https://google.github.io/osv.dev/): A comprehensive database for open-source vulnerability information.
 > **Disclaimer**: Delvelin may not identify all vulnerabilities but serves as a powerful first step in securing your codebase.
 
 ---
