@@ -33,14 +33,14 @@ Add the plugin to your Gradle project.
 ### **Kotlin DSL**
 ```kotlin
 plugins {
-    id("io.github.hangga.delvelin") version "0.0.18-beta0"
+    id("io.github.hangga.delvelin") version "0.0.19-beta"
 }
 ```
 
 ### **Groovy DSL**
 ```groovy
 plugins {
-    id 'io.github.hangga.delvelin' version '0.0.18-beta0'
+    id 'io.github.hangga.delvelin' version '0.0.19-beta'
 }
 ```
 
@@ -105,8 +105,8 @@ gradle-scan:
 
 ### **HTML Format**
 
-![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/output-sample.png?raw=true)
-![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/output-sample-summary.png?raw=true)
+![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/vulnerability-report-croped.png?raw=true)
+![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/vulnerability-expanded.png?raw=true)
 
 For a detailed report, output can be saved in HTML format:
 [Example HTML Output](https://hangga.github.io/vulnerability-report.html)
