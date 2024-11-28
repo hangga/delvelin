@@ -215,8 +215,9 @@ public class Reports {
 
     private static void buildHtmlHeader(StringBuffer htmlBuffer, String dateReport) {
         htmlBuffer.append("<html><head>")
+            .append("<link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap\" rel=\"stylesheet\">\n" + "    ")
             .append("<style>")
-            .append("body { background-color: #f4f7fc; margin: 0; padding: 10px 100px 100px 100px; }")
+            .append("body { background-color: #f4f7fc; margin: 0; padding: 10px 100px 100px 100px; font-family: 'Poppins', sans-serif; line-height: 1.6;}")
             .append("h2 { color: #8B5DFF; }")
             .append("h2 { text-align: center; }")
             .append("h4 { text-align: center; }")
@@ -235,6 +236,8 @@ public class Reports {
             .append("th, td { padding: 14px !important; text-align: left; border: 0px; box-sizing: border-box;}")
 //            .append("th, td { padding: 4px; text-align: left; border: 1px solid #ddd; }")
             .append("th { background-color: white; }")
+            .append(".trapesium{color:#FFF; display:inline-block;width:100px;height:24px;background-color:#9694FF;clip-path:polygon(0 0, 80% 0, 100% 100%, 0%" +
+                " 100%); text-align:center; color:#fff; padding:8px;  font-size:14px; }")
             .append("code{display:inline-block; font-family:monospace; "+
                 "background-color:#323844; "+
 //                "background-color:#FFF; "+
@@ -314,8 +317,9 @@ public class Reports {
 //                .append("</td>")
 //                .append("<td><a target=\"_blank\" href=\"")
                 .append("<hr/><div style='display: flex; align-items: left; padding:6px 6px 6px 0px; margin: 3px; '>"+
-                    "<span style='border-radius: 1px; display: block; width:100px; text-align:right; background-color: #9694FF; color:#FFF; padding:6px; " +
-                    "font-size:13px;'>Path : </span>"+
+//                    "<span style='border-radius: 1px; display: block; width:100px; text-align:right; background-color: #9694FF; color:#FFF; padding:6px; " +
+//                    "font-size:13px;'>Path : </span>"+
+                    "<span class=\"trapesium\">Path : </span>"+
                     "  <a style='margin:6px 0px 6px 10px; float: left;' target=\"_blank\" href=\"")
                 .append(removeTrail(item.getSpecificLocation()))
                 .append("\">")
