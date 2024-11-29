@@ -21,20 +21,25 @@
         p {
             padding: 2px;
         }
+
         pre {
             display: block;
+            /* width: 100%; */
             font-family: monospace;
             white-space: pre-wrap;
             background-color: #323844;
+
             /* border: 1px solid #8b5dff;
             border-radius: 4px; */
+
             padding: 20px;
             color: #fde7bb;
-            overflow-x: auto;
-            max-width: 100%;
-            word-wrap: break-word;
+            /* overflow-x: auto; */
+            /* max-width: 100%;*/
+            /* word-wrap: break-word; */
             margin-bottom:0px;
         }
+
         hr {
             border: 0.5px solid #8b5dff;
             margin-top: 20px;
@@ -44,6 +49,8 @@
             border-collapse: separate;
             margin-top: 20px;
             border-spacing: 0;
+            max-width: 100%;      /* Lebar maksimal tabel dibatasi hingga 800px */
+            table-layout: fixed;  /* Membuat tabel memiliki lebar kolom yang konsisten */
         }
         th,
         td {
@@ -93,11 +100,34 @@
           padding: 0; /* Hilangkan padding default jika ada */
         }
 
+        .msg{
+            max-width: 100%;
+            padding : 20px;
+            border: 1px solid #8b5dff;
+            border-radius: 3px;
+        }
+
+        .issue {
+            vertical-align: top;
+            word-wrap: break-word;
+            background-color:#E2E8F4;
+            display: flex;
+            align-items: left;
+            padding:0px; margin: 0px 0px 12px 0px;
+        }
+
+        .specpath {
+            vertical-align: top;
+            font-size:13px; margin:4px 0px 4px 10px; float: left; word-wrap: break-word;
+            max-width: 100%;
+        }
+
     </style>
 </head>
 <body>
 <img width="120"
-     src="https://raw.githubusercontent.com/hangga/delvelin/refs/heads/main/doc/delvelin-soft-black.webp"> <span class="toolver">${VERSION}</span>
+     src="https://raw.githubusercontent.com/hangga/delvelin/refs/heads/main/doc/delvelin-soft-black.webp">
+<span class="toolver">${VERSION}</span>
 <hr/>
 
 <h2>Vulnerability Report</h2>

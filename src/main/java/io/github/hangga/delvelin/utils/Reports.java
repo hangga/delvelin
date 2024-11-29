@@ -1,6 +1,7 @@
 package io.github.hangga.delvelin.utils;
 
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -160,10 +161,31 @@ public class Reports {
         if (input == null) {
             return null;
         }
-        if (input.length() <= 140) {
+        if (input.length() <= 50) {
             return input;
         }
-        return input.substring(0, 140) + "...";
+        return input.substring(0, 50);
+    }
+
+    public static String trimLink(String input) {
+
+        String sep = FileSystems.getDefault().getSeparator();
+        String[] parts = input.split(String.valueOf(sep));
+
+        // Jika lebih dari 3 bagian, ambil 3 terakhir dan tambahkan '...'
+        if (parts.length > 4) {
+            StringBuilder result = new StringBuilder("   ...");
+            // Ambil tiga bagian terakhir
+            for (int i = parts.length - 4; i < parts.length; i++) {
+                result.append(parts[i]);
+                if (i < parts.length - 1) {
+                    result.append(sep); // Menambahkan separator antar bagian
+                }
+            }
+            return result.toString();
+        } else {
+            return input; // Jika jumlah bagian 3 atau kurang, kembalikan string asli
+        }
     }
 
     public static String removeTrail(String input) {
@@ -237,7 +259,7 @@ public class Reports {
             String lastMessage = "";
 
             for (ItemReport item : reports) {
-                String finding = item.getFinding().isEmpty() ? "" : "<pre>" + trimTitle(item.getFinding()) + "</pre>";
+                String finding = item.getFinding().trim().isEmpty() ? "" : "<pre>" + trimTitle(item.getFinding()) + "</pre>";
                 String message = item.getMessage();
                 String specificLocation = removeTrail(item.getSpecificLocation());
 
@@ -248,11 +270,13 @@ public class Reports {
                     lastMessage = message;  // Jika berbeda, perbarui pesan terakhir
                 }
 
+                String trimedLink = trimLink(specificLocation);
                 // Mengganti placeholder dengan data aktual
                 String populatedRow = rowTemplate
                     .replace("${FINDING}", finding)
-                    .replace("${MESSAGE}", message)
-                    .replace("${SPECIFIC_LOCATION}", specificLocation);
+                    .replace("${MESSAGE}", message.isEmpty()? "" : "<div class='msg'>"+message+"</div>")
+                    .replace("${SPECIFIC_LOCATION}", specificLocation)
+                    .replace("${TITLE_SPECIFIC_LOCATION}", trimedLink);
 
                 reportRows.append(populatedRow);
             }

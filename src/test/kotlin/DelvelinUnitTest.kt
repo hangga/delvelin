@@ -7,6 +7,7 @@ class DelvelinUnitTest {
     fun `vulnerability test`() {
         Delvelin()
             .setOutputFormat(OutputFileFormat.HTML)
+            .setAllowedExtensions(".gradle",".kts",".java",".kt")
             .setAutoLaunchBrowser(true)
             .scan()
     }
