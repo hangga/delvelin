@@ -1,4 +1,4 @@
-<img src="https://github.com/hangga/delvelin/blob/main/delvelin-soft-black.webp?raw=true" 
+<img src="https://github.com/hangga/delvelin/blob/main/doc/delvelin-soft-black.webp?raw=true" 
 alt="Delvelin Scan Demo" width="260">
 
 ![Java](https://img.shields.io/badge/Java-8+-blue?logo=java) ![Kotlin](https://img.shields.io/badge/Kotlin-1.5+-blueviolet?logo=kotlin) ![Gradle Plugin](https://img.shields.io/badge/Gradle-Plugin-brightgreen?logo=gradle) ![CWE](https://img.shields.io/badge/CWE-Standards-orange) ![CVSS](https://img.shields.io/badge/CVSS-Severity-red)
@@ -9,7 +9,7 @@ alt="Delvelin Scan Demo" width="260">
 By aligning with ISO/IEC 27001 principles, Delveline helps raise security awareness and improve software development security.
 
 
-![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/delvelin-scan.gif?raw=true)
+![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/doc/delvelin-scan.gif?raw=true)
 
 [//]: # (## **Features**)
 
@@ -133,7 +133,7 @@ Run the `delvelinScan` task to analyze your project:
 
 If we are using Intellij IDEA, we can also use the gradle menu in the sidebar:
 
-<img width="400" src="https://github.com/hangga/delvelin/blob/main/delvelin-scan-gradle-menu.png?raw=true" alt="sidebar"/>
+<img width="400" src="https://github.com/hangga/delvelin/blob/main/doc/delvelin-scan-gradle-menu.png?raw=true" alt="sidebar"/>
 
 ---
 
@@ -166,8 +166,8 @@ gradle-scan:
 
 ### **HTML Format**
 
-![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/vulnerability-report-croped.png?raw=true)
-![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/vulnerability-expanded.png?raw=true)
+![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/doc/vulnerability-report-croped.png?raw=true)
+![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/doc/vulnerability-expanded.png?raw=true)
 
 For a detailed report, output can be saved in HTML format:
 [Example HTML Output](https://hangga.github.io/vulnerability-report.html)
