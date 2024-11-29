@@ -8,7 +8,6 @@ alt="Delvelin Scan Demo" width="260">
 **Delveline** is a Code Vulnerability Analyzer for Java and Kotlin. It provides comprehensive 
 security analysis based on OWASP ASVS, CWE, and OSV.dev.
 
----
 ![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/delvelin-scan.gif?raw=true)
 
 [//]: # (## **Features**)
@@ -26,19 +25,12 @@ security analysis based on OWASP ASVS, CWE, and OSV.dev.
 [//]: # ()
 [//]: # (---)
 
----
-
 ## Key Features
-
----
  
 - **CWE and CVSS Integration**: Identify vulnerabilities and prioritize fixes using industry-standard scoring.
 - **Dependency Scanning with OSV.dev**: Detect known CVEs in libraries and dependencies.
 
-
 ## Advantages
-
----
 
 ### **1. Security-Oriented Focus**
 - **Delveline** excels as a security analysis tool, offering the ability to detect vulnerabilities such as:
@@ -49,16 +41,11 @@ security analysis based on OWASP ASVS, CWE, and OSV.dev.
 
   **OSV.dev**, backed by Google, provides an extensive database for detecting known vulnerabilities (CVEs) in dependencies and libraries used in your project. This enables **Delveline** to identify outdated or vulnerable dependencies more effectively.
 
----
-
 ### **2. Industry Standards and Vulnerability Scoring**
 - **Delveline** integrates **CWE (Common Weakness Enumeration)** as a reference for defining vulnerabilities.
 - It also uses **CVSS (Common Vulnerability Scoring System)** for severity scoring and prioritization of fixes.
 - By incorporating **OSV.dev**, it adds another layer of detection by identifying known CVEs in project dependencies.
 
-  Neither **Detekt** nor **Konsist** employs formal security standards, vulnerability databases, or scoring systems.
-
----
 
 [//]: # (### **4. Multi-Platform Execution Support**)
 
@@ -75,7 +62,6 @@ security analysis based on OWASP ASVS, CWE, and OSV.dev.
 ### **3. Runtime-Assisted Static Analysis**
 - **Delveline** employs a unique **runtime-assisted static analysis** approach, allowing static analysis to be supplemented by runtime data, making it more adaptive than purely static tools like **Detekt**.
 
----
 
 ### **4. Target Audience**
 - **Delveline** is designed for projects requiring deep security analysis.
@@ -95,7 +81,6 @@ security analysis based on OWASP ASVS, CWE, and OSV.dev.
 [//]: # (- Flexible integrations &#40;Gradle, IntelliJ, Kotlin DSL&#41;.)
 
 Adding a direct comparison section to the **Delveline** README could further emphasize these strengths! 😊
----
 
 ## **How it Works**
 We leverage:
@@ -104,27 +89,23 @@ We leverage:
 - [OSV (Open Source Vulnerabilities)](https://google.github.io/osv.dev/): A comprehensive database for open-source vulnerability information.
 > **Disclaimer**: Delvelin may not identify all vulnerabilities but serves as a powerful first step in securing your codebase.
 
----
-
 ## **Installation**
 
 Add the plugin to your Gradle project.
 
-### **Kotlin DSL**
+### **1. Kotlin DSL**
 ```kotlin
 plugins {
     id("io.github.hangga.delvelin") version "0.0.19-beta"
 }
 ```
 
-### **Groovy DSL**
+### **2. Groovy DSL**
 ```groovy
 plugins {
     id 'io.github.hangga.delvelin' version '0.0.19-beta'
 }
 ```
-
----
 
 ## **Configuration**
 
@@ -138,11 +119,9 @@ delvelin {
 }
 ```
 
----
-
 ## **Running Delvelin Analyzer**
 
-### Running on Local Machine
+### 1. On Local Machine
 
 Run the `delvelinScan` task to analyze your project:
 ```bash
@@ -155,7 +134,7 @@ If we are using Intellij IDEA, we can also use the gradle menu in the sidebar:
 
 ---
 
-### Running on Gitlab CI
+### 2. On Gitlab CI
 Add `delvelinScan` gradle task to our pipeline configuration, for example:
 ```yaml
 stages:
@@ -179,7 +158,6 @@ gradle-scan:
 | `showDate`       | `Boolean` | `true`            | Show date in the output.                            |
 | `showSaveDialog` | `Boolean` | `false`           | Prompt a save dialog after the scan.                |
 
----
 
 ## **Sample Output**
 
