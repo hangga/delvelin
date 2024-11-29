@@ -60,7 +60,7 @@ security analysis based on OWASP ASVS, CWE, and OSV.dev.
 [//]: # (---)
 
 ### **3. Runtime-Assisted Static Analysis**
-- **Delveline** employs a unique **runtime-assisted static analysis** approach, allowing static analysis to be supplemented by runtime data, making it more adaptive than purely static tools like **Detekt**.
+- **Delveline** employs a unique **runtime-assisted static analysis** approach, allowing static analysis to be supplemented by runtime data, making it more adaptive than purely static tools.
 
 
 ### **4. Target Audience**
