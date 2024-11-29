@@ -5,8 +5,9 @@ alt="Delvelin Scan Demo" width="260">
 [![OSV.dev](https://img.shields.io/badge/OSV.dev-Vulnerability%20Database-blue)](https://google.github.io/osv.dev/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) 
 
-**Delveline** is a Code Vulnerability Analyzer for Java and Kotlin. It provides comprehensive 
-security analysis based on OWASP ASVS, CWE, and OSV.dev.
+**Delveline** is a Code Vulnerability Analyzer for Java and Kotlin that supports best practices in security and risk management.  
+By aligning with ISO/IEC 27001 principles, Delveline helps raise security awareness and improve software development security.
+
 
 ![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/delvelin-scan.gif?raw=true)
 
@@ -26,9 +27,11 @@ security analysis based on OWASP ASVS, CWE, and OSV.dev.
 [//]: # (---)
 
 ## Key Features
- 
-- **CWE and CVSS Integration**: Identify vulnerabilities and prioritize fixes using industry-standard scoring.
+
+- **ISO/IEC 27001 Alignment**: Delveline supports best practices in security awareness and risk management.
+- **CWE and CVSS Integration**: Identify and prioritize vulnerabilities using industry standards.
 - **Dependency Scanning with OSV.dev**: Detect known CVEs in libraries and dependencies.
+- **Thread-Safety Detection**: Highlight unsafe structures in multi-threading scenarios.
 
 ## Advantages
 
