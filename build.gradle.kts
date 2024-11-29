@@ -5,7 +5,8 @@ plugins {
 }
 
 group = "io.github.hangga"
-version = "0.0.20-beta"
+//version = "0.0.20-beta"
+version = project.findProperty("version") as String? ?: ""
 
 repositories {
     mavenCentral()

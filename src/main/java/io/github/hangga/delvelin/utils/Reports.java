@@ -1,6 +1,7 @@
 package io.github.hangga.delvelin.utils;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -181,9 +182,8 @@ public class Reports {
         Map<String, List<ItemReport>> groupedReports = itemReports.stream()
             .collect(Collectors.groupingBy(ItemReport::getCweCode));
 
-        String dateReport = formattedDate();
         StringBuffer htmlBuffer = new StringBuffer();
-        buildHtmlHeader(htmlBuffer, dateReport);
+        buildHtmlHeader(htmlBuffer);
 
         Map<String, Integer> cweCounts = new ConcurrentHashMap<>();
         Map<String, String> priorities = new ConcurrentHashMap<>();
@@ -206,6 +206,7 @@ public class Reports {
 
         buildPieChart(htmlBuffer, cweCounts, priorities);
         buildBarChart(htmlBuffer, cweCounts, priorities);
+        appendFooter(htmlBuffer);
 
         if (Config.isShowSaveDialog) {
             FileUtil.saveOutputCustom(htmlBuffer.toString(), ".html");
@@ -214,12 +215,9 @@ public class Reports {
         }
     }
 
-    private static void buildHtmlHeader(StringBuffer htmlBuffer, String dateReport) {
-        String headerHtml;
+    private static void buildHtmlHeader(StringBuffer htmlBuffer) {
         try {
-            headerHtml =loadResource("html/header.html");
-            headerHtml = headerHtml.replace("${dateReport}", dateReport);
-            htmlBuffer.append(headerHtml);
+            htmlBuffer.append(loadResource("html/header.html").replace("${VERSION}", Config.VERSION));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -232,16 +230,23 @@ public class Reports {
     private static void appendCweSection(StringBuffer htmlBuffer, String cweCode, String vulnerabilityName,
         List<ItemReport> reports, String priority) {
         try {
-            // Load template HTML
             String cweTemplate = loadResource("html/cwe-section.html");
             String rowTemplate = loadResource("html/report-row.html");
 
-            // Generate rows for the table
             StringBuilder reportRows = new StringBuilder();
+            String lastMessage = "";
+
             for (ItemReport item : reports) {
                 String finding = item.getFinding().isEmpty() ? "" : "<pre>" + trimTitle(item.getFinding()) + "</pre>";
                 String message = item.getMessage();
                 String specificLocation = removeTrail(item.getSpecificLocation());
+
+                // Memeriksa apakah pesan sama dengan pesan terakhir
+                if (message.equals(lastMessage)) {
+                    message = "";  // Jika pesan sama, kosongkan pesan
+                } else {
+                    lastMessage = message;  // Jika berbeda, perbarui pesan terakhir
+                }
 
                 // Mengganti placeholder dengan data aktual
                 String populatedRow = rowTemplate
@@ -249,7 +254,6 @@ public class Reports {
                     .replace("${MESSAGE}", message)
                     .replace("${SPECIFIC_LOCATION}", specificLocation);
 
-                // Menambahkan hasil ke buffer
                 reportRows.append(populatedRow);
             }
 
@@ -329,6 +333,28 @@ public class Reports {
         } catch (IOException e) {
             throw new RuntimeException("Failed to load or process bar chart template", e);
         }
+    }
+
+    private static void appendFooter(StringBuffer htmlBuffer) {
+        try {
+            String footerTemplate = loadResource("html/footer.html");
+
+            String populatedFooter = footerTemplate
+                .replace("${TOOL_NAME}", "Delveline")
+                .replace("${TOOL_VERSION}", Config.VERSION)
+                .replace("${GENERATION_DATE}", getCurrentDateTime())
+                .replace("${TOOL_URL}", "https://github.com/hangga/delvelin")
+                .replace("${CURRENT_YEAR}", String.valueOf(LocalDate.now().getYear()))
+                .replace("${COPYRIGHT_HOLDER}", "Delveline Team");
+
+            htmlBuffer.append(populatedFooter);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load or process footer template", e);
+        }
+    }
+
+    private static String getCurrentDateTime() {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     private static String getPriorityColor(String priority) {

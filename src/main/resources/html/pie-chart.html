@@ -1,7 +1,14 @@
 <h3 style="text-align: center;">Issues Distribution</h3>
-<div style="width: 100%; height: 400px;">
-    <canvas style="margin: auto;" id="findingsChart"></canvas>
+<!--<div style="width: 100%; height: 400px;">-->
+<!--    <canvas style="margin: auto;" id="findingsChart"></canvas>-->
+<!--</div>-->
+
+<div
+        style="display: flex; justify-content: space-between; align-items: center; width: 80%; height: 400px;">
+    <canvas id="findingsChart" style="flex: 1; margin: 0 10px;"></canvas>
+    <canvas id="findingsBarChart" style="flex: 1; margin: 0 10px;"></canvas>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>

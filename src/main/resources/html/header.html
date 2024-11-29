@@ -1,21 +1,104 @@
 <html>
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Vulnerability Report by Delvelin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+          rel="stylesheet">
     <style>
-        body { background-color: #f4f7fc; margin: 0; padding: 10px 100px 100px 100px; font-family: 'Poppins', sans-serif; line-height: 1.6; }
-        h2 { color: #8B5DFF; text-align: center; }
-        h4 { text-align: center; }
-        p { padding: 2px; }
-        pre { display: block; font-family: monospace; white-space: pre-wrap; background-color: #323844; border: 1px solid #fde7bb; border-radius: 4px; padding: 20px; color: #9694FF; overflow-x: auto; max-width: 100%; word-wrap: break-word; }
-        hr { border: 1px solid #8B5DFF; margin-top: 20px; }
-        table { width: 100%; border-collapse: separate; margin-top: 20px; border-spacing: 0; }
-        th, td { padding: 14px !important; text-align: left; border: 0px; box-sizing: border-box; }
-        th { background-color: white; }
-        .trapesium { color: #FFF; display: inline-block; width: 100px; height: 24px; background-color: #9694FF; clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%); text-align: center; padding: 8px; font-size: 14px; }
-        code { display: inline-block; font-family: monospace; background-color: #323844; border: 1px solid #FDE7BB; border-radius: 3px; padding: 2px 5px; margin: 0 2px; color: #9694FF; white-space: nowrap; }
+        body {
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 10px 100px 100px 100px;
+            font-family: "Poppins", sans-serif;
+            line-height: 1.6;
+        }
+        h2 {
+            color: #8b5dff;
+            text-align: center;
+        }
+        h4 {
+            text-align: center;
+        }
+        p {
+            padding: 2px;
+        }
+        pre {
+            display: block;
+            font-family: monospace;
+            white-space: pre-wrap;
+            background-color: #323844;
+            /* border: 1px solid #8b5dff;
+            border-radius: 4px; */
+            padding: 20px;
+            color: #fde7bb;
+            overflow-x: auto;
+            max-width: 100%;
+            word-wrap: break-word;
+            margin-bottom:0px;
+        }
+        hr {
+            border: 0.5px solid #8b5dff;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            margin-top: 20px;
+            border-spacing: 0;
+        }
+        th,
+        td {
+            padding: 14px !important;
+            text-align: left;
+            border: 0px;
+            box-sizing: border-box;
+        }
+        th {
+            background-color: white;
+        }
+        .trapesium {
+            color: #fff;
+            display: inline-block;
+            /* border: 1px solid #323844; */
+            /* border-radius: 3px;*/
+            width: 60px;
+            height: 100%;
+            background-color: #9694ff;
+            /* clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%); */
+            text-align: center;
+            padding: 5px;
+            font-size: 13px;
+            margin: 0px;
+        }
+        code {
+            display: inline-block;
+            font-family: monospace;
+            background-color: #fde7bb;
+            border: 1px solid #323844;
+            border-radius: 3px;
+            padding: 2px 5px;
+            margin: 0 2px;
+            color: #9694ff;
+            white-space: nowrap;
+        }
+        .toolver {
+            color: #8b5dff;
+            font-size: 0.8em;
+            position: relative;
+            top: -0.9em;
+        }
+
+        .align-top-left {
+          text-align: left; /* Merapatkan teks ke kiri */
+          vertical-align: top; /* Merapatkan teks ke atas */
+          padding: 0; /* Hilangkan padding default jika ada */
+        }
+
     </style>
 </head>
 <body>
+<img width="120"
+     src="https://raw.githubusercontent.com/hangga/delvelin/refs/heads/main/doc/delvelin-soft-black.webp"> <span class="toolver">${VERSION}</span>
 <hr/>
+
 <h2>Vulnerability Report</h2>
-<p style="text-align: center;">${dateReport}</p>
+<!--<p style="text-align: center;">${dateReport}</p>-->
