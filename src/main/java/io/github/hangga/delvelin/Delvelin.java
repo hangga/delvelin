@@ -43,6 +43,11 @@ public class Delvelin {
             .scan();
     }
 
+    public Delvelin setAutoLaunchBrowser(boolean isAutoLauch){
+        Config.isAutoLaunchBrowser = isAutoLauch;
+        return this;
+    }
+
     public Delvelin setAllowedExtensions(String... extensions) {
         this.sourceSets.setExtensions(extensions);
         Config.isCustomExtensions = true;

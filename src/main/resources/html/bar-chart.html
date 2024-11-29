@@ -1,0 +1,30 @@
+<!--<h3 style="text-align: center;">Issues Distribution</h3>-->
+<div style="width: 100%;">
+    <canvas style="margin: auto;" id="findingsBarChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const barCtx = document.getElementById('findingsBarChart').getContext('2d');
+    new Chart(barCtx, {
+        type: 'bar',
+        data: {
+            labels: [${CWE_LABELS}],
+            datasets: [{
+                label: 'Issues',
+                data: [${CWE_DATA}],
+                backgroundColor: ${CHART_COLORS},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y', // Membuat grafik horizontal
+            scales: {
+                x: { beginAtZero: true }
+            },
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+</script>

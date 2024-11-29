@@ -1,0 +1,19 @@
+<style>
+    details summary:hover {
+        background-color: #9694FF; /* Warna saat hover */
+        color: #FFFFFF;            /* Warna teks saat hover */
+    }
+</style>
+<details>
+    <summary style="cursor: pointer; margin: 4px 0; padding: 10px 0px 10px 20px; font-size: 16px; font-weight: bold; border-radius: 6px;
+        text-align: left; transition: all 0.3s ease; border: 1px solid #9694FF; position: relative;">
+        <span style="display: inline;">${CWE_CODE} - ${VULNERABILITY_NAME}</span>
+        <span style="font-size: 13.5px; min-width: 80px; border-radius: 2px; display: block; text-align: center; padding: 6px;
+        position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background-color: ${PRIORITY_COLOR};">
+            ${ISSUE_COUNT} issues
+        </span>
+    </summary>
+    <table>
+        ${REPORT_ROWS}
+    </table>
+</details>

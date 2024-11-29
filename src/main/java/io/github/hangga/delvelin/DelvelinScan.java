@@ -30,11 +30,9 @@ public class DelvelinScan implements Plugin<Project> {
                             .get(), e);
                     }
 
-                    new Delvelin().setShowSaveDialog(ext.getShowSaveDialog()
-                            .get())
+                    new Delvelin().setShowSaveDialog(ext.getShowSaveDialog().get())
                         .setOutputFormat(outputFileFormat)
-                        .setShowDate(ext.getShowDate()
-                            .get())
+                        .setShowDate(ext.getShowDate().get())
                         .scan();
                 });
             });
@@ -45,6 +43,7 @@ public class DelvelinScan implements Plugin<Project> {
         private final Property<String> outputFileFormat;
         private final Property<Boolean> showDate;
         private final Property<Boolean> showSaveDialog;
+        private final Property<Boolean> autoLaunchBrowser;
         private final Property<Boolean> ignoreCommentBlock;
         private final Property<Boolean> customExtensions;
 
@@ -60,6 +59,12 @@ public class DelvelinScan implements Plugin<Project> {
                 .convention(false);
             this.customExtensions = objectFactory.property(Boolean.class)
                 .convention(false);
+            this.autoLaunchBrowser = objectFactory.property(Boolean.class)
+                .convention(false);
+        }
+
+        public Property<Boolean> getIsAutoLaunchBrowser(){
+            return autoLaunchBrowser;
         }
 
         public Property<String> getOutputFileFormat() {

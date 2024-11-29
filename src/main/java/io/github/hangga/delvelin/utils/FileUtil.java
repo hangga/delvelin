@@ -1,8 +1,13 @@
 package io.github.hangga.delvelin.utils;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,6 +16,8 @@ import java.util.stream.Stream;
 import javax.swing.*;
 
 import org.jetbrains.annotations.NotNull;
+
+import io.github.hangga.delvelin.properties.Config;
 
 public class FileUtil {
 
@@ -33,7 +40,7 @@ public class FileUtil {
         Path outputPath = Paths.get(path.toString(), "vulnerability-report" + extName);
         try {
             Files.write(outputPath, content.getBytes());
-            if (Desktop.isDesktopSupported() && extName.equalsIgnoreCase(".html")) {
+            if (Desktop.isDesktopSupported() && extName.equalsIgnoreCase(".html") && Config.isAutoLaunchBrowser) {
                 Desktop.getDesktop()
                     .browse(outputPath.toUri());
             } else {
@@ -85,6 +92,23 @@ public class FileUtil {
         fileChooser.setSelectedFile(new File("vulnerability-report" + extName));
         return fileChooser;
     }
+
+    public static String loadHtmlFromResource(Class className, String resourcePath) throws IOException {
+        try (InputStream inputStream = className.getClassLoader().getResourceAsStream(resourcePath)) {
+            if (inputStream == null) {
+                throw new FileNotFoundException("Resource not found: " + resourcePath);
+            }
+            StringBuilder content = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
+            }
+            return content.toString();
+        }
+    }
+
 
 }
 

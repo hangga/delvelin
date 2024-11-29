@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.hangga"
-version = "0.0.19-beta"
+version = "0.0.20-beta"
 
 repositories {
     mavenCentral()
@@ -35,6 +35,7 @@ tasks.register<Jar>("fatJar") {
     from(sourceSets.main.get().output) // Tambahkan semua output dari sourceSets
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 
+    artifacts { name }
     archiveBaseName.set("delvelin")
     archiveClassifier.set("all")
     archiveVersion.set(project.version.toString())
@@ -47,11 +48,12 @@ tasks.named("build") {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            // Jangan gunakan `from(components["java"])` jika ingin fat JAR menjadi default
+            // Publikasikan fat JAR dengan nama khusus
             artifact(tasks.named("fatJar").get()) {
-                classifier = null // Jadikan fat JAR sebagai default artifact
+                classifier = "all" // Sertakan classifier agar nama unik
             }
 
+            // Metadata publikasi
             groupId = project.group.toString()
             artifactId = "delvelin"
             version = project.version.toString()

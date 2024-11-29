@@ -1,5 +1,6 @@
 package io.github.hangga.delvelin.utils;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -214,154 +215,93 @@ public class Reports {
     }
 
     private static void buildHtmlHeader(StringBuffer htmlBuffer, String dateReport) {
-        htmlBuffer.append("<html><head>")
-            .append("<link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap\" rel=\"stylesheet\">\n" + "    ")
-            .append("<style>")
-            .append("body { background-color: #f4f7fc; margin: 0; padding: 10px 100px 100px 100px; font-family: 'Poppins', sans-serif; line-height: 1.6;}")
-            .append("h2 { color: #8B5DFF; }")
-            .append("h2 { text-align: center; }")
-            .append("h4 { text-align: center; }")
-            .append("p { padding: 2px; }")
-            .append(
-                "pre{display:block; font-family:monospace; white-space:pre-wrap; "+
-                    "background-color:#323844; "+
-//                    "background-color:#FFF; "+
-                    "border:1px solid #fde7bb; border-radius:4px;" +
-                    "padding:20px;"+
-//                    "color:#000; "+
-                    "color:#9694FF; "+
-                    "overflow-x:auto;max-width:100%;word-wrap:break-word}")
-            .append("hr { border: 1px solid #8B5DFF; margin-top: 20px; }")
-            .append("table { width: 100%; border-collapse: separate; margin-top: 20px; border-spacing: 0; }")
-            .append("th, td { padding: 14px !important; text-align: left; border: 0px; box-sizing: border-box;}")
-//            .append("th, td { padding: 4px; text-align: left; border: 1px solid #ddd; }")
-            .append("th { background-color: white; }")
-            .append(".trapesium{color:#FFF; display:inline-block;width:100px;height:24px;background-color:#9694FF;clip-path:polygon(0 0, 80% 0, 100% 100%, 0%" +
-                " 100%); text-align:center; color:#fff; padding:8px;  font-size:14px; }")
-            .append("code{display:inline-block; font-family:monospace; "+
-                "background-color:#323844; "+
-//                "background-color:#FFF; "+
-                "border:1px solid #FDE7BB;border-radius:3px;padding:2px " +
-                "5px;" +
-                "margin:0 2px;"+
-//                "color:#000; "+
-                "color:#9694FF; "+
-                "white-space:nowrap}")
-            .append("</style>")
-            .append("</head><body>")
-            .append("<hr/>")
-            .append("<h2>Vulnerability Report</h2>")
-            .append("<p style=\"text-align: center;\">")
-            .append(dateReport)
-            .append("</p>");
-//            .append("<hr/><br/>");
+        String headerHtml;
+        try {
+            headerHtml =loadResource("html/header.html");
+            headerHtml = headerHtml.replace("${dateReport}", dateReport);
+            htmlBuffer.append(headerHtml);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private static void appendCweSection(StringBuffer htmlBuffer, String cweCode, String vulnerabilityName, List<ItemReport> reports, String priority) {
-        htmlBuffer.append("<style>")
-            .append("details summary:hover {")
-            .append("    background-color: #9694FF;") // Warna saat hover
-            .append("    color: #FFFFFF;")          // Warna teks saat hover
-            .append("}")
-            .append("</style>");
+    private static String loadResource(String resourcePath) throws IOException {
+        return FileUtil.loadHtmlFromResource(Reports.class,resourcePath);
+    }
 
-        htmlBuffer.append("<details>")
-            .append("<summary style='cursor: pointer; margin: 4px 0; padding: 10px 0px 10px 20px; " + "font-size: 16px; font-weight: bold; border-radius: " +
-                "6px; text-align:left;")
-            .append("transition: all 0.3s ease; border: 1px solid #9694FF; position: relative;'>")
-            .append("<span style='display:inline;'>")
-            .append(cweCode)
-            .append(" - ")
-            .append(vulnerabilityName)
-            .append("</span>")
-            //            .append("<span style='box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); font-size: 14px;  border-radius: 6px; display: block; " +
-            .append("<span style='font-size: 13.5px; min-width:80px;  border-radius: 2px; display: block; text-align:center; " +
-                "padding: 6px; position: absolute; right:6px; top: 50%; " + "transform: translateY(-50%); " + "background-color:")
-            .append(getPriorityColor(priority))
-            .append("; '> ")
-            .append(reports.size())
-            .append(" issues </span>")
-            .append("</summary>");
+    private static void appendCweSection(StringBuffer htmlBuffer, String cweCode, String vulnerabilityName,
+        List<ItemReport> reports, String priority) {
+        try {
+            // Load template HTML
+            String cweTemplate = loadResource("html/cwe-section.html");
+            String rowTemplate = loadResource("html/report-row.html");
 
-        // Add Table CSS (Optional)
-        htmlBuffer.append("<style>")
-            .append("table { padding: 10px; width: 100%; border-collapse: collapse; margin-bottom: 40px; margin-top:5px;}")
-            .append("th, td { border: 1px solid #D1D2D4; padding-left: 8px; padding-right: 8px; padding-top:2px; padding-bottom:2px; text-align: left; " +
-                "word-wrap: break-word; word-break: " + "break-word;}")
-            .append("td:nth-child(1) { width: 40%; }")
-            .append("td:nth-child(3) { width: 10%; text-align: right; }")
-            .append("td:nth-child(4) { width: 10%; text-align: right; }")
-            .append("td:nth-child(5) { width: 8%; }")
-            .append("</style>");
+            // Generate rows for the table
+            StringBuilder reportRows = new StringBuilder();
+            for (ItemReport item : reports) {
+                String finding = item.getFinding().isEmpty() ? "" : "<pre>" + trimTitle(item.getFinding()) + "</pre>";
+                String message = item.getMessage();
+                String specificLocation = removeTrail(item.getSpecificLocation());
 
-        // Add Table Content
-        htmlBuffer.append("<table>");
-//            .append("<tr>")
-//            .append("<th>Issues</th>")
-////            .append("<th>Location</th>")
-//            .append("</tr>");
+                // Mengganti placeholder dengan data aktual
+                String populatedRow = rowTemplate
+                    .replace("${FINDING}", finding)
+                    .replace("${MESSAGE}", message)
+                    .replace("${SPECIFIC_LOCATION}", specificLocation);
 
-        int idx = 0;
-        for (ItemReport item : reports) {
-            idx++;
-            String sippet = item.getFinding();
-            htmlBuffer.append("<tr>")
-                .append("<td>")
-//                .append(
-//                    "<span style='border: 1px solid #AE445A; min-width: 15px; text-align:center; position:absolute; background-color:#FFF; color: #000; font-size: 12px;  " +
-//                        "border-radius: 10px; display: " + "block; " + "padding:2px; '>")
-//                .append(idx)
-//                .append("</span>")
-                .append(sippet.isEmpty()? "" : "<pre>" + trimTitle(sippet) + "</pre>")
-                .append(item.getMessage())
-//                .append("</td>")
-//                .append("<td><a target=\"_blank\" href=\"")
-                .append("<hr/><div style='display: flex; align-items: left; padding:6px 6px 6px 0px; margin: 3px; '>"+
-//                    "<span style='border-radius: 1px; display: block; width:100px; text-align:right; background-color: #9694FF; color:#FFF; padding:6px; " +
-//                    "font-size:13px;'>Path : </span>"+
-                    "<span class=\"trapesium\">Path : </span>"+
-                    "  <a style='margin:6px 0px 6px 10px; float: left;' target=\"_blank\" href=\"")
-                .append(removeTrail(item.getSpecificLocation()))
-                .append("\">")
-                .append(item.getSpecificLocation())
-                .append("</a></div></td>")
-                .append("</tr>");
+                // Menambahkan hasil ke buffer
+                reportRows.append(populatedRow);
+            }
+
+            // Replace placeholders
+            String populatedHtml = cweTemplate
+                .replace("${CWE_CODE}", cweCode)
+                .replace("${VULNERABILITY_NAME}", vulnerabilityName)
+                .replace("${PRIORITY_COLOR}", getPriorityColor(priority))
+                .replace("${ISSUE_COUNT}", String.valueOf(reports.size()))
+                .replace("${REPORT_ROWS}", reportRows.toString());
+
+            // Append to HTML buffer
+            htmlBuffer.append(populatedHtml);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load or process HTML template", e);
         }
-        htmlBuffer.append("</table>");
-        htmlBuffer.append("</details>");
     }
 
     private static void buildPieChart(StringBuffer htmlBuffer, Map<String, Integer> cweCounts, Map<String, String> priorities) {
+        // Prepare data for labels and counts
         String cweLabels = cweCounts.keySet()
-            .stream()
-            .map(cwe -> "\"" + cwe + "\"")
-            .collect(Collectors.joining(","));
-        String cweData = cweCounts.values()
-            .stream()
-            .map(String::valueOf)
-            .collect(Collectors.joining(","));
-        String chartColors = priorities.values()
-            .stream()
-            .map(Reports::getPriorityColor)
-            .collect(Collectors.joining("\",\"", "[\"", "\"]"));
+                    .stream()
+                    .map(cwe -> "\"" + cwe + "\"")
+                    .collect(Collectors.joining(","));
+                String cweData = cweCounts.values()
+                    .stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(","));
+                String chartColors = priorities.values()
+                    .stream()
+                    .map(Reports::getPriorityColor)
+                    .collect(Collectors.joining("\",\"", "[\"", "\"]"));
 
-        htmlBuffer.append("<h3 style=\"text-align: center;\">Issues Distribution</h3>")
-            .append("<div style=\"width: 100%; height: 400px;\"><canvas style=\"margin:auto;\" id='findingsChart'></canvas></div>")
-            .append("<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>")
-            .append("<script>")
-            .append("const ctx = document.getElementById('findingsChart').getContext('2d');")
-            .append("new Chart(ctx, { type: 'pie', data: { labels: [")
-            .append(cweLabels)
-            .append("], ")
-            .append("datasets: [{ data: [")
-            .append(cweData)
-            .append("], backgroundColor: ")
-            .append(chartColors)
-            .append(", hoverOffset: 4 }] } });")
-            .append("</script>");
+        try {
+            // Load pie chart template
+            String template = loadResource("html/pie-chart.html");
+
+            // Replace placeholders with actual data
+            String populatedHtml = template
+                .replace("${CWE_LABELS}", cweLabels)
+                .replace("${CWE_DATA}", cweData)
+                .replace("${CHART_COLORS}", chartColors);
+
+            // Append to HTML buffer
+            htmlBuffer.append(populatedHtml);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load or process pie chart template", e);
+        }
     }
 
     private static void buildBarChart(StringBuffer htmlBuffer, Map<String, Integer> cweCounts, Map<String, String> priorities) {
+        // Persiapan data untuk labels, data, dan warna
         String cweLabels = cweCounts.keySet()
             .stream()
             .map(cwe -> "\"" + cwe + "\"")
@@ -375,26 +315,20 @@ public class Reports {
             .map(Reports::getPriorityColor)
             .collect(Collectors.joining("\",\"", "[\"", "\"]"));
 
-        htmlBuffer.append("<div style=\"width: 100%; height: 800px;\"><canvas style=\"margin:auto;\" id='findingsBarChart'></canvas></div>")
-            .append("<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>")
-            .append("<script>")
-            .append("const barCtx = document.getElementById('findingsBarChart').getContext('2d');")
-            .append("new Chart(barCtx, {")
-            .append("type: 'bar',")
-            .append("data: { labels: [")
-            .append(cweLabels)
-            .append("], datasets: [{ label: 'Findings', data: [")
-            .append(cweData)
-            .append("], backgroundColor: ")
-            .append(chartColors)
-            .append(", borderWidth: 1 }] },")
-            .append("options: {")
-            .append("indexAxis: 'y',") // Membuat grafik horizontal
-            .append("scales: { x: { beginAtZero: true } },")
-            .append("plugins: { legend: { display: false } }")
-            .append("}")
-            .append("});")
-            .append("</script>");
+        try {
+            String template = loadResource("html/bar-chart.html");
+
+            // Mengganti placeholder dengan data aktual
+            String populatedHtml = template
+                .replace("${CWE_LABELS}", cweLabels)
+                .replace("${CWE_DATA}", cweData)
+                .replace("${CHART_COLORS}", chartColors);
+
+            // Menambahkan hasil ke htmlBuffer
+            htmlBuffer.append(populatedHtml);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load or process bar chart template", e);
+        }
     }
 
     private static String getPriorityColor(String priority) {
@@ -431,7 +365,6 @@ public class Reports {
         jsonBuilder.append("\"vulnerabilities\": [");
 
         boolean isFirstCwe = true;
-        //        double totalScore = 0.0; // Total score for all CWE groups
 
         for (Map.Entry<String, List<ItemReport>> entry : groupedReports.entrySet()) {
             if (!isFirstCwe) {
