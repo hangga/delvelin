@@ -47,7 +47,10 @@ tasks.named("build") {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            from(components["java"]) // Publikasikan JAR default yang dihasilkan
+            // Jangan gunakan `from(components["java"])` jika ingin fat JAR menjadi default
+            artifact(tasks.named("fatJar").get()) {
+                classifier = null // Jadikan fat JAR sebagai default artifact
+            }
 
             groupId = project.group.toString()
             artifactId = "delvelin"
