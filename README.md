@@ -83,14 +83,14 @@ By aligning with ISO/IEC 27001 principles, Delveline helps raise security awaren
 
 [//]: # (- Flexible integrations &#40;Gradle, IntelliJ, Kotlin DSL&#41;.)
 
-Adding a direct comparison section to the **Delveline** README could further emphasize these strengths! 😊
-
 ## **How it Works**
 We leverage:
 - [CWE (Common Weakness Enumeration)](https://cwe.mitre.org/data/slices/699.html): A global standard for identifying and categorizing vulnerabilities.
 - [CVSS (Common Vulnerability Scoring System)](https://www.first.org/cvss/calculator/3.0): A framework for scoring the severity of vulnerabilities.
 - [OSV (Open Source Vulnerabilities)](https://google.github.io/osv.dev/): A comprehensive database for open-source vulnerability information.
-> **Disclaimer**: Delvelin may not identify all vulnerabilities but serves as a powerful first step in securing your codebase.
+- **ISO/IEC 27001 Alignment**: Supporting security awareness and risk management practices aligned with global information security standards.
+
+> **Disclaimer**: Delveline may not identify all vulnerabilities but serves as a powerful first step in securing your codebase.
 
 ## **Installation**
 
