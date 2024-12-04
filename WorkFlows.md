@@ -5,9 +5,11 @@
     - **Using Delvelin Plugin** : The user installs the Delveline plugin or library into the 
       project using Gradle or 
    Maven. If the user chooses to use the Delveline plugin, it will run in Gradle with a task 
-   called `delvelinScan`. If the user opts for the library, they must run Delveline from a unit test.
+   called `delvelinScan`. 
+    - **Using delvelin Library**: If the user opts for the library, they must run Delveline from 
+      a unit test.
 
-   - **Using delvelin Library** : The user can also run Delveline in a GitLab CI pipeline.
+   - **Using Gitlab CI** : The user can also run Delveline in a GitLab CI pipeline.
 
 2. **Delveline Analysis with Two Approaches**
    2.1. **Static Analysis for Allowed File Types**  
