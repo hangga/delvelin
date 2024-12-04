@@ -22,6 +22,13 @@
               - API Tokens
               - Passwords
               - Private Keys
+     - **Weak Cryptographic Detection**
+       - Detects whether there are weak cryptographic algorithms in the code such as : MD5, SHA-1, 
+         DES, DESede (Triple DES), RC4, Blowfish, RSA with key sizes of 512, 1024, or 1536 bits, 
+         DSA with key sizes of 512, 1024, or 1536 bits and HMAC-MD5
+       
+     - **SQL Injection Detection**
+       - Detects queries in the source code that may be vulnerable to SQL injection.
 
      - **XSS Vulnerability Scan**
           - Analyzes XSS patterns using regex on the code strings to detect potential vulnerabilities.
