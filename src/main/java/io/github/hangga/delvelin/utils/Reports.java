@@ -17,12 +17,61 @@ import io.github.hangga.delvelin.properties.Config;
 
 public class Reports {
 
+    private static class ItemFile {
+
+        String specificLocation;
+        String ext;
+
+        public ItemFile(String specificLocation, String ext, String className) {
+            this.specificLocation = specificLocation;
+            this.ext = ext;
+            this.className = className;
+        }
+
+        String className;
+
+        public String getSpecificLocation() {
+            return specificLocation;
+        }
+
+        public String getExt() {
+            return ext;
+        }
+
+        public String getClassName() {
+            return className;
+        }
+    }
+
+    public static void detect(String specificLocation, String ext, String className){
+        itemFiles.add(new ItemFile(specificLocation, ext, className));
+    }
+
     private static class ItemReport {
 
         String cweCode;
         String vulnerabilityName;
         String finding;
         String specificLocation;
+        String ext;
+        String className;
+
+        public void setClassName(String className) {
+            this.className = className;
+        }
+
+        public String getClassName() {
+            return className;
+        }
+
+        public void setExt(String ext) {
+            this.ext = ext;
+        }
+
+        public String getExt() {
+            return ext;
+        }
+
         String message;
         String priority;
 
@@ -78,6 +127,7 @@ public class Reports {
     }
 
     static CopyOnWriteArraySet<ItemReport> itemReports = new CopyOnWriteArraySet<>();
+    static CopyOnWriteArraySet<ItemFile> itemFiles = new CopyOnWriteArraySet<>();
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM, dd - HH:mm:ss");
 
@@ -86,8 +136,11 @@ public class Reports {
             .format(formatter);
     }
 
-    public static void addToReport(String cweCode, String finding, String vulnerabilityName, String location, String message, String priority) {
+    public static void addToReport(String cweCode, String finding, String vulnerabilityName, String location, String message, String priority, String className,
+        String ext) {
         ItemReport newItem = new ItemReport(cweCode, finding, vulnerabilityName, location, message, priority);
+        newItem.setExt(ext);
+        newItem.setClassName(className);
 
         // check if exist
         for (ItemReport existingItem : itemReports) {
@@ -169,7 +222,8 @@ public class Reports {
 
     public static String trimLink(String input) {
 
-        String sep = FileSystems.getDefault().getSeparator();
+        String sep = FileSystems.getDefault()
+            .getSeparator();
         String[] parts = input.split(String.valueOf(sep));
 
         // Jika lebih dari 3 bagian, ambil 3 terakhir dan tambahkan '...'
@@ -207,8 +261,12 @@ public class Reports {
         StringBuffer htmlBuffer = new StringBuffer();
         buildHtmlHeader(htmlBuffer);
 
+        Map<String, Long> fileStats = countFilesByExtensionFromReports();
+        buildFileStatsBarChart(htmlBuffer, fileStats);
+
         Map<String, Integer> cweCounts = new ConcurrentHashMap<>();
         Map<String, String> priorities = new ConcurrentHashMap<>();
+
 
         for (Map.Entry<String, List<ItemReport>> entry : groupedReports.entrySet()) {
             String cweCode = entry.getKey();
@@ -225,9 +283,10 @@ public class Reports {
 
             appendCweSection(htmlBuffer, cweCode, vulnerabilityName, reports, priority);
         }
-
-        buildPieChart(htmlBuffer, cweCounts, priorities);
         buildBarChart(htmlBuffer, cweCounts, priorities);
+        buildPieChart(htmlBuffer, cweCounts, priorities);
+//        buildBarChart(htmlBuffer, cweCounts, priorities);
+
         appendFooter(htmlBuffer);
 
         if (Config.isShowSaveDialog) {
@@ -245,12 +304,104 @@ public class Reports {
         }
     }
 
-    private static String loadResource(String resourcePath) throws IOException {
-        return FileUtil.loadHtmlFromResource(Reports.class,resourcePath);
+    //    private static void buildFileStatsBarChart(StringBuffer htmlBuffer, Map<String, Long> fileStats) {
+    //        // Persiapan data untuk labels dan data
+    //        String fileLabels = fileStats.keySet()
+    //            .stream()
+    //            .map(ext -> "\"" + ext + "\"")
+    //            .collect(Collectors.joining(","));
+    //        String fileData = fileStats.values()
+    //            .stream()
+    //            .map(String::valueOf)
+    //            .collect(Collectors.joining(","));
+    //
+    //        // Warna default jika tidak ada prioritas
+    //        String chartColors = "[\"#4CAF50\", \"#FFC107\", \"#F44336\", \"#2196F3\", \"#9C27B0\"]"; // Kamu bisa tambahkan logika warna jika dibutuhkan
+    //
+    //        try {
+    //            String template = loadResource("html/filestats-bar-chart.html");
+    //
+    //            // Mengganti placeholder dengan data aktual
+    //            String populatedHtml = template.replace("${STAT_LABELS}", fileLabels)
+    //                .replace("${STAT_DATA}", fileData)
+    //                .replace("${STAT_CHART_COLORS}", chartColors);
+    //
+    //            // Menambahkan hasil ke htmlBuffer
+    //            htmlBuffer.append(populatedHtml);
+    //        } catch (IOException e) {
+    //            throw new RuntimeException("Failed to load or process bar chart template", e);
+    //        }
+    //    }
+
+    private static void buildFileStatsBarChart(StringBuffer htmlBuffer, Map<String, Long> fileStats) {
+        // Hitung total nilai
+        long totalFiles = fileStats.values()
+            .stream()
+            .mapToLong(Long::longValue)
+            .sum();
+
+        // Persiapkan data HTML untuk bar chart
+        String barItems = fileStats.entrySet()
+            .stream()
+            .map(entry -> {
+                String ext = entry.getKey();
+                long count = entry.getValue();
+                double percentage = (double) count / totalFiles * 100;
+
+                // Pilih warna berdasarkan ekstensi file
+                String color = getBarColor(ext);
+
+                // Buat elemen HTML untuk satu bar
+                return String.format("<li style=\"margin-bottom: 8px; display: flex; align-items: center;\">" +
+                    "<span style=\"width: 80px; text-align: right; padding-right: 10px; font-weight: bold;\">%s</span>" +
+                    "<div style=\"flex: 1; height: 18px; background-color: #ddd; border-radius: 4px; overflow: hidden; margin: 0 10px;\">" +
+                    "<div style=\"width: %.1f%%; height: 100%%; background-color: %s; border-radius: 4px;\"></div>" + "</div>" +
+                    "<span style=\"width: 50px; text-align: left;\">%.1f%%</span>" + "</li>", ext, percentage, color, percentage);
+            })
+            .collect(Collectors.joining("\n"));
+
+        try {
+            String template = loadResource("html/filestats-bar-chart.html");
+
+            // Gantikan placeholder dengan data aktual
+            String populatedHtml = template.replace("${BAR_ITEMS}", barItems)
+                .replace("${ROOT_DIR}", getDirName())
+                .replace("${ROOT_PATH}","Path: "+FileUtil.getBasePath().toString());
+
+            // Tambahkan hasil ke htmlBuffer
+            htmlBuffer.append(populatedHtml);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load or process progress bar template", e);
+        }
     }
 
-    private static void appendCweSection(StringBuffer htmlBuffer, String cweCode, String vulnerabilityName,
-        List<ItemReport> reports, String priority) {
+    /**
+     * Mendapatkan warna untuk setiap ekstensi file.
+     * @param ext Ekstensi file.
+     * @return Warna dalam format hex.
+     */
+    private static String getBarColor(String ext) {
+        switch (ext) {
+            case ".java":
+                return "#B07219";
+            case ".kt":
+                return "#8B5DFF";
+            case ".xml":
+                return "#F44336";
+            case ".properties":
+                return "#2196F3";
+            case ".json":
+                return "#9C27B0";
+            default:
+                return "#757575"; // Warna default
+        }
+    }
+
+    private static String loadResource(String resourcePath) throws IOException {
+        return FileUtil.loadHtmlFromResource(Reports.class, resourcePath);
+    }
+
+    private static void appendCweSection(StringBuffer htmlBuffer, String cweCode, String vulnerabilityName, List<ItemReport> reports, String priority) {
         try {
             String cweTemplate = loadResource("html/cwe-section.html");
             String rowTemplate = loadResource("html/report-row.html");
@@ -259,7 +410,9 @@ public class Reports {
             String lastMessage = "";
 
             for (ItemReport item : reports) {
-                String finding = item.getFinding().trim().isEmpty() ? "" : "<pre>" + trimTitle(item.getFinding()) + "</pre>";
+                String finding = item.getFinding()
+                    .trim()
+                    .isEmpty() ? "" : "<pre>" + trimTitle(item.getFinding()) + "</pre>";
                 String message = item.getMessage();
                 String specificLocation = removeTrail(item.getSpecificLocation());
 
@@ -272,9 +425,8 @@ public class Reports {
 
                 String trimedLink = trimLink(specificLocation);
                 // Mengganti placeholder dengan data aktual
-                String populatedRow = rowTemplate
-                    .replace("${FINDING}", finding)
-                    .replace("${MESSAGE}", message.isEmpty()? "" : "<div class='msg'>"+message+"</div>")
+                String populatedRow = rowTemplate.replace("${FINDING}", finding)
+                    .replace("${MESSAGE}", message.isEmpty() ? "" : "<div class='msg'>" + message + "</div>")
                     .replace("${SPECIFIC_LOCATION}", specificLocation)
                     .replace("${TITLE_SPECIFIC_LOCATION}", trimedLink);
 
@@ -282,8 +434,7 @@ public class Reports {
             }
 
             // Replace placeholders
-            String populatedHtml = cweTemplate
-                .replace("${CWE_CODE}", cweCode)
+            String populatedHtml = cweTemplate.replace("${CWE_CODE}", cweCode)
                 .replace("${VULNERABILITY_NAME}", vulnerabilityName)
                 .replace("${PRIORITY_COLOR}", getPriorityColor(priority))
                 .replace("${ISSUE_COUNT}", String.valueOf(reports.size()))
@@ -299,25 +450,24 @@ public class Reports {
     private static void buildPieChart(StringBuffer htmlBuffer, Map<String, Integer> cweCounts, Map<String, String> priorities) {
         // Prepare data for labels and counts
         String cweLabels = cweCounts.keySet()
-                    .stream()
-                    .map(cwe -> "\"" + cwe + "\"")
-                    .collect(Collectors.joining(","));
-                String cweData = cweCounts.values()
-                    .stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.joining(","));
-                String chartColors = priorities.values()
-                    .stream()
-                    .map(Reports::getPriorityColor)
-                    .collect(Collectors.joining("\",\"", "[\"", "\"]"));
+            .stream()
+            .map(cwe -> "\"" + cwe + "\"")
+            .collect(Collectors.joining(","));
+        String cweData = cweCounts.values()
+            .stream()
+            .map(String::valueOf)
+            .collect(Collectors.joining(","));
+        String chartColors = priorities.values()
+            .stream()
+            .map(Reports::getPriorityColor)
+            .collect(Collectors.joining("\",\"", "[\"", "\"]"));
 
         try {
             // Load pie chart template
             String template = loadResource("html/pie-chart.html");
 
             // Replace placeholders with actual data
-            String populatedHtml = template
-                .replace("${CWE_LABELS}", cweLabels)
+            String populatedHtml = template.replace("${CWE_LABELS}", cweLabels)
                 .replace("${CWE_DATA}", cweData)
                 .replace("${CHART_COLORS}", chartColors);
 
@@ -347,10 +497,9 @@ public class Reports {
             String template = loadResource("html/bar-chart.html");
 
             // Mengganti placeholder dengan data aktual
-            String populatedHtml = template
-                .replace("${CWE_LABELS}", cweLabels)
-                .replace("${CWE_DATA}", cweData)
-                .replace("${CHART_COLORS}", chartColors);
+            String populatedHtml = template.replace("${CWE_LABELS_BAR}", cweLabels)
+                .replace("${CWE_DATA_BAR}", cweData)
+                .replace("${CHART_COLORS_BAR}", chartColors);
 
             // Menambahkan hasil ke htmlBuffer
             htmlBuffer.append(populatedHtml);
@@ -363,12 +512,12 @@ public class Reports {
         try {
             String footerTemplate = loadResource("html/footer.html");
 
-            String populatedFooter = footerTemplate
-                .replace("${TOOL_NAME}", "Delveline")
+            String populatedFooter = footerTemplate.replace("${TOOL_NAME}", "Delveline")
                 .replace("${TOOL_VERSION}", Config.VERSION)
                 .replace("${GENERATION_DATE}", getCurrentDateTime())
-                .replace("${TOOL_URL}", "https://github.com/hangga/delvelin")
-                .replace("${CURRENT_YEAR}", String.valueOf(LocalDate.now().getYear()))
+                .replace("${TOOL_URL}", "https://delvelin.github.io")
+                .replace("${CURRENT_YEAR}", String.valueOf(LocalDate.now()
+                    .getYear()))
                 .replace("${COPYRIGHT_HOLDER}", "Delveline Team");
 
             htmlBuffer.append(populatedFooter);
@@ -378,7 +527,8 @@ public class Reports {
     }
 
     private static String getCurrentDateTime() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return LocalDateTime.now()
+            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     private static String getPriorityColor(String priority) {
@@ -396,6 +546,104 @@ public class Reports {
         }
     }
 
+    static String getDirName() {
+        String path = FileUtil.getBasePath()
+            .toString();
+        return path.substring(path.lastIndexOf(SourceSet.SEP) + 1);
+    }
+
+    //    String getDirName(){
+    //        String path = String.valueOf(FileUtil.getBasePath());
+    //        String[] end = path.split(SourceSet.SEP);
+    //        return end[end.length - 1];
+    //    }
+
+    //    public static void generateJson() {
+    //        if (itemReports.isEmpty()) {
+    //            return;
+    //        }
+    //
+    //        // Grouping reports by CWE Code
+    //        Map<String, List<ItemReport>> groupedReports = itemReports.stream()
+    //            .collect(Collectors.groupingBy(ItemReport::getCweCode));
+    //
+    //        StringBuilder jsonBuilder = new StringBuilder();
+    //        jsonBuilder.append("{");
+    //
+    //        String dateReport = formattedDate();
+    //        jsonBuilder.append("\"date\": \"")
+    //            .append(dateReport)
+    //            .append("\",");
+    //
+    //        jsonBuilder.append("\"projectRoot\": \"")
+    //            .append(getDirName())
+    //            .append("\",");
+    //
+    //        jsonBuilder.append("\"vulnerabilities\": [");
+    //
+    //        boolean isFirstCwe = true;
+    //
+    //        for (Map.Entry<String, List<ItemReport>> entry : groupedReports.entrySet()) {
+    //            if (!isFirstCwe) {
+    //                jsonBuilder.append(",");
+    //            }
+    //
+    //            String cweCode = entry.getKey();
+    //            List<ItemReport> reports = entry.getValue();
+    //
+    //            String vulnerabilityName = reports.get(0)
+    //                .getVulnerabilityName();
+    //
+    //            String priority = reports.get(0)
+    //                .getPriority();
+    //
+    //            jsonBuilder.append("{");
+    //            jsonBuilder.append("\"cweCode\": \"")
+    //                .append(cweCode)
+    //                .append("\",");
+    //            jsonBuilder.append("\"vulnerabilityName\": \"")
+    //                .append(vulnerabilityName)
+    //                .append("\",");
+    //            jsonBuilder.append("\"priority\": \"")
+    //                .append(priority)
+    //                .append("\",");
+    //            jsonBuilder.append("\"issues\": [");
+    //
+    //            boolean isFirstFinding = true;
+    //            for (ItemReport item : reports) {
+    //                if (!isFirstFinding) {
+    //                    jsonBuilder.append(",");
+    //                }
+    //
+    //                jsonBuilder.append("{");
+    //                jsonBuilder.append("\"issues\": \"")
+    //                    .append(escapeJson(item.getFinding()))
+    //                    .append("\",");
+    //                jsonBuilder.append("\"message\": \"")
+    //                    .append(escapeJson(item.getMessage()))
+    //                    .append("\",");
+    //                jsonBuilder.append("\"location\": \"")
+    //                    .append(escapeJson(item.getSpecificLocation()))
+    //                    .append("\"");
+    //                jsonBuilder.append("}");
+    //                isFirstFinding = false;
+    //            }
+    //
+    //            jsonBuilder.append("]");
+    //            jsonBuilder.append("}");
+    //            isFirstCwe = false;
+    //        }
+    //
+    //        jsonBuilder.append("]");
+    //        jsonBuilder.append("}");
+    //
+    //        if (Config.isShowSaveDialog) {
+    //            FileUtil.saveOutputCustom(jsonBuilder.toString(), ".json");
+    //        } else {
+    //            FileUtil.saveOutputFile(jsonBuilder.toString(), ".json");
+    //        }
+    //    }
+
     public static void generateJson() {
         if (itemReports.isEmpty()) {
             return;
@@ -411,14 +659,35 @@ public class Reports {
         String dateReport = formattedDate();
         jsonBuilder.append("\"date\": \"")
             .append(dateReport)
-            .append("\",");
-        jsonBuilder.append("\"vulnerabilities\": [");
+            .append("\",\n");
+
+        jsonBuilder.append("\"projectRoot\": \"")
+            .append(getDirName())
+            .append("\",\n");
+
+        // Adding file extension statistics
+        Map<String, Long> fileStats = countFilesByExtensionFromReports();
+        jsonBuilder.append("\"fileExtensions\": {\n");
+        boolean isFirstExt = true;
+        for (Map.Entry<String, Long> entry : fileStats.entrySet()) {
+            if (!isFirstExt) {
+                jsonBuilder.append(",\n");
+            }
+            jsonBuilder.append("\"")
+                .append(entry.getKey())
+                .append("\": ")
+                .append(entry.getValue());
+            isFirstExt = false;
+        }
+        jsonBuilder.append("\n},\n");
+
+        jsonBuilder.append("\"vulnerabilities\": [\n");
 
         boolean isFirstCwe = true;
 
         for (Map.Entry<String, List<ItemReport>> entry : groupedReports.entrySet()) {
             if (!isFirstCwe) {
-                jsonBuilder.append(",");
+                jsonBuilder.append(",\n");
             }
 
             String cweCode = entry.getKey();
@@ -430,44 +699,44 @@ public class Reports {
             String priority = reports.get(0)
                 .getPriority();
 
-            jsonBuilder.append("{");
+            jsonBuilder.append("{\n");
             jsonBuilder.append("\"cweCode\": \"")
                 .append(cweCode)
-                .append("\",");
+                .append("\",\n");
             jsonBuilder.append("\"vulnerabilityName\": \"")
                 .append(vulnerabilityName)
-                .append("\",");
+                .append("\",\n");
             jsonBuilder.append("\"priority\": \"")
                 .append(priority)
-                .append("\",");
-            jsonBuilder.append("\"issues\": [");
+                .append("\",\n");
+            jsonBuilder.append("\"issues\": [\n");
 
             boolean isFirstFinding = true;
             for (ItemReport item : reports) {
                 if (!isFirstFinding) {
-                    jsonBuilder.append(",");
+                    jsonBuilder.append(",\n");
                 }
 
-                jsonBuilder.append("{");
+                jsonBuilder.append("{\n");
                 jsonBuilder.append("\"issues\": \"")
                     .append(escapeJson(item.getFinding()))
-                    .append("\",");
+                    .append("\",\n");
                 jsonBuilder.append("\"message\": \"")
                     .append(escapeJson(item.getMessage()))
-                    .append("\",");
+                    .append("\",\n");
                 jsonBuilder.append("\"location\": \"")
                     .append(escapeJson(item.getSpecificLocation()))
-                    .append("\"");
+                    .append("\"\n");
                 jsonBuilder.append("}");
                 isFirstFinding = false;
             }
 
-            jsonBuilder.append("]");
+            jsonBuilder.append("\n]");
             jsonBuilder.append("}");
             isFirstCwe = false;
         }
 
-        jsonBuilder.append("]");
+        jsonBuilder.append("\n]");
         jsonBuilder.append("}");
 
         if (Config.isShowSaveDialog) {
@@ -475,6 +744,20 @@ public class Reports {
         } else {
             FileUtil.saveOutputFile(jsonBuilder.toString(), ".json");
         }
+    }
+
+//    private static Map<String, Long> countFilesByExtensionFromReports() {
+//        return itemReports.stream()
+//            .map(ItemReport::getExt)
+//            .filter(ext -> ext != null && !ext.isEmpty())
+//            .collect(Collectors.groupingBy(ext -> ext, Collectors.counting()));
+//    }
+
+    private static Map<String, Long> countFilesByExtensionFromReports() {
+        return itemFiles.stream()
+            .map(ItemFile::getExt)
+            .filter(ext -> ext != null && !ext.isEmpty())
+            .collect(Collectors.groupingBy(ext -> ext, Collectors.counting()));
     }
 
     private static String escapeJson(String input) {
