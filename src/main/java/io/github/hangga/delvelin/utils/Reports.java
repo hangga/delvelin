@@ -285,7 +285,6 @@ public class Reports {
         }
         buildBarChart(htmlBuffer, cweCounts, priorities);
         buildPieChart(htmlBuffer, cweCounts, priorities);
-//        buildBarChart(htmlBuffer, cweCounts, priorities);
 
         appendFooter(htmlBuffer);
 
@@ -303,35 +302,6 @@ public class Reports {
             throw new RuntimeException(e);
         }
     }
-
-    //    private static void buildFileStatsBarChart(StringBuffer htmlBuffer, Map<String, Long> fileStats) {
-    //        // Persiapan data untuk labels dan data
-    //        String fileLabels = fileStats.keySet()
-    //            .stream()
-    //            .map(ext -> "\"" + ext + "\"")
-    //            .collect(Collectors.joining(","));
-    //        String fileData = fileStats.values()
-    //            .stream()
-    //            .map(String::valueOf)
-    //            .collect(Collectors.joining(","));
-    //
-    //        // Warna default jika tidak ada prioritas
-    //        String chartColors = "[\"#4CAF50\", \"#FFC107\", \"#F44336\", \"#2196F3\", \"#9C27B0\"]"; // Kamu bisa tambahkan logika warna jika dibutuhkan
-    //
-    //        try {
-    //            String template = loadResource("html/filestats-bar-chart.html");
-    //
-    //            // Mengganti placeholder dengan data aktual
-    //            String populatedHtml = template.replace("${STAT_LABELS}", fileLabels)
-    //                .replace("${STAT_DATA}", fileData)
-    //                .replace("${STAT_CHART_COLORS}", chartColors);
-    //
-    //            // Menambahkan hasil ke htmlBuffer
-    //            htmlBuffer.append(populatedHtml);
-    //        } catch (IOException e) {
-    //            throw new RuntimeException("Failed to load or process bar chart template", e);
-    //        }
-    //    }
 
     private static void buildFileStatsBarChart(StringBuffer htmlBuffer, Map<String, Long> fileStats) {
         // Hitung total nilai
@@ -552,98 +522,6 @@ public class Reports {
         return path.substring(path.lastIndexOf(SourceSet.SEP) + 1);
     }
 
-    //    String getDirName(){
-    //        String path = String.valueOf(FileUtil.getBasePath());
-    //        String[] end = path.split(SourceSet.SEP);
-    //        return end[end.length - 1];
-    //    }
-
-    //    public static void generateJson() {
-    //        if (itemReports.isEmpty()) {
-    //            return;
-    //        }
-    //
-    //        // Grouping reports by CWE Code
-    //        Map<String, List<ItemReport>> groupedReports = itemReports.stream()
-    //            .collect(Collectors.groupingBy(ItemReport::getCweCode));
-    //
-    //        StringBuilder jsonBuilder = new StringBuilder();
-    //        jsonBuilder.append("{");
-    //
-    //        String dateReport = formattedDate();
-    //        jsonBuilder.append("\"date\": \"")
-    //            .append(dateReport)
-    //            .append("\",");
-    //
-    //        jsonBuilder.append("\"projectRoot\": \"")
-    //            .append(getDirName())
-    //            .append("\",");
-    //
-    //        jsonBuilder.append("\"vulnerabilities\": [");
-    //
-    //        boolean isFirstCwe = true;
-    //
-    //        for (Map.Entry<String, List<ItemReport>> entry : groupedReports.entrySet()) {
-    //            if (!isFirstCwe) {
-    //                jsonBuilder.append(",");
-    //            }
-    //
-    //            String cweCode = entry.getKey();
-    //            List<ItemReport> reports = entry.getValue();
-    //
-    //            String vulnerabilityName = reports.get(0)
-    //                .getVulnerabilityName();
-    //
-    //            String priority = reports.get(0)
-    //                .getPriority();
-    //
-    //            jsonBuilder.append("{");
-    //            jsonBuilder.append("\"cweCode\": \"")
-    //                .append(cweCode)
-    //                .append("\",");
-    //            jsonBuilder.append("\"vulnerabilityName\": \"")
-    //                .append(vulnerabilityName)
-    //                .append("\",");
-    //            jsonBuilder.append("\"priority\": \"")
-    //                .append(priority)
-    //                .append("\",");
-    //            jsonBuilder.append("\"issues\": [");
-    //
-    //            boolean isFirstFinding = true;
-    //            for (ItemReport item : reports) {
-    //                if (!isFirstFinding) {
-    //                    jsonBuilder.append(",");
-    //                }
-    //
-    //                jsonBuilder.append("{");
-    //                jsonBuilder.append("\"issues\": \"")
-    //                    .append(escapeJson(item.getFinding()))
-    //                    .append("\",");
-    //                jsonBuilder.append("\"message\": \"")
-    //                    .append(escapeJson(item.getMessage()))
-    //                    .append("\",");
-    //                jsonBuilder.append("\"location\": \"")
-    //                    .append(escapeJson(item.getSpecificLocation()))
-    //                    .append("\"");
-    //                jsonBuilder.append("}");
-    //                isFirstFinding = false;
-    //            }
-    //
-    //            jsonBuilder.append("]");
-    //            jsonBuilder.append("}");
-    //            isFirstCwe = false;
-    //        }
-    //
-    //        jsonBuilder.append("]");
-    //        jsonBuilder.append("}");
-    //
-    //        if (Config.isShowSaveDialog) {
-    //            FileUtil.saveOutputCustom(jsonBuilder.toString(), ".json");
-    //        } else {
-    //            FileUtil.saveOutputFile(jsonBuilder.toString(), ".json");
-    //        }
-    //    }
-
     public static void generateJson() {
         if (itemReports.isEmpty()) {
             return;
@@ -663,6 +541,10 @@ public class Reports {
 
         jsonBuilder.append("\"projectRoot\": \"")
             .append(getDirName())
+            .append("\",\n");
+
+        jsonBuilder.append("\"projectPath\": \"")
+            .append(FileUtil.getBasePath())
             .append("\",\n");
 
         // Adding file extension statistics
@@ -718,7 +600,7 @@ public class Reports {
                 }
 
                 jsonBuilder.append("{\n");
-                jsonBuilder.append("\"issues\": \"")
+                jsonBuilder.append("\"issue\": \"")
                     .append(escapeJson(item.getFinding()))
                     .append("\",\n");
                 jsonBuilder.append("\"message\": \"")

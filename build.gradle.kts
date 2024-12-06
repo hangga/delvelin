@@ -89,6 +89,6 @@ gradlePlugin {
 tasks.register<JavaExec>("scanDelvelin") {
     classpath = sourceSets["main"].runtimeClasspath
     mainClass.set("io.github.hangga.delvelin.Delvelin")
-    args("format_html")
-//    args("format_json")
+//    args("format_html")
+    args("format_json")
 }
