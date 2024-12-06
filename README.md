@@ -99,14 +99,14 @@ Add the plugin to your Gradle project.
 ### **1. Kotlin DSL**
 ```kotlin
 plugins {
-    id("io.github.hangga.delvelin") version "0.1.0-beta"
+    id("io.github.hangga.delvelin") version "0.1.1-beta"
 }
 ```
 
 ### **2. Groovy DSL**
 ```groovy
 plugins {
-    id 'io.github.hangga.delvelin' version '0.1.0-beta'
+    id 'io.github.hangga.delvelin' version '0.1.1-beta'
 }
 ```
 
