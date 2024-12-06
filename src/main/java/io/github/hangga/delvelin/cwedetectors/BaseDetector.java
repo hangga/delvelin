@@ -33,6 +33,7 @@ public abstract class BaseDetector {
                 .replaceAll("(.*)\\.[^.]+$", "$1")
                 .replaceAll("(.*)\\.(.*)$", "$1($2");
         }
+        Reports.detect("",extName, className);
     }
 
     public String specificLocation(int lineNumber) {
@@ -41,12 +42,12 @@ public abstract class BaseDetector {
 
     public void setValidVulnerability(String cweCode, String desc, String specificLocation, String finding, String message, String priority) {
         Reports.addToReport(cweCode, finding, desc, specificLocation,
-            message, priority);
+            message, priority, className, extName);
     }
 
     public void setValidVulnerability(String specificLocation, String finding, String message) {
         Reports.addToReport(vulnerabilities.getCweCode(), finding, vulnerabilities.getDescription(), specificLocation,
-            message, vulnerabilities.getPriority());
+            message, vulnerabilities.getPriority(), className, extName);
     }
 
 }
