@@ -167,7 +167,6 @@ gradle-scan:
 ### **HTML Format**
 
 ![Delvelin Scan Demo](https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true)
-![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/doc/vulnerability-expanded.png?raw=true)
 
 For a detailed report, output can be saved in HTML format:
 [Example HTML Output](https://delvelin.github.io/docs/vulnerability-report.html)
