@@ -11,20 +11,17 @@ By aligning with ISO/IEC 27001 principles, Delveline helps raise security awaren
 
 ![Delvelin Scan Demo](https://delvelin.github.io/assets/img/delvelin-scan-new.gif)
 
-[//]: # (## **Features**)
+## **Sample Output**
 
-[//]: # (- Detects vulnerabilities using the CWE classification.)
+### **Console Log**
+![Delvelin Scan Console](https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true)
 
-[//]: # (- CVE vulnerability detection.)
+### **HTML Format**
 
-[//]: # (- Supports Java and Kotlin codebases.)
+![Delvelin Scan Demo](https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true)
 
-[//]: # (- Configurable output formats: `LOG`, `JSON`, and `HTML`.)
-
-[//]: # (- Easy integration as a Gradle plugin.)
-
-[//]: # ()
-[//]: # (---)
+For a detailed report, output can be saved in HTML format:
+[Example HTML Output](https://delvelin.github.io/docs/vulnerability-report.html)
 
 ## Key Features
 
@@ -160,19 +157,6 @@ gradle-scan:
 | `outputFileFormat`   | `String`  | `LOG`             | `LOG`, `JSON`, `HTML`.               |
 | `showDate`       | `Boolean` | `true`            | Show date in the output.                            |
 | `showSaveDialog` | `Boolean` | `false`           | Prompt a save dialog after the scan.                |
-
-
-## **Sample Output**
-
-### **Console Log**
-![Delvelin Scan Console](https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true)
-
-### **HTML Format**
-
-![Delvelin Scan Demo](https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true)
-
-For a detailed report, output can be saved in HTML format:
-[Example HTML Output](https://delvelin.github.io/docs/vulnerability-report.html)
 
 ---
 
