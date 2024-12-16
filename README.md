@@ -9,7 +9,7 @@ alt="Delvelin Scan Demo" width="260">
 By aligning with ISO/IEC 27001 principles, Delveline helps raise security awareness and improve software development security.
 
 
-![Delvelin Scan Demo](https://github.com/hangga/delvelin/blob/main/doc/delvelin-scan.gif?raw=true)
+![Delvelin Scan Demo](https://delvelin.github.io/assets/img/delvelin-scan-new.gif)
 
 [//]: # (## **Features**)
 
