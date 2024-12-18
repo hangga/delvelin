@@ -1,3 +1,13 @@
+- [Using Delvelin Gradle Plugin](#using-delvelin-gradle-plugin)
+  + [**1. Kotlin DSL**](#1-kotlin-dsl)
+  + [**2. Groovy DSL**](#2-groovy-dsl)
+    * [**Configuration**](#configuration)
+    * [**Running Delvelin Analyzer**](#running-delvelin-analyzer)
+        + [1. On Local Machine](#1-on-local-machine)
+        + [2. On Gitlab CI](#2-on-gitlab-ci)
+        + [<a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>](#see-example-project-) 
+---
+
 # Using Delvelin Gradle Plugin
 
 Add the plugin to your Gradle project.
