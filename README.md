@@ -21,34 +21,39 @@ We leverage:
 
 <img 
 src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true" 
-alt="Delveline Report Console View" width="60%" />
-<img 
-src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true" 
-alt="Delveline Report HTML View" width="60%" />
+alt="Delveline Report Console View" width="100%" />
+
+<a href="https://delvelin.github.io/docs/vulnerability-report.html">View example in Html Format</a>
+
+[//]: # (<img )
+
+[//]: # (src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true" )
+
+[//]: # (alt="Delveline Report HTML View" width="60%" />)
 
 > **Disclaimer**: Delveline may not identify all vulnerabilities but serves as a powerful first step in securing your codebase.
 
-## **How to Use**
+# How to Use
 
-# Using Delvelin Gradle Plugin
+## Using Delvelin Gradle Plugin
 
 Add the plugin to your Gradle project.
 
-### **1. Kotlin DSL**
+### Kotlin DSL
 ```kotlin
 plugins {
     id("io.github.hangga.delvelin") version "0.1.1-beta"
 }
 ```
 
-### **2. Groovy DSL**
+### Groovy DSL
 ```groovy
 plugins {
     id 'io.github.hangga.delvelin' version '0.1.1-beta'
 }
 ```
 
-## **Configuration**
+### Configuration
 
 Configure Delvelin using the `delvelin` extension.
 
@@ -66,9 +71,9 @@ delvelin {
 | `setAutoLaunchBrowser`    | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
 | `setShowSaveDialog`       | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
 
-## **Running Delvelin Analyzer**
+### Running Delvelin Analyzer
 
-### 1. On Local Machine
+#### 1. On Local Machine
 
 Run the `delvelinScan` task to analyze your project:
 ```bash
@@ -80,7 +85,7 @@ If we are using Intellij IDEA, we can also use the gradle menu in the sidebar:
 
 <img width="400" src="https://github.com/hangga/delvelin/blob/main/doc/delvelin-scan-gradle-menu.png?raw=true" alt="sidebar"/>
 
-### 2. On Gitlab CI
+#### 2. On Gitlab CI
 Add `delvelinScan` gradle task to our pipeline configuration, for example:
 ```yaml
 stages:
@@ -96,7 +101,7 @@ gradle-scan:
     - develop
 ```
 
-# Using Delvelin Library
+## Using Delvelin Library
 
 We can use the Delvelin library just like any other Kotlin/Java library. It offers a more flexible way with additional configuration.
 
@@ -189,7 +194,7 @@ fun `vulnerability test with save dialog`() {
 
 ![Delvelin Scan Demo](doc/save-dialog-blur_magicstudio_8tefrlgzfnr-cmprz.png?raw=true)
 
-## Configuration Options
+### Configuration Options
 
 | Configuration Option                     | Description                                                                                  | Default Value |
 |------------------------------------------|----------------------------------------------------------------------------------------------|---------------|
@@ -198,6 +203,7 @@ fun `vulnerability test with save dialog`() {
 | `setAutoLaunchBrowser(boolean value)`    | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
 | `setShowSaveDialog(boolean value)`       | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
 | `setLogListener(LogListener listener)`   | Set a custom listener for capturing logs during analysis (useful for Android integration).   | `null`        |
+
 
 > **Important Notes**
 > If you choose the JSON or HTML output format, you **must** use either `setAutoLaunchBrowser` or
@@ -208,8 +214,6 @@ fun `vulnerability test with save dialog`() {
 ## **License**
 This project is licensed under [MIT License](LICENSE).
 
----
-
 ## **Contributing**
 Contributions are welcome! Feel free to submit issues or pull requests for new features or improvements.
 
@@ -217,13 +221,13 @@ This project is still a work in progress, and your contributions are highly valu
 
 If you find this project useful and would like to support its development, we would greatly appreciate your donations. Your generosity will go a long way in ensuring the growth and sustainability of this initiative.
 
+---
+
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F215NPV4)
 
 [![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/hanggaajisayekti/)
 
 Thank you for your support!
-
----
 
 ### **Connect**
 Feel free to reach out for questions, suggestions, or contributions:
