@@ -154,7 +154,7 @@ gradle-scan:
 
 | Configuration Option                     | Description                                                                                  | Default Value |
 |------------------------------------------|----------------------------------------------------------------------------------------------|---------------|
-| `setOutputFormat(OutputFileFormat format)` | Set the output format of the analysis (e.g., `HTML`, `JSON`, or `CONSOLE`).                  | `CONSOLE`     |
+| `setOutputFormat(OutputFileFormat format)` | Set the output format of the analysis (e.g., `HTML`, `JSON`, or `LOG`).                  | `LOG`     |
 | `setAllowedExtensions(String... values)` | Specify file extensions to include in the analysis. By default, allows `.java`, `.kt`, `.gradle`, `.kts`, and `.xml`. | `[".java", ".kt", ".gradle", ".kts", ".xml"]` |
 | `setAutoLaunchBrowser(boolean value)`    | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
 | `setShowSaveDialog(boolean value)`       | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
