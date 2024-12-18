@@ -104,3 +104,5 @@ fun `vulnerability test with save dialog`() {
 > **Important Notes**
 > If you choose the JSON or HTML output format, you **must** use either `setAutoLaunchBrowser` or 
 > `setShowSaveDialog`. These methods ensure that the output is handled properly.
+
+### <a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>
