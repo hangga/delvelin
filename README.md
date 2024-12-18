@@ -20,12 +20,24 @@ We leverage:
 
 ## **Sample Output**
 
-### **Console Log**
-![Delvelin Scan Console](https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true)
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+    <img style="width: 50%;" 
+         src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true" 
+         alt="Delveline Report Console View" />
+    <img style="width: 50%;" 
+         src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true" 
+         alt="Delveline Report HTML View" />
+</div>
 
-### **HTML Format**
+[//]: # (### **Console Log**)
 
-![Delvelin Scan Demo](https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true)
+[//]: # (![Delvelin Scan Console]&#40;https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true&#41;)
+
+[//]: # ()
+[//]: # (### **HTML Format**)
+
+[//]: # ()
+[//]: # (![Delvelin Scan Demo]&#40;https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true&#41;)
 
 For a detailed report, output can be saved in HTML format:
 [Example HTML Output](https://delvelin.github.io/docs/vulnerability-report.html)
