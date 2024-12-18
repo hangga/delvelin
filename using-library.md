@@ -17,20 +17,18 @@ dependencies {
 ### Maven Configuration
 
 ```xml
-<repositories>
-    <repository>
-        <id>hangga-repsy-repo</id>
-        <url>https://repo.repsy.io/mvn/hangga/repo</url>
-    </repository>
-</repositories>
 
-<dependencies>
-    <dependency>
-        <groupId>io.github.hangga</groupId>
-        <artifactId>delvelin-plugin</artifactId>
-        <version>0.1.1-beta</version>
-    </dependency>
-</dependencies>
+<repository>
+    <id>hangga-repsy-repo</id>
+    <url>https://repo.repsy.io/mvn/hangga/repo</url>
+</repository>
+
+<dependency>
+    <groupId>io.github.hangga</groupId>
+    <artifactId>delvelin-plugin</artifactId>
+    <version>0.1.1-beta</version>
+    <scope>test</scope>
+</dependency>
 ```
 
 ### Best Practices
