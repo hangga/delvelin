@@ -122,7 +122,7 @@ For a detailed report, output can be saved in HTML format:
   Gradle
   Plugin</a>
 - <a href="https://github.com/hangga/delvelin/blob/main/using-library.md">Using Delvelin Library</a>
-
+- <a href="https://github.com/delvelin/example-kotlin">See Example Project</a>
 ---
 
 ## **License**
