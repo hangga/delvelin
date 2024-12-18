@@ -150,16 +150,6 @@ gradle-scan:
     - develop
 ```
 
-## **Configurations**
-
-| **Parameter**    | **Type**  | **Default**       | **Description**                                      |
-|------------------|-----------|-------------------|------------------------------------------------------|
-| `outputFileFormat`   | `String`  | `LOG`             | `LOG`, `JSON`, `HTML`.               |
-| `showDate`       | `Boolean` | `true`            | Show date in the output.                            |
-| `showSaveDialog` | `Boolean` | `false`           | Prompt a save dialog after the scan.                |
-
-
-
 ## Delvelin Configuration Options
 
 | Configuration Option                     | Description                                                                                  | Default Value |
