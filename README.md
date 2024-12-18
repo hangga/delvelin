@@ -4,20 +4,45 @@ alt="Delvelin Scan Demo" width="260">
 ![Java](https://img.shields.io/badge/Java-8+-blue?logo=java) ![Kotlin](https://img.shields.io/badge/Kotlin-1.5+-blueviolet?logo=kotlin) ![Gradle Plugin](https://img.shields.io/badge/Gradle-Plugin-brightgreen?logo=gradle) ![CWE](https://img.shields.io/badge/CWE-Standards-orange) ![CVSS](https://img.shields.io/badge/CVSS-Severity-red)
 [![OSV.dev](https://img.shields.io/badge/OSV.dev-Vulnerability%20Database-blue)](https://google.github.io/osv.dev/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) 
+---
+# Table of Contents
+
+- [How it Works](#how-it-works)
+- [Example Output](#example-output)
+- [Integrating Delvelin](#integrating-delvelin)
+    * [1. Using Delvelin Gradle Plugin](#1-using-delvelin-gradle-plugin)
+        + [Kotlin DSL](#kotlin-dsl)
+        + [Groovy DSL](#groovy-dsl)
+        + [Configuration](#configuration)
+        + [Running Delvelin Analyzer](#running-delvelin-analyzer)
+            - [1. On Local Machine](#1-on-local-machine)
+            - [2. On Gitlab CI](#2-on-gitlab-ci)
+    * [2. Using Delvelin Library](#2-using-delvelin-library)
+        + [Gradle Configuration](#gradle-configuration)
+        + [Maven Configuration](#maven-configuration)
+        + [Best Practices](#best-practices)
+        + [Usage on Android](#usage-on-android)
+        + [Alternative Examples](#alternative-examples)
+        + [Configuration Options](#configuration-options)
+        + [<a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>](#-a-href--https---githubcom-delvelin-example-kotlin--see-example-project-----a-)
+- [**License**](#--license--)
+- [**Contributing**](#--contributing--)
+        + [**Connect**](#--connect--)
+---
 
 **Delveline** is a Code Vulnerability Analyzer for Java and Kotlin that supports best practices in security and risk management.  
 By aligning with ISO/IEC 27001 principles, Delveline helps raise security awareness and improve software development security.
 
 ![Delvelin Scan Demo](https://delvelin.github.io/assets/img/delvelin-scan-new.gif)
 
-## **How it Works**
+# How it Works
 We leverage:
 - [CWE (Common Weakness Enumeration)](https://cwe.mitre.org/data/slices/699.html): A global standard for identifying and categorizing vulnerabilities.
 - [CVSS (Common Vulnerability Scoring System)](https://www.first.org/cvss/calculator/3.0): A framework for scoring the severity of vulnerabilities.
 - [OSV (Open Source Vulnerabilities)](https://google.github.io/osv.dev/): A comprehensive database for open-source vulnerability information.
 - **ISO/IEC 27001 Alignment**: Supporting security awareness and risk management practices aligned with global information security standards.
 
-## **Sample Output**
+# Example Output
 
 <img 
 src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true" 
@@ -33,9 +58,9 @@ alt="Delveline Report Console View" width="100%" />
 
 > **Disclaimer**: Delveline may not identify all vulnerabilities but serves as a powerful first step in securing your codebase.
 
-# How to Use
+# Integrating Delvelin
 
-## Using Delvelin Gradle Plugin
+## 1. Using Delvelin Gradle Plugin
 
 Add the plugin to your Gradle project.
 
@@ -101,7 +126,7 @@ gradle-scan:
     - develop
 ```
 
-## Using Delvelin Library
+## 2. Using Delvelin Library
 
 We can use the Delvelin library just like any other Kotlin/Java library. It offers a more flexible way with additional configuration.
 
@@ -211,10 +236,10 @@ fun `vulnerability test with save dialog`() {
 
 ### <a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>
 
-## **License**
+# **License**
 This project is licensed under [MIT License](LICENSE).
 
-## **Contributing**
+# **Contributing**
 Contributions are welcome! Feel free to submit issues or pull requests for new features or improvements.
 
 This project is still a work in progress, and your contributions are highly valuable in helping us improve and refine it.
