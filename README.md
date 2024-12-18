@@ -20,10 +20,14 @@ We leverage:
 
 ## **Sample Output**
 
-<p align="center" style="background: url('https://placehold.co/100x30/0782FF/FFFFFF?text='); padding: 10px;">
+<div align="center" style="background: url('https://placehold.co/100x30/0782FF/FFFFFF'); padding: 
+10px;">
     <img src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true" alt="Delveline Report Console View" width="48%" />
-    <img src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true" alt="Delveline Report HTML View" width="48%" />
-</p>
+    <a href="https://delvelin.github.io/docs/vulnerability-report.html">
+        <img src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true" 
+        alt="Delveline Report HTML View" width="48%" />
+    </a>
+</div>
 
 [//]: # (### **Console Log**)
 
@@ -35,8 +39,9 @@ We leverage:
 [//]: # ()
 [//]: # (![Delvelin Scan Demo]&#40;https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true&#41;)
 
-For a detailed report, output can be saved in HTML format:
-[Example HTML Output](https://delvelin.github.io/docs/vulnerability-report.html)
+[//]: # (For a detailed report, output can be saved in HTML format:)
+
+[//]: # ([Example HTML Output]&#40;https://delvelin.github.io/docs/vulnerability-report.html&#41;)
 
 [//]: # ()
 [//]: # (## Key Features)
