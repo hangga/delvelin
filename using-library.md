@@ -1,6 +1,6 @@
 # Using Delvelin Library
 
-You can use the Delvelin library just like any other Kotlin/Java library.
+We can use the Delvelin library just like any other Kotlin/Java library. It offers a more flexible way with additional configuration.
 
 ### Gradle Configuration
 
@@ -97,8 +97,16 @@ fun `vulnerability test with save dialog`() {
 }
 ```
 
----
-
 > **Important Notes**
 > If you choose the JSON or HTML output format, you **must** use either `setAutoLaunchBrowser` or 
 > `setShowSaveDialog`. These methods ensure that the output is handled properly.
+
+## Configuration Options
+
+| Configuration Option                     | Description                                                                                  | Default Value |
+|------------------------------------------|----------------------------------------------------------------------------------------------|---------------|
+| `setOutputFormat(OutputFileFormat format)` | Set the output format of the analysis (e.g., `HTML`, `JSON`, or `LOG`).                  | `LOG`     |
+| `setAllowedExtensions(String... values)` | Specify file extensions to include in the analysis. By default, allows `.java`, `.kt`, `.gradle`, `.kts`, and `.xml`. | `[".java", ".kt", ".gradle", ".kts", ".xml"]` |
+| `setAutoLaunchBrowser(boolean value)`    | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
+| `setShowSaveDialog(boolean value)`       | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
+| `setLogListener(LogListener listener)`   | Set a custom listener for capturing logs during analysis (useful for Android integration).   | `null`        |
