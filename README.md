@@ -20,10 +20,10 @@ We leverage:
 
 ## **Sample Output**
 
-<p align="center" style="background: url('https://placehold.co/100x30/0782FF/FFFFFF?text='); padding: 10px;">
+<div align="center" style="background: #0782FF; padding: 10px;">
     <img src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true" alt="Delveline Report Console View" width="48%" />
     <img src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true" alt="Delveline Report HTML View" width="48%" />
-</p>
+</div>
 
 [//]: # (### **Console Log**)
 
