@@ -33,8 +33,6 @@ dependencies {
 </dependencies>
 ```
 
----
-
 ### Best Practices
 
 It is highly recommended to run the Delvelin library in unit tests to keep your production classes clean. You can also run it in the main class or the project’s main package, but this is not advised.
@@ -54,15 +52,13 @@ fun `vulnerability test`() {
 }
 ```
 
----
-
 ### Usage on Android
 
 To log messages in LogCat, you can use a custom listener like this:
 
 ```kotlin
 @Test
-fun `vulnerability with custom listener for android`() {
+fun `vulnerability test with custom listener for android`() {
     Delvelin().setLogListener(object : LogListener {
         override fun onGetLog(s: String) {
             Log.d("DelvelinLog", s)
@@ -74,8 +70,6 @@ fun `vulnerability with custom listener for android`() {
     }).scan()
 }
 ```
-
----
 
 ### Alternative Examples
 
