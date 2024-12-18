@@ -28,6 +28,12 @@ delvelin {
 }
 ```
 
+| Configuration Option                     | Description                                                                                  | Default Value |
+|------------------------------------------|----------------------------------------------------------------------------------------------|---------------|
+| `setOutputFormat` | Set the output format of the analysis (e.g., `HTML`, `JSON`, or `LOG`).                  | `LOG`     |
+| `setAutoLaunchBrowser`    | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
+| `setShowSaveDialog`       | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
+
 ## **Running Delvelin Analyzer**
 
 ### 1. On Local Machine
@@ -57,11 +63,3 @@ gradle-scan:
     - main
     - develop
 ```
-
-## Configuration Options
-
-| Configuration Option                     | Description                                                                                  | Default Value |
-|------------------------------------------|----------------------------------------------------------------------------------------------|---------------|
-| `setOutputFormat` | Set the output format of the analysis (e.g., `HTML`, `JSON`, or `LOG`).                  | `LOG`     |
-| `setAutoLaunchBrowser`    | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
-| `setShowSaveDialog`       | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
