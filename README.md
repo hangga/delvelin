@@ -5,26 +5,25 @@ alt="Delvelin Scan Demo" width="260">
 [![OSV.dev](https://img.shields.io/badge/OSV.dev-Vulnerability%20Database-blue)](https://google.github.io/osv.dev/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) 
 ---
-- [How it Works](#how-it-works)
-- [Example Output](#example-output)
-- [Integrating Delvelin](#integrating-delvelin)
-  * [1. Using Delvelin Gradle Plugin](#1-using-delvelin-gradle-plugin)
-    + [Kotlin DSL](#kotlin-dsl)
-    + [Groovy DSL](#groovy-dsl)
-    + [Configuration](#configuration)
-    + [Running Delvelin Analyzer](#running-delvelin-analyzer)
-      - [1. On Local Machine](#1-on-local-machine)
-      - [2. On Gitlab CI](#2-on-gitlab-ci)
-  * [2. Using Delvelin Library](#2-using-delvelin-library)
-      + [Gradle Configuration](#gradle-configuration)
-      + [Maven Configuration](#maven-configuration)
-      + [Best Practices](#best-practices)
-      + [Usage on Android](#usage-on-android)
-      + [Alternative Examples](#alternative-examples)
-      + [Configuration Options](#configuration-options)
-- [License](#license)
-- [Contributing](#contributing)
-  * [Connect](#connect)
+- 1.[How it Works](#how-it-works)
+- 2.[Example Output](#example-output)
+- 3.[Integrating Delvelin](#integrating-delvelin)
+  * 3.1. [Using Delvelin Gradle Plugin](#1-using-delvelin-gradle-plugin)
+    + 3.1.1. [Kotlin DSL](#kotlin-dsl)
+    + 3.1.2. [Groovy DSL](#groovy-dsl)
+    + 3.1.3. [Configuration](#configuration)
+    + 3.1.4. [Running Delvelin Analyzer](#running-delvelin-analyzer)
+      - [On Local Machine](#1-on-local-machine)
+      - [On Gitlab CI](#2-on-gitlab-ci)
+  * 3.2. [Using Delvelin Library](#2-using-delvelin-library)
+      + 3.2.1. [Gradle Configuration](#gradle-configuration)
+      + 3.2.2. [Maven Configuration](#maven-configuration)
+      + 3.2.3. [Best Practices](#best-practices)
+      + 3.2.4. [Usage on Android](#usage-on-android)
+      + 3.2.5. [Alternative Examples](#alternative-examples)
+      + 3.2.6. [Configuration Options](#configuration-options)
+- 4.[License](#license)
+- 5.[Contributing](#contributing)
 ---
 
 **Delveline** is a Code Vulnerability Analyzer for Java and Kotlin that supports best practices in security and risk management.  
@@ -32,14 +31,14 @@ By aligning with ISO/IEC 27001 principles, Delveline helps raise security awaren
 
 ![Delvelin Scan Demo](https://delvelin.github.io/assets/img/delvelin-scan-new.gif)
 
-# How it Works
+# 1. How it Works
 We leverage:
 - [CWE (Common Weakness Enumeration)](https://cwe.mitre.org/data/slices/699.html): A global standard for identifying and categorizing vulnerabilities.
 - [CVSS (Common Vulnerability Scoring System)](https://www.first.org/cvss/calculator/3.0): A framework for scoring the severity of vulnerabilities.
 - [OSV (Open Source Vulnerabilities)](https://google.github.io/osv.dev/): A comprehensive database for open-source vulnerability information.
 - **ISO/IEC 27001 Alignment**: Supporting security awareness and risk management practices aligned with global information security standards.
 
-# Example Output
+# 2. Example Output
 
 <img 
 src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true" 
@@ -56,34 +55,33 @@ Or view example in <a href="https://delvelin.github.io/docs/vulnerability-report
 
 > **Disclaimer**: Delveline may not identify all vulnerabilities but serves as a powerful first step in securing your codebase.
 
-# Integrating Delvelin
+# 3. Integrating Delvelin
 
-## 1. Using Delvelin Gradle Plugin
+## 3.1. Using Delvelin Gradle Plugin
 
 Add the plugin to your Gradle project.
 
-### Kotlin DSL
+### 3.1.1. Kotlin DSL
 ```kotlin
 plugins {
     id("io.github.hangga.delvelin") version "0.1.1-beta"
 }
 ```
 
-### Groovy DSL
+### 3.1.2. Groovy DSL
 ```groovy
 plugins {
     id 'io.github.hangga.delvelin' version '0.1.1-beta'
 }
 ```
 
-### Configuration
+### 3.1.3. Configuration
 
 Configure Delvelin using the `delvelin` extension.
 
 ```groovy
 delvelin {
     outputFileFormat = 'JSON' // Options: LOG, JSON, HTML
-    showDate = true
     showSaveDialog = false
 }
 ```
@@ -94,9 +92,9 @@ delvelin {
 | `setAutoLaunchBrowser`    | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
 | `setShowSaveDialog`       | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
 
-### Running Delvelin Analyzer
+### 3.1.4. Running Delvelin Analyzer
 
-#### 1. On Local Machine
+#### On Local Machine
 
 Run the `delvelinScan` task to analyze your project:
 ```bash
@@ -108,7 +106,7 @@ If we are using Intellij IDEA, we can also use the gradle menu in the sidebar:
 
 <img width="400" src="https://github.com/hangga/delvelin/blob/main/doc/delvelin-scan-gradle-menu.png?raw=true" alt="sidebar"/>
 
-#### 2. On Gitlab CI
+#### On Gitlab CI
 Add `delvelinScan` gradle task to our pipeline configuration, for example:
 ```yaml
 stages:
@@ -124,11 +122,11 @@ gradle-scan:
     - develop
 ```
 
-## 2. Using Delvelin Library
+## 3.2. Using Delvelin Library
 
 We can use the Delvelin library just like any other Kotlin/Java library. It offers a more flexible way with additional configuration.
 
-### Gradle Configuration
+### 3.2.1. Gradle Configuration
 
 ```kotlin
 repositories {
@@ -140,7 +138,7 @@ dependencies {
 }
 ```
 
-### Maven Configuration
+### 3.2.2. Maven Configuration
 
 ```xml
 
@@ -157,7 +155,7 @@ dependencies {
 </dependency>
 ```
 
-### Best Practices
+### 3.2.3. Best Practices
 
 It is highly recommended to run the Delvelin library in unit tests to keep your production classes clean. You can also run it in the main class or the project’s main package, but this is not advised.
 
@@ -176,7 +174,7 @@ fun `vulnerability test`() {
 }
 ```
 
-### Usage on Android
+### 3.2.4. Usage on Android
 
 To log messages in LogCat, you can use a custom listener like this:
 
@@ -195,7 +193,7 @@ fun `vulnerability test with custom listener for android`() {
 }
 ```
 
-### Alternative Examples
+### 3.2.5. Alternative Examples
 
 ```kotlin
 @Test
@@ -217,7 +215,7 @@ fun `vulnerability test with save dialog`() {
 
 ![Delvelin Scan Demo](doc/save-dialog-blur_magicstudio_8tefrlgzfnr-cmprz.png?raw=true)
 
-### Configuration Options
+### 3.2.6. Configuration Options
 
 | Configuration Option                     | Description                                                                                  | Default Value |
 |------------------------------------------|----------------------------------------------------------------------------------------------|---------------|
@@ -234,10 +232,10 @@ fun `vulnerability test with save dialog`() {
 
 ### <a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>
 
-# License
+# 4. License
 This project is licensed under [MIT License](LICENSE).
 
-# Contributing
+# 5. Contributing
 Contributions are welcome! Feel free to submit issues or pull requests for new features or improvements.
 
 This project is still a work in progress, and your contributions are highly valuable in helping us improve and refine it.
@@ -252,7 +250,7 @@ If you find this project useful and would like to support its development, we wo
 
 Thank you for your support!
 
-### **Connect**
+### Connect
 Feel free to reach out for questions, suggestions, or contributions:
 - 📧 Email: bazeniancode@gmail.com
 - 🌐 [GitHub Repository](https://github.com/hangga/delvelin)
