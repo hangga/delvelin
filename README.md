@@ -21,7 +21,7 @@ We leverage:
 ## **Sample Output**
 
 <div style="display: flex; justify-content: space-between; align-items: center; 
-background-color:#0782FF; padding:10px;">
+background-color: #0782FF; padding: 10px;">
     <img style="width: 48%;"
          src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true" 
          alt="Delveline Report Console View" />
