@@ -20,11 +20,11 @@ We leverage:
 
 ## **Sample Output**
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-    <img style="width: 50%;" 
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <img style="width: 48%;"
          src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true" 
          alt="Delveline Report Console View" />
-    <img style="width: 50%;" 
+    <img style="width: 48%;"
          src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-html.png?raw=true" 
          alt="Delveline Report HTML View" />
 </div>
