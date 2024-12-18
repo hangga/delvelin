@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.hangga:delvelin:0.1.1-beta'
+    testImplementation('io.github.hangga:delvelin-plugin:0.1.1-beta')
 }
 ```
 
@@ -27,7 +27,7 @@ dependencies {
 <dependencies>
     <dependency>
         <groupId>io.github.hangga</groupId>
-        <artifactId>delvelin</artifactId>
+        <artifactId>delvelin-plugin</artifactId>
         <version>0.1.1-beta</version>
     </dependency>
 </dependencies>
