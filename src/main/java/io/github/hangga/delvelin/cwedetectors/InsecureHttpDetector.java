@@ -1,5 +1,7 @@
 package io.github.hangga.delvelin.cwedetectors;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.regex.Pattern;
 
 import io.github.hangga.delvelin.properties.Vulnerabilities;
@@ -17,14 +19,30 @@ public class InsecureHttpDetector extends BaseDetector {
         if (!this.extName.equals(".kt") && !this.extName.equals(".java")) {
             return;
         }
-        if (line.contains("HttpURLConnection") && HTTP_URL_PATTERN.matcher(line)
-            .find()) {
-            setValidVulnerability(specificLocation(lineNumber), line, "Insecure HTTP detected");
+        if (line.contains("HttpURLConnection")) {
+            if (line.contains("http://") || containsHttpUrl(line) || HTTP_URL_PATTERN.matcher(line)
+                .find()) {
+                setValidVulnerability(specificLocation(lineNumber), line, "Insecure HTTP detected");
+            }
         }
     }
 
     @Override
     public void detect(String content) {
 
+    }
+
+    private boolean containsHttpUrl(String line) {
+        String[] words = line.split("\\s+"); // Pecah berdasarkan spasi
+        for (String word : words) {
+            try {
+                URL url = new URL(word);
+                if ("http".equalsIgnoreCase(url.getProtocol())) {
+                    return true;
+                }
+            } catch (MalformedURLException ignored) {
+            }
+        }
+        return false;
     }
 }
