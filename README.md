@@ -10,24 +10,24 @@ alt="Delvelin Scan Demo" width="260">
 - [How it Works](#how-it-works)
 - [Example Output](#example-output)
 - [Integrating Delvelin](#integrating-delvelin)
-    * [1. Using Delvelin Gradle Plugin](#1-using-delvelin-gradle-plugin)
-        + [Kotlin DSL](#kotlin-dsl)
-        + [Groovy DSL](#groovy-dsl)
-        + [Configuration](#configuration)
-        + [Running Delvelin Analyzer](#running-delvelin-analyzer)
-            - [1. On Local Machine](#1-on-local-machine)
-            - [2. On Gitlab CI](#2-on-gitlab-ci)
-    * [2. Using Delvelin Library](#2-using-delvelin-library)
-        + [Gradle Configuration](#gradle-configuration)
-        + [Maven Configuration](#maven-configuration)
-        + [Best Practices](#best-practices)
-        + [Usage on Android](#usage-on-android)
-        + [Alternative Examples](#alternative-examples)
-        + [Configuration Options](#configuration-options)
-        + [<a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>](#-a-href--https---githubcom-delvelin-example-kotlin--see-example-project-----a-)
-- [**License**](#--license--)
-- [**Contributing**](#--contributing--)
-        + [**Connect**](#--connect--)
+  * [1. Using Delvelin Gradle Plugin](#1-using-delvelin-gradle-plugin)
+    + [Kotlin DSL](#kotlin-dsl)
+    + [Groovy DSL](#groovy-dsl)
+    + [Configuration](#configuration)
+    + [Running Delvelin Analyzer](#running-delvelin-analyzer)
+      - [1. On Local Machine](#1-on-local-machine)
+      - [2. On Gitlab CI](#2-on-gitlab-ci)
+  * [2. Using Delvelin Library](#2-using-delvelin-library)
+      + [Gradle Configuration](#gradle-configuration)
+      + [Maven Configuration](#maven-configuration)
+      + [Best Practices](#best-practices)
+      + [Usage on Android](#usage-on-android)
+      + [Alternative Examples](#alternative-examples)
+      + [Configuration Options](#configuration-options)
+      + [<a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>](#-a-href--https---githubcom-delvelin-example-kotlin--see-example-project-----a-)
+- [License](#license)
+- [Contributing](#contributing)
+  * [Connect](#connect)
 ---
 
 **Delveline** is a Code Vulnerability Analyzer for Java and Kotlin that supports best practices in security and risk management.  
@@ -237,10 +237,10 @@ fun `vulnerability test with save dialog`() {
 
 ### <a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>
 
-# **License**
+# License
 This project is licensed under [MIT License](LICENSE).
 
-# **Contributing**
+# Contributing
 Contributions are welcome! Feel free to submit issues or pull requests for new features or improvements.
 
 This project is still a work in progress, and your contributions are highly valuable in helping us improve and refine it.
