@@ -89,6 +89,8 @@ fun `vulnerability test with save dialog`() {
 }
 ```
 
+![Delvelin Scan Demo](doc/save-dialog-blur_magicstudio_8tefrlgzfnr-cmprz.png?raw=true)
+
 ## Configuration Options
 
 | Configuration Option                     | Description                                                                                  | Default Value |
