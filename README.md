@@ -48,7 +48,8 @@ We leverage:
 src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true" 
 alt="Delveline Report Console View" width="100%" />
 
-<a href="https://delvelin.github.io/docs/vulnerability-report.html">View example in Html Format</a>
+Or view example in <a href="https://delvelin.github.io/docs/vulnerability-report.html">HTML 
+ Format</a>
 
 [//]: # (<img )
 
