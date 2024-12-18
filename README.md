@@ -23,28 +23,45 @@ By aligning with ISO/IEC 27001 principles, Delveline helps raise security awaren
 For a detailed report, output can be saved in HTML format:
 [Example HTML Output](https://delvelin.github.io/docs/vulnerability-report.html)
 
-## Key Features
+[//]: # ()
+[//]: # (## Key Features)
 
-- **ISO/IEC 27001 Alignment**: Delveline supports best practices in security awareness and risk management.
-- **CWE and CVSS Integration**: Identify and prioritize vulnerabilities using industry standards.
-- **Dependency Scanning with OSV.dev**: Detect known CVEs in libraries and dependencies.
-- **Thread-Safety Detection**: Highlight unsafe structures in multi-threading scenarios.
+[//]: # ()
+[//]: # (- **ISO/IEC 27001 Alignment**: Delveline supports best practices in security awareness and risk management.)
 
-## Advantages
+[//]: # (- **CWE and CVSS Integration**: Identify and prioritize vulnerabilities using industry standards.)
 
-### **1. Security-Oriented Focus**
-- **Delveline** excels as a security analysis tool, offering the ability to detect vulnerabilities such as:
-    - Non-thread-safe data structures (e.g., `HashMap`, `ArrayList`) in multi-threading scenarios.
-    - Hardcoded sensitive data like API tokens, passwords, or private keys.
-    - XSS vulnerabilities through regex pattern analysis on code strings.
-    - Detection aligned with **OWASP ASVS**, **CWE**, and **OSV.dev** standards.
+[//]: # (- **Dependency Scanning with OSV.dev**: Detect known CVEs in libraries and dependencies.)
 
-  **OSV.dev**, backed by Google, provides an extensive database for detecting known vulnerabilities (CVEs) in dependencies and libraries used in your project. This enables **Delveline** to identify outdated or vulnerable dependencies more effectively.
+[//]: # (- **Thread-Safety Detection**: Highlight unsafe structures in multi-threading scenarios.)
 
-### **2. Industry Standards and Vulnerability Scoring**
-- **Delveline** integrates **CWE (Common Weakness Enumeration)** as a reference for defining vulnerabilities.
-- It also uses **CVSS (Common Vulnerability Scoring System)** for severity scoring and prioritization of fixes.
-- By incorporating **OSV.dev**, it adds another layer of detection by identifying known CVEs in project dependencies.
+[//]: # ()
+[//]: # (## Advantages)
+
+[//]: # ()
+[//]: # (### **1. Security-Oriented Focus**)
+
+[//]: # (- **Delveline** excels as a security analysis tool, offering the ability to detect vulnerabilities such as:)
+
+[//]: # (    - Non-thread-safe data structures &#40;e.g., `HashMap`, `ArrayList`&#41; in multi-threading scenarios.)
+
+[//]: # (    - Hardcoded sensitive data like API tokens, passwords, or private keys.)
+
+[//]: # (    - XSS vulnerabilities through regex pattern analysis on code strings.)
+
+[//]: # (    - Detection aligned with **OWASP ASVS**, **CWE**, and **OSV.dev** standards.)
+
+[//]: # ()
+[//]: # (  **OSV.dev**, backed by Google, provides an extensive database for detecting known vulnerabilities &#40;CVEs&#41; in dependencies and libraries used in your project. This enables **Delveline** to identify outdated or vulnerable dependencies more effectively.)
+
+[//]: # ()
+[//]: # (### **2. Industry Standards and Vulnerability Scoring**)
+
+[//]: # (- **Delveline** integrates **CWE &#40;Common Weakness Enumeration&#41;** as a reference for defining vulnerabilities.)
+
+[//]: # (- It also uses **CVSS &#40;Common Vulnerability Scoring System&#41;** for severity scoring and prioritization of fixes.)
+
+[//]: # (- By incorporating **OSV.dev**, it adds another layer of detection by identifying known CVEs in project dependencies.)
 
 
 [//]: # (### **4. Multi-Platform Execution Support**)
@@ -59,12 +76,15 @@ For a detailed report, output can be saved in HTML format:
 
 [//]: # (---)
 
-### **3. Runtime-Assisted Static Analysis**
-- **Delveline** employs a unique **runtime-assisted static analysis** approach, allowing static analysis to be supplemented by runtime data, making it more adaptive than purely static tools.
+[//]: # (### **3. Runtime-Assisted Static Analysis**)
 
+[//]: # (- **Delveline** employs a unique **runtime-assisted static analysis** approach, allowing static analysis to be supplemented by runtime data, making it more adaptive than purely static tools.)
 
-### **4. Target Audience**
-- **Delveline** is designed for projects requiring deep security analysis.
+[//]: # ()
+[//]: # ()
+[//]: # (### **4. Target Audience**)
+
+[//]: # (- **Delveline** is designed for projects requiring deep security analysis.)
 
 [//]: # (---)
 
