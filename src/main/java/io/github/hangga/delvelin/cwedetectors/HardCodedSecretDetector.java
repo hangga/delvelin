@@ -34,16 +34,19 @@ public class HardCodedSecretDetector extends BaseDetector {
         }
     }
 
+    private final List<String> ignoredKeys = Arrays.asList(
+        "passwordEncoder", "tokenType", "authService", "secretProvider"
+    );
+
     private boolean isContainSensitiveKey(String line) {
-        boolean found = false;
         for (String key : sensitiveKeys) {
-            if (line.toLowerCase()
-                .contains(key.toLowerCase())) { // case-insensitive check
-                found = true;
-                break;
+            if (line.toLowerCase().contains(key.toLowerCase())) {
+                if (ignoredKeys.stream().noneMatch(line::contains)) { // Pastikan bukan ignored key
+                    return true;
+                }
             }
         }
-        return found;
+        return false;
     }
 
     private boolean isCommonPatternMatch(String line, int lineNumber) {
