@@ -1,3 +1,15 @@
+- [Using Delvelin Library](#using-delvelin-library)
+    + [Gradle Configuration](#gradle-configuration)
+    + [Maven Configuration](#maven-configuration)
+    + [Best Practices](#best-practices)
+    + [Usage on Android](#usage-on-android)
+    + [Alternative Examples](#alternative-examples)
+    * [Configuration Options](#configuration-options)
+        + [<a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>](#-a-href--https---githubcom-delvelin-example-kotlin--see-example-project-----a-)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+---
 # Using Delvelin Library
 
 We can use the Delvelin library just like any other Kotlin/Java library. It offers a more flexible way with additional configuration.
