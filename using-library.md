@@ -6,9 +6,6 @@
     + [Alternative Examples](#alternative-examples)
     * [Configuration Options](#configuration-options)
         + [<a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>](#-a-href--https---githubcom-delvelin-example-kotlin--see-example-project-----a-)
-
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 ---
 # Using Delvelin Library
 
