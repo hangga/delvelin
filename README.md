@@ -5,9 +5,9 @@ alt="Delvelin Scan Demo" width="260">
 [![OSV.dev](https://img.shields.io/badge/OSV.dev-Vulnerability%20Database-blue)](https://google.github.io/osv.dev/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) 
 ---
-- 1. [How it Works](#1-how-it-works)
-- 2. [Example Output](#2-example-output)
-- 3. [Integrating Delvelin](#3-integrating-delvelin)
+- 1.[How it Works](#1-how-it-works)
+- 2.[Example Output](#2-example-output)
+- 3.[Integrating Delvelin](#3-integrating-delvelin)
     * 3.1. [Using Delvelin Gradle Plugin](#31-using-delvelin-gradle-plugin)
         + 3.1.1. [Kotlin DSL](#311-kotlin-dsl)
         + 3.1.2. [Groovy DSL](#312-groovy-dsl)
@@ -22,8 +22,8 @@ alt="Delvelin Scan Demo" width="260">
         + 3.2.4. [Usage on Android](#324-usage-on-android)
         + 3.2.5. [Alternative Examples](#325-alternative-examples)
         + 3.2.6. [Configuration Options](#326-configuration-options)
-- 4. [License](#4-license)
-- 5. [Contributing](#5-contributing)
+- 4.[License](#4-license)
+- 5.[Contributing](#5-contributing)
 
 ---
 
