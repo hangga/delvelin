@@ -12,19 +12,19 @@ alt="Delvelin Scan Demo" width="260">
 - 2.[Example Output](#2-example-output)
 - 3.[Integrating Delvelin](#3-integrating-delvelin)
     * 3.1. [Using Delvelin Gradle Plugin](#31-using-delvelin-gradle-plugin)
-        + 3.1.1. [Kotlin DSL](#311-kotlin-dsl)
-        + 3.1.2. [Groovy DSL](#312-groovy-dsl)
-        + 3.1.3. [Configuration](#313-configuration)
-        + 3.1.4. [Running Delvelin Analyzer](#314-running-delvelin-analyzer)
+        + [Kotlin DSL](#kotlin-dsl)
+        + [Groovy DSL](#groovy-dsl)
+        + [Configuration](#configuration)
+        + [Running Delvelin Analyzer](#running-delvelin-analyzer)
             - [On Local Machine](#on-local-machine)
             - [On Gitlab CI](#on-gitlab-ci)
-    * 3.2. [Using Delvelin Library](#32-using-delvelin-library)
-        + 3.2.1. [Gradle Configuration](#321-gradle-configuration)
-        + 3.2.2. [Maven Configuration](#322-maven-configuration)
-        + 3.2.3. [Best Practices](#323-best-practices)
-        + 3.2.4. [Usage on Android](#324-usage-on-android)
-        + 3.2.5. [Alternative Examples](#325-alternative-examples)
-        + 3.2.6. [Configuration Options](#326-configuration-options)
+    * 3.2. [Using Delvelin Library](#using-delvelin-library)
+        + [Gradle Configuration](#gradle-configuration)
+        + [Maven Configuration](#maven-configuration)
+        + [Best Practices](#best-practices)
+        + [Usage on Android](#usage-on-android)
+        + [Alternative Examples](#alternative-examples)
+        + [Configuration Options](#configuration-options)
 - 4.[License](#4-license)
 - 5.[Contributing](#5-contributing)
 ---
@@ -75,21 +75,21 @@ your project needs:
 
 Add the plugin to your Gradle project.
 
-### 3.1.1. Kotlin DSL
+### Kotlin DSL
 ```kotlin
 plugins {
     id("io.github.hangga.delvelin") version "0.1.1-beta"
 }
 ```
 
-### 3.1.2. Groovy DSL
+### Groovy DSL
 ```groovy
 plugins {
     id 'io.github.hangga.delvelin' version '0.1.1-beta'
 }
 ```
 
-### 3.1.3. Configuration
+### Configuration
 
 Configure Delvelin using the `delvelin` extension.
 
@@ -106,7 +106,7 @@ delvelin {
 | `setAutoLaunchBrowser`    | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
 | `setShowSaveDialog`       | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
 
-### 3.1.4. Running Delvelin Analyzer
+### Running Delvelin Analyzer
 
 #### On Local Machine
 
@@ -140,7 +140,7 @@ gradle-scan:
 
 We can use the Delvelin library just like any other Kotlin/Java library. It offers a more flexible way with additional configuration.
 
-### 3.2.1. Gradle Configuration
+### Gradle Configuration
 
 ```kotlin
 repositories {
@@ -152,7 +152,7 @@ dependencies {
 }
 ```
 
-### 3.2.2. Maven Configuration
+### Maven Configuration
 
 ```xml
 
@@ -169,7 +169,7 @@ dependencies {
 </dependency>
 ```
 
-### 3.2.3. Best Practices
+### Best Practices
 
 It is highly recommended to run the Delvelin library in unit tests to keep your production classes clean. You can also run it in the main class or the project’s main package, but this is not advised.
 
@@ -188,7 +188,7 @@ fun `vulnerability test`() {
 }
 ```
 
-### 3.2.4. Usage on Android
+### Usage on Android
 
 To log messages in LogCat, you can use a custom listener like this:
 
@@ -207,7 +207,7 @@ fun `vulnerability test with custom listener for android`() {
 }
 ```
 
-### 3.2.5. Alternative Examples
+### Alternative Examples
 
 ```kotlin
 @Test
@@ -229,7 +229,7 @@ fun `vulnerability test with save dialog`() {
 
 ![Delvelin Scan Demo](doc/save-dialog-blur_magicstudio_8tefrlgzfnr-cmprz.png?raw=true)
 
-### 3.2.6. Configuration Options
+### Configuration Options
 
 | Configuration Option                     | Description                                                                                  | Default Value |
 |------------------------------------------|----------------------------------------------------------------------------------------------|---------------|
