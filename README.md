@@ -75,14 +75,14 @@ your project needs:
 
 Add the plugin to your Gradle project.
 
-### Kotlin DSL
+### KTS
 ```kotlin
 plugins {
     id("io.github.hangga.delvelin") version "0.1.1-beta"
 }
 ```
 
-### Groovy DSL
+### Groovy
 ```groovy
 plugins {
     id 'io.github.hangga.delvelin' version '0.1.1-beta'
@@ -140,7 +140,7 @@ gradle-scan:
 
 We can use the Delvelin library just like any other Kotlin/Java library. It offers a more flexible way with additional configuration.
 
-### Gradle Configuration
+### Gradle
 
 ```kotlin
 repositories {
@@ -152,7 +152,7 @@ dependencies {
 }
 ```
 
-### Maven Configuration
+### Maven
 
 ```xml
 
