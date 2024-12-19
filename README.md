@@ -5,8 +5,7 @@ alt="Delvelin Scan Demo" width="260">
 [![OSV.dev](https://img.shields.io/badge/OSV.dev-Vulnerability%20Database-blue)](https://google.github.io/osv.dev/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) 
 ---
-**Delveline** is a Code Vulnerability Analyzer for Java and Kotlin that supports best practices in security and risk management.  
-By aligning with ISO/IEC 27001 principles, Delveline helps raise security awareness and improve software development security.
+**Delveline** is a tool for Kotlin and Java developers that identifies and categorizes vulnerabilities, helping teams align with security standards like ISO 27001 and improve code security.
 
 ### Jump ahead:
 - 1.[How it Works](#1-how-it-works)
@@ -33,9 +32,15 @@ By aligning with ISO/IEC 27001 principles, Delveline helps raise security awaren
 ![Delvelin Scan Demo](https://delvelin.github.io/assets/img/delvelin-scan-new.gif)
 
 # 1. How it Works
+
+Delveline is a specialized tool designed for Kotlin and Java developers, helping identify and categorize software vulnerabilities effectively. By leveraging the CWE (Common Weakness Enumeration) framework and detecting CVE (Common Vulnerabilities and Exposures), Delveline bridges the gap between secure software development and industry standards like ISO 27001.
+
+Aligned with ISO 27001’s focus on information security and risk management, Delveline provides actionable insights into vulnerabilities within source code and dependencies specific to Kotlin and Java projects. While not a standalone security solution, it serves as a valuable aid in achieving compliance by offering clear categorization of risks and practical guidance for remediation.
+
+Delveline empowers Kotlin and Java teams to develop secure and resilient applications while aligning their development practices with global security standards.
+
 We leverage:
 - [CWE (Common Weakness Enumeration)](https://cwe.mitre.org/data/slices/699.html): A global standard for identifying and categorizing vulnerabilities.
-- [CVSS (Common Vulnerability Scoring System)](https://www.first.org/cvss/calculator/3.0): A framework for scoring the severity of vulnerabilities.
 - [OSV (Open Source Vulnerabilities)](https://google.github.io/osv.dev/): A comprehensive database for open-source vulnerability information.
 - **ISO/IEC 27001 Alignment**: Supporting security awareness and risk management practices aligned with global information security standards.
 
