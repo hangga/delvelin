@@ -37,12 +37,12 @@ Delveline is a specialized tool designed for Kotlin and Java developers, helping
 
 Aligned with ISO 27001’s focus on information security and risk management, Delveline provides actionable insights into vulnerabilities within source code and dependencies specific to Kotlin and Java projects. While not a standalone security solution, it serves as a valuable aid in achieving compliance by offering clear categorization of risks and practical guidance for remediation.
 
-Delveline empowers Kotlin and Java teams to develop secure and resilient applications while aligning their development practices with global security standards.
-
 We leverage:
 - [CWE (Common Weakness Enumeration)](https://cwe.mitre.org/data/slices/699.html): A global standard for identifying and categorizing vulnerabilities.
 - [OSV (Open Source Vulnerabilities)](https://google.github.io/osv.dev/): A comprehensive database for open-source vulnerability information.
 - **ISO/IEC 27001 Alignment**: Supporting security awareness and risk management practices aligned with global information security standards.
+
+Delveline empowers Kotlin and Java teams to develop secure and resilient applications while aligning their development practices with global security standards.
 
 # 2. Example Output
 
