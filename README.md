@@ -5,6 +5,10 @@ alt="Delvelin Scan Demo" width="260">
 [![OSV.dev](https://img.shields.io/badge/OSV.dev-Vulnerability%20Database-blue)](https://google.github.io/osv.dev/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) 
 ---
+**Delveline** is a Code Vulnerability Analyzer for Java and Kotlin that supports best practices in security and risk management.  
+By aligning with ISO/IEC 27001 principles, Delveline helps raise security awareness and improve software development security.
+
+### Jump ahead:
 - 1.[How it Works](#1-how-it-works)
 - 2.[Example Output](#2-example-output)
 - 3.[Integrating Delvelin](#3-integrating-delvelin)
@@ -24,11 +28,7 @@ alt="Delvelin Scan Demo" width="260">
         + 3.2.6. [Configuration Options](#326-configuration-options)
 - 4.[License](#4-license)
 - 5.[Contributing](#5-contributing)
-
 ---
-
-**Delveline** is a Code Vulnerability Analyzer for Java and Kotlin that supports best practices in security and risk management.  
-By aligning with ISO/IEC 27001 principles, Delveline helps raise security awareness and improve software development security.
 
 ![Delvelin Scan Demo](https://delvelin.github.io/assets/img/delvelin-scan-new.gif)
 
