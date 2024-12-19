@@ -68,6 +68,9 @@ Or view example in <a href="https://delvelin.github.io/docs/vulnerability-report
 
 # 3. Integrating Delvelin
 
+To integrate delvelin in Java/Kotlin project, we can use two ways. Choose the way that suits 
+your project needs:
+
 ## 3.1. Using Delvelin Gradle Plugin
 
 Add the plugin to your Gradle project.
