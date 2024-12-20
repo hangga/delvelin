@@ -46,14 +46,16 @@ Delveline empowers Kotlin and Java teams to develop secure and resilient applica
 
 # 2. Example Output
 
-<img 
-src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true" 
-alt="Delveline Report Console View" width="100%" />
-
-<img
-src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-2.png?raw=true"
-width="100%"
-/>
+<div style="display: flex; justify-content: space-between; gap: 10px;">
+  <a href="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true" target="_blank">
+    <img 
+      src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-1.png?raw=true"/>
+  </a>
+  <a href="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-2.png?raw=true" target="_blank">
+    <img 
+      src="https://github.com/delvelin/blog/blob/master/_posts/delvelin-report-console-2.png?raw=true"/>
+  </a>
+</div>
 
 Or view example in <a href="https://delvelin.github.io/docs/vulnerability-report.html">HTML 
  Format</a>
@@ -118,7 +120,10 @@ Run the `delvelinScan` task to analyze your project:
 
 If we are using Intellij IDEA, we can also use the gradle menu in the sidebar:
 
-<img width="400" src="https://github.com/hangga/delvelin/blob/main/doc/delvelin-scan-gradle-menu.png?raw=true" alt="sidebar"/>
+<div style="display: flex; justify-content: center; align-items: center;">  
+    <img style="max-width: 34%; height: auto;" 
+    src="https://github.com/hangga/delvelin/blob/main/doc/delvelin-scan-gradle-menu.png?raw=true" alt="sidebar"/>
+</div>
 
 #### On Gitlab CI
 Add `delvelinScan` gradle task to our pipeline configuration, for example:
