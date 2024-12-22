@@ -121,7 +121,7 @@ Run the `delvelinScan` task to analyze your project:
 If we are using Intellij IDEA, we can also use the gradle menu in the sidebar:
 
 <div style="display: flex; justify-content: center; align-items: center;">  
-    <img style="width:200px;" 
+    <img style="width:300px;" 
     src="https://github.com/hangga/delvelin/blob/main/doc/delvelin-scan-gradle-menu.png?raw=true" alt="sidebar"/>
 </div>
 
