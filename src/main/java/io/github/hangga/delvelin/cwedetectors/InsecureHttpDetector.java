@@ -19,11 +19,11 @@ public class InsecureHttpDetector extends BaseDetector {
         if (!this.extName.equals(".kt") && !this.extName.equals(".java")) {
             return;
         }
-        if (line.contains("HttpURLConnection")) {
-            if (line.contains("http://") || containsHttpUrl(line) || HTTP_URL_PATTERN.matcher(line)
-                .find()) {
-                setValidVulnerability(specificLocation(lineNumber), line, "Insecure HTTP detected");
-            }
+
+        if (line.contains("HttpURLConnection") ||
+            HTTP_URL_PATTERN.matcher(line).find() ||
+            containsHttpUrl(line)) {
+            setValidVulnerability(specificLocation(lineNumber), line, "Weak SSL Context configuration. Ensure SSLContext is configured securely.");
         }
     }
 

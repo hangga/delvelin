@@ -20,6 +20,7 @@ public class GeneralScanner {
         new SQLInjectionDetector(),
         new CmdInjectionDetector(),
         new WeakCryptographicDetector(),
+        new InsecureHttpDetector(),
         new OsvDetector()
         // add new detector here
     );
