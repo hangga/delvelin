@@ -9,7 +9,7 @@ import io.github.hangga.delvelin.properties.Vulnerabilities;
 
 public class HardCodedSecretDetector extends BaseDetector {
 
-    String msg = "Warning: Potential hardcoded secrets or credentials found in the source code. Hardcoding sensitive information such as passwords, tokens, " +
+    String msg = "Warning: Hardcoded secrets or credentials found in the source code. Hardcoding sensitive information such as passwords, tokens, " +
         "and API keys can expose secrets and increase the risk of data leaks.";
 
     private static final Pattern KEYWORD_PATTERN = Pattern.compile(

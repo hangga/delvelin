@@ -37,7 +37,7 @@ public enum Vulnerabilities {
     }
 
     Vulnerabilities(String description, String cweCode, String priority) {
-        this.description = "Potential " + description;
+        this.description = description;
         this.cweCode = cweCode;
         this.priority = priority;
     }
