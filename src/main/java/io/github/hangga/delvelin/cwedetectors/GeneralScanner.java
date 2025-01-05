@@ -62,6 +62,10 @@ public class GeneralScanner {
         }
     }
 
+    public void addDetector(BaseDetector detector) {
+        detectors.add(detector);
+    }
+
     private void detectByLine(String line, int lineNumber) {
         detectors.forEach(detector -> detector.detect(line, lineNumber));
     }
