@@ -250,10 +250,6 @@ fun `vulnerability test with save dialog`() {
 > If you choose the JSON or HTML output format, you **must** use either `setAutoLaunchBrowser` or
 > `setShowSaveDialog`. These methods ensure that the output is handled properly.
 
-### <a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>
-
-Sure! Here is the additional README documentation for using `Delvelin` with a custom detector `ExampleCustomDetector`:
-
 ### Usage with Custom Detector
 
 Below is an example of how to use Delvelin with a custom detector `ExampleCustomDetector`.
@@ -313,6 +309,8 @@ fun `test using your own custom detector`() {
         .scan()
 }
 ```
+
+### <a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>
 
 # 4. License
 This project is licensed under [MIT License](LICENSE).
