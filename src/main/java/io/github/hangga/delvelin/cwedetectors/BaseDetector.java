@@ -49,5 +49,4 @@ public abstract class BaseDetector {
         Reports.addToReport(vulnerabilities.getCweCode(), finding, vulnerabilities.getDescription(), specificLocation,
             message, vulnerabilities.getPriority(), className, extName);
     }
-
 }

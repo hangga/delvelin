@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import io.github.hangga.delvelin.cwedetectors.BaseDetector;
 import io.github.hangga.delvelin.cwedetectors.GeneralScanner;
 import io.github.hangga.delvelin.properties.Config;
 import io.github.hangga.delvelin.properties.OutputFileFormat;
@@ -29,6 +30,11 @@ public class Delvelin {
 
     public Delvelin setOutputFormat(OutputFileFormat format) {
         Config.outputFileFormat = format;
+        return this;
+    }
+
+    public Delvelin addCustomDetector(BaseDetector detector){
+        generalScanner.addDetector(detector);
         return this;
     }
 

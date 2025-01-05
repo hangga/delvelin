@@ -1,4 +1,5 @@
 import io.github.hangga.delvelin.Delvelin
+import io.github.hangga.delvelin.cwedetectors.BaseDetector
 import io.github.hangga.delvelin.properties.OutputFileFormat
 import org.junit.jupiter.api.Test
 import java.io.BufferedReader
@@ -12,9 +13,37 @@ import javax.net.ssl.TrustManagerFactory
 
 class DelvelinUnitTest {
 
+    class ExampleCustomDetector : BaseDetector() {
+
+        override fun detect(line: String, lineNumber: Int) {
+            // Implementation of line based detection
+            if (line.contains("examplePattern")) {
+                val specificLocation = specificLocation(lineNumber)
+                setValidVulnerability(
+                    specificLocation,
+                    "Example finding",
+                    "Detected example pattern in the code"
+                )
+            }
+        }
+
+        override fun detect(content: String) {
+            // Implementation of full content based detection
+            if (content.contains("examplePattern")) {
+                val specificLocation = specificLocation(-1) // -1 to denote whole content
+                setValidVulnerability(
+                    specificLocation,
+                    "Example finding",
+                    "Detected example pattern in the full content"
+                )
+            }
+        }
+    }
+
     @Test
     fun `vulnerability test`() {
         Delvelin().setOutputFormat(OutputFileFormat.HTML)
+            .addCustomDetector(ExampleCustomDetector())
             .setAllowedExtensions(".gradle", ".kts", ".java", ".kt").setAutoLaunchBrowser(true)
             .scan()
     }
