@@ -46,9 +46,15 @@ class DelvelinUnitTest {
     }
 
     @Test
-    fun `vulnerability test`() {
+    fun `test using your own custom detector`() {
         Delvelin().setOutputFormat(OutputFileFormat.HTML)
             .addCustomDetector(ExampleCustomDetector())
+            .scan()
+    }
+
+    @Test
+    fun `vulnerability test`() {
+        Delvelin().setOutputFormat(OutputFileFormat.HTML)
             .setAllowedExtensions(".gradle", ".kts", ".java", ".kt").setAutoLaunchBrowser(true)
             .scan()
     }
