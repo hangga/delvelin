@@ -1,6 +1,7 @@
 import io.github.hangga.delvelin.Delvelin
 import io.github.hangga.delvelin.cwedetectors.BaseDetector
 import io.github.hangga.delvelin.properties.OutputFileFormat
+import io.github.hangga.delvelin.properties.Vulnerabilities
 import org.junit.jupiter.api.Test
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -14,6 +15,10 @@ import javax.net.ssl.TrustManagerFactory
 class DelvelinUnitTest {
 
     class ExampleCustomDetector : BaseDetector() {
+
+        init {
+            this.vulnerabilities = Vulnerabilities.UNSAFE_REFLECTION
+        }
 
         override fun detect(line: String, lineNumber: Int) {
             // Implementation of line based detection
