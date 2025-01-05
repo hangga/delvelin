@@ -25,6 +25,7 @@ alt="Delvelin Scan Demo" width="260">
         + [Usage on Android](#usage-on-android)
         + [Alternative Examples](#alternative-examples)
         + [Configuration Options](#configuration-options)
+        + [Usage with Custom Detector](#usage-with-custom-detector)
 - 4.[License](#4-license)
 - 5.[Contributing](#5-contributing)
 ---
@@ -80,14 +81,14 @@ Add the plugin to your Gradle project.
 ### KTS
 ```kotlin
 plugins {
-    id("io.github.hangga.delvelin") version "0.1.2-beta"
+    id("io.github.hangga.delvelin") version "0.2.0-beta"
 }
 ```
 
 ### Groovy
 ```groovy
 plugins {
-    id 'io.github.hangga.delvelin' version '0.1.2-beta'
+    id 'io.github.hangga.delvelin' version '0.2.0-beta'
 }
 ```
 
@@ -153,7 +154,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation('io.github.hangga:delvelin-plugin:0.1.2-beta')
+    testImplementation('io.github.hangga:delvelin-plugin:0.2.0-beta')
 }
 ```
 
@@ -169,7 +170,7 @@ dependencies {
 <dependency>
     <groupId>io.github.hangga</groupId>
     <artifactId>delvelin-plugin</artifactId>
-    <version>0.1.2-beta</version>
+    <version>0.2.0-beta</version>
     <scope>test</scope>
 </dependency>
 ```
