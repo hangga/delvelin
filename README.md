@@ -236,20 +236,82 @@ fun `vulnerability test with save dialog`() {
 
 ### Configuration Options
 
-| Configuration Option                     | Description                                                                                  | Default Value |
-|------------------------------------------|----------------------------------------------------------------------------------------------|---------------|
-| `setOutputFormat(OutputFileFormat format)` | Set the output format of the analysis (e.g., `HTML`, `JSON`, or `LOG`).                  | `LOG`     |
-| `setAllowedExtensions(String... values)` | Specify file extensions to include in the analysis. By default, allows `.java`, `.kt`, `.gradle`, `.kts`, and `.xml`. | `[".java", ".kt", ".gradle", ".kts", ".xml"]` |
-| `setAutoLaunchBrowser(boolean value)`    | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
-| `setShowSaveDialog(boolean value)`       | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
-| `setLogListener(LogListener listener)`   | Set a custom listener for capturing logs during analysis (useful for Android integration).   | `null`        |
-
+| Configuration Option                         | Description                                                                                  | Default Value |
+|----------------------------------------------|----------------------------------------------------------------------------------------------|---------------|
+| `setOutputFormat(OutputFileFormat format)`   | Set the output format of the analysis (e.g., `HTML`, `JSON`, or `LOG`).                      | `LOG`         |
+| `setAllowedExtensions(String... values)`     | Specify file extensions to include in the analysis. By default, allows `.java`, `.kt`, `.gradle`, `.kts`, and `.xml`. | `[".java", ".kt", ".gradle", ".kts", ".xml"]` |
+| `setAutoLaunchBrowser(boolean value)`        | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
+| `setShowSaveDialog(boolean value)`           | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
+| `setLogListener(LogListener listener)`       | Set a custom listener for capturing logs during analysis (useful for Android integration).   | `null`        |
+| `addCustomDetector(BaseDetector detector)`   | Add your own custom detector to identify specific patterns or vulnerabilities in the code.   | `null`        |
 
 > **Important Notes**
 > If you choose the JSON or HTML output format, you **must** use either `setAutoLaunchBrowser` or
 > `setShowSaveDialog`. These methods ensure that the output is handled properly.
 
 ### <a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>
+
+Sure! Here is the additional README documentation for using `Delvelin` with a custom detector `ExampleCustomDetector`:
+
+### Usage with Custom Detector
+
+Below is an example of how to use Delvelin with a custom detector `ExampleCustomDetector`.
+
+#### Step-by-step
+
+1. Create a custom detector class like `ExampleCustomDetector`.
+2. Add detection implementation in the `detect(line: String, lineNumber: Int)` and `detect(content: String)` methods.
+3. Create a test function that sets the output format, adds the custom detector, and runs the scan.
+
+#### Example Custom Detector
+
+The following custom detector detects a specific pattern in the code. It checks each line of code and the entire content to find the pattern called `examplePattern`.
+
+```kotlin
+class ExampleCustomDetector : BaseDetector() {
+
+    init {
+        this.vulnerabilities = Vulnerabilities.UNSAFE_REFLECTION
+    }
+
+    override fun detect(line: String, lineNumber: Int) {
+        // Implementation of line-based detection
+        if (line.contains("examplePattern")) {
+            val specificLocation = specificLocation(lineNumber)
+            setValidVulnerability(
+                specificLocation,
+                "Example finding",
+                "Detected example pattern in the code"
+            )
+        }
+    }
+
+    override fun detect(content: String) {
+        // Implementation of full content-based detection
+        if (content.contains("examplePattern")) {
+            val specificLocation = specificLocation(-1) // -1 to denote whole content
+            setValidVulnerability(
+                specificLocation,
+                "Example finding",
+                "Detected example pattern in the full content"
+            )
+        }
+    }
+}
+```
+
+#### Using Custom Detector in Tests
+
+Here is an example test that uses `ExampleCustomDetector` with Delvelin. This test sets the output format to HTML and adds the custom detector before running the scan.
+
+```kotlin
+@Test
+fun `test using your own custom detector`() {
+    Delvelin().setOutputFormat(OutputFileFormat.HTML)
+        .addCustomDetector(ExampleCustomDetector())
+        .scan()
+}
+```
 
 # 4. License
 This project is licensed under [MIT License](LICENSE).
