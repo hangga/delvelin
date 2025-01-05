@@ -235,21 +235,6 @@ fun `vulnerability test with save dialog`() {
 
 ![Delvelin Scan Demo](doc/save-dialog-blur_magicstudio_8tefrlgzfnr-cmprz.png?raw=true)
 
-### Configuration Options
-
-| Configuration Option                         | Description                                                                                  | Default Value |
-|----------------------------------------------|----------------------------------------------------------------------------------------------|---------------|
-| `setOutputFormat(OutputFileFormat format)`   | Set the output format of the analysis (e.g., `HTML`, `JSON`, or `LOG`).                      | `LOG`         |
-| `setAllowedExtensions(String... values)`     | Specify file extensions to include in the analysis. By default, allows `.java`, `.kt`, `.gradle`, `.kts`, and `.xml`. | `[".java", ".kt", ".gradle", ".kts", ".xml"]` |
-| `setAutoLaunchBrowser(boolean value)`        | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
-| `setShowSaveDialog(boolean value)`           | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
-| `setLogListener(LogListener listener)`       | Set a custom listener for capturing logs during analysis (useful for Android integration).   | `null`        |
-| `addCustomDetector(BaseDetector detector)`   | Add your own custom detector to identify specific patterns or vulnerabilities in the code.   | `null`        |
-
-> **Important Notes**
-> If you choose the JSON or HTML output format, you **must** use either `setAutoLaunchBrowser` or
-> `setShowSaveDialog`. These methods ensure that the output is handled properly.
-
 ### Usage with Custom Detector
 
 Below is an example of how to use Delvelin with a custom detector `ExampleCustomDetector`.
@@ -309,6 +294,21 @@ fun `test using your own custom detector`() {
         .scan()
 }
 ```
+
+### Configuration Options
+
+| Configuration Option                         | Description                                                                                  | Default Value |
+|----------------------------------------------|----------------------------------------------------------------------------------------------|---------------|
+| `setOutputFormat(OutputFileFormat format)`   | Set the output format of the analysis (e.g., `HTML`, `JSON`, or `LOG`).                      | `LOG`         |
+| `setAllowedExtensions(String... values)`     | Specify file extensions to include in the analysis. By default, allows `.java`, `.kt`, `.gradle`, `.kts`, and `.xml`. | `[".java", ".kt", ".gradle", ".kts", ".xml"]` |
+| `setAutoLaunchBrowser(boolean value)`        | Automatically open the generated HTML report in the browser. Set to `false` to disable.      | `false`       |
+| `setShowSaveDialog(boolean value)`           | Display a save dialog for HTML and JSON reports. Set to `false` to disable.                  | `false`       |
+| `setLogListener(LogListener listener)`       | Set a custom listener for capturing logs during analysis (useful for Android integration).   | `null`        |
+| `addCustomDetector(BaseDetector detector)`   | Add your own custom detector to identify specific patterns or vulnerabilities in the code.   | `null`        |
+
+> **Important Notes**
+> If you choose the JSON or HTML output format, you **must** use either `setAutoLaunchBrowser` or
+> `setShowSaveDialog`. These methods ensure that the output is handled properly.
 
 ### <a href="https://github.com/delvelin/example-kotlin">See Example Project >></a>
 
