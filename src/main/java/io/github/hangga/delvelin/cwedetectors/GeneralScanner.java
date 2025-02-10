@@ -2,6 +2,7 @@ package io.github.hangga.delvelin.cwedetectors;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,9 +12,23 @@ import io.github.hangga.delvelin.utils.FileUtil;
 
 public class GeneralScanner {
 
-    private final List<BaseDetector> detectors = Arrays.asList(
+//    private final List<BaseDetector> detectors = Arrays.asList(
+//        new ThreadDetector(),
+//        //        new NonAtomicDetector(),
+//        new HardCodedSecretDetector(),
+//        new NonThreadSafeDetector(),
+//        new XSSDetector(),
+//        new SQLInjectionDetector(),
+//        new CmdInjectionDetector(),
+//        new WeakCryptographicDetector(),
+//        new InsecureHttpDetector(),
+//        new OsvDetector()
+//        // add new detector here
+//    );
+
+    private final List<BaseDetector> detectors = new ArrayList<>(Arrays.asList(
         new ThreadDetector(),
-        //        new NonAtomicDetector(),
+        // new NonAtomicDetector(),
         new HardCodedSecretDetector(),
         new NonThreadSafeDetector(),
         new XSSDetector(),
@@ -23,7 +38,8 @@ public class GeneralScanner {
         new InsecureHttpDetector(),
         new OsvDetector()
         // add new detector here
-    );
+    ));
+
 
     private boolean shouldSkipLine(String line) {
         return line.startsWith("import") || line.startsWith("public void") || line.startsWith("private void") || line.startsWith("protected void") ||
