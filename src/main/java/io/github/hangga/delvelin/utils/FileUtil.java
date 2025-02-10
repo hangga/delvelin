@@ -35,21 +35,54 @@ public class FileUtil {
         return new String(Files.readAllBytes(path));
     }
 
+//    public static void saveOutputFile(String content, String extName) {
+//        Path path = FileUtil.getBasePath();
+//        Path outputPath = Paths.get(path.toString(), "vulnerability-report" + extName);
+//        try {
+//            Files.write(outputPath, content.getBytes());
+//            if (Desktop.isDesktopSupported() && extName.equalsIgnoreCase(".html") && Config.isAutoLaunchBrowser) {
+//                Desktop.getDesktop()
+//                    .browse(outputPath.toUri());
+//            } else {
+//                System.out.println("Report saved: file://" + outputPath.toAbsolutePath());
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException("Failed to save HTML report to file: " + path, e);
+//        }
+//    }
+
     public static void saveOutputFile(String content, String extName) {
-        Path path = FileUtil.getBasePath();
-        Path outputPath = Paths.get(path.toString(), "vulnerability-report" + extName);
+        Path basePath;
+
+        if (Files.exists(Paths.get("target", "surefire-reports"))) {
+            basePath = Paths.get("target", "surefire-reports"); // Maven Surefire (Unit Test)
+        } else if (Files.exists(Paths.get("target", "failsafe-reports"))) {
+            basePath = Paths.get("target", "failsafe-reports"); // Maven Failsafe (Integration Test)
+        } else if (Files.exists(Paths.get("build", "reports", "tests", "test"))) {
+            basePath = Paths.get("build", "reports", "tests", "test"); // Gradle JUnit
+        } else {
+            basePath = FileUtil.getBasePath(); // Fallback jika tidak ditemukan
+        }
+
+        saveFile(content, extName, basePath);
+    }
+
+    private static void saveFile(String content, String extName, Path basePath) {
         try {
+            Files.createDirectories(basePath);
+            Path outputPath = basePath.resolve("vulnerability-report" + extName);
             Files.write(outputPath, content.getBytes());
+
             if (Desktop.isDesktopSupported() && extName.equalsIgnoreCase(".html") && Config.isAutoLaunchBrowser) {
-                Desktop.getDesktop()
-                    .browse(outputPath.toUri());
+                Desktop.getDesktop().browse(outputPath.toUri());
             } else {
                 System.out.println("Report saved: file://" + outputPath.toAbsolutePath());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to save HTML report to file: " + path, e);
+            throw new RuntimeException("Failed to save report to file: " + basePath, e);
         }
     }
+
 
     public static void saveOutputCustom(String content, String extName) {
         JFileChooser fileChooser = getJFileChooser(extName);
