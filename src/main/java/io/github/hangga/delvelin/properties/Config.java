@@ -9,5 +9,5 @@ public class Config {
 
     public static OutputFileFormat outputFileFormat = OutputFileFormat.LOG;
 
-    public static String VERSION = "0.2.1-beta";
+    public static String VERSION = "0.2.1";
 }

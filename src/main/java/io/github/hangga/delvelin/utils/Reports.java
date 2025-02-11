@@ -482,7 +482,7 @@ public class Reports {
         try {
             String footerTemplate = loadResource("html/footer.html");
 
-            String populatedFooter = footerTemplate.replace("${TOOL_NAME}", "Delveline")
+            String populatedFooter = footerTemplate.replace("${TOOL_NAME}", "Delvelin")
                 .replace("${TOOL_VERSION}", Config.VERSION)
                 .replace("${GENERATION_DATE}", getCurrentDateTime())
                 .replace("${TOOL_URL}", "https://delvelin.github.io")

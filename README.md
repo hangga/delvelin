@@ -81,14 +81,14 @@ Add the plugin to your Gradle project.
 ### KTS
 ```kotlin
 plugins {
-    id("io.github.hangga.delvelin") version "0.2.1-beta"
+    id("io.github.hangga.delvelin") version "0.2.1"
 }
 ```
 
 ### Groovy
 ```groovy
 plugins {
-    id 'io.github.hangga.delvelin' version '0.2.1-beta'
+    id 'io.github.hangga.delvelin' version '0.2.1'
 }
 ```
 
@@ -154,7 +154,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation('io.github.hangga:delvelin-plugin:0.2.1-beta')
+    testImplementation('io.github.hangga:delvelin-plugin:0.2.1')
 }
 ```
 
@@ -170,7 +170,7 @@ dependencies {
 <dependency>
     <groupId>io.github.hangga</groupId>
     <artifactId>delvelin-plugin</artifactId>
-    <version>0.2.1-beta</version>
+    <version>0.2.1</version>
     <scope>test</scope>
 </dependency>
 ```
