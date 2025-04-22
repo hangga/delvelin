@@ -102,6 +102,9 @@ public class Delvelin {
                 logListener.onGetLog(Objects.requireNonNull(Reports.log())
                     .toString());
             }
+            if (Reports.isHasCriticalIssues()) {
+                throw new RuntimeException("Build failed due to critical vulnerabilities.");
+            }
         }
     }
 }

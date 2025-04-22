@@ -8,7 +8,7 @@ import io.github.hangga.delvelin.properties.Vulnerabilities;
 import io.github.hangga.delvelin.utils.Reports;
 import io.github.hangga.delvelin.utils.SourceSet;
 
-public abstract class BaseDetector {
+public abstract class BaseDetector{
 
     public String className;
     public String extName;

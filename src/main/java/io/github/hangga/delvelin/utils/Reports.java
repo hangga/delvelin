@@ -136,6 +136,12 @@ public class Reports {
             .format(formatter);
     }
 
+    static boolean hasCriticalIssues = false;
+
+    public static boolean isHasCriticalIssues() {
+        return hasCriticalIssues;
+    }
+
     public static void addToReport(String cweCode, String finding, String vulnerabilityName, String location, String message, String priority, String className,
         String ext) {
         ItemReport newItem = new ItemReport(cweCode, finding, vulnerabilityName, location, message, priority);
@@ -149,6 +155,10 @@ public class Reports {
                 .equals(location)) {
                 return;
             }
+        }
+
+        if (priority.equals("CRITICAL")) {
+            hasCriticalIssues = true;
         }
 
         itemReports.add(newItem);
@@ -336,7 +346,7 @@ public class Reports {
             // Gantikan placeholder dengan data aktual
             String populatedHtml = template.replace("${BAR_ITEMS}", barItems)
                 .replace("${ROOT_DIR}", getDirName())
-                .replace("${ROOT_PATH}","Path: "+FileUtil.getBasePath().toString());
+                .replace("${ROOT_PATH}","Path: "+ FileUtil.getBasePath());
 
             // Tambahkan hasil ke htmlBuffer
             htmlBuffer.append(populatedHtml);

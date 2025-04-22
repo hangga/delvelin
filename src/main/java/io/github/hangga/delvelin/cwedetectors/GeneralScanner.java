@@ -12,20 +12,6 @@ import io.github.hangga.delvelin.utils.FileUtil;
 
 public class GeneralScanner {
 
-//    private final List<BaseDetector> detectors = Arrays.asList(
-//        new ThreadDetector(),
-//        //        new NonAtomicDetector(),
-//        new HardCodedSecretDetector(),
-//        new NonThreadSafeDetector(),
-//        new XSSDetector(),
-//        new SQLInjectionDetector(),
-//        new CmdInjectionDetector(),
-//        new WeakCryptographicDetector(),
-//        new InsecureHttpDetector(),
-//        new OsvDetector()
-//        // add new detector here
-//    );
-
     private final List<BaseDetector> detectors = new ArrayList<>(Arrays.asList(
         new ThreadDetector(),
         // new NonAtomicDetector(),
